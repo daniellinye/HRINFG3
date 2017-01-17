@@ -1,6 +1,6 @@
 #Copyright 2017 Daniel Lin
 
-#TODO still need to import psycopg2
+import psycopg2
 #TODO still need to search for asset imports
 #connection = psycopg2.connect
 
