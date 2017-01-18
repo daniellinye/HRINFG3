@@ -2,6 +2,9 @@ import pygame
 
 pygame.init()
 
+#TODO init the menu
+#TODO make the menu
+#TODO have menu switch
 
 class Menu():
     def __init__(self, screen, items, bg_color, font, font_color):
