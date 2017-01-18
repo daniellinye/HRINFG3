@@ -1,10 +1,10 @@
 #Copyright 2017 Daniel Lin
 
-#TODO still need to import psycopg2
+import psycopg2
 #TODO still need to search for asset imports
 #connection = psycopg2.connect
 
-import pygame #help us access pygame
+import pygame #helps us access pygame
 
 #RGB values (0-255) can also use other ways
 black = (0, 0, 0)
