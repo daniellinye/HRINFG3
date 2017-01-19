@@ -20,7 +20,7 @@ class iV:
         self.mousepos = pygame.mouse.get_pos()
 
         self.font = pygame.font.SysFont("Times", 40)
-        self.rulesfont = pygame.font.SysFont("Times", 7)
+        self.rulesfont = pygame.font.SysFont("Times", 20)
 
         self.black = (0, 0, 0)
         self.green = (0, 255, 0)
@@ -29,7 +29,7 @@ class iV:
         self.background = Background('./assets/background.PNG', [0,0])
 
         #screen values
-        self.rules = Rules().rules
+        self.rules = Rules().editedrules
         self.score = 0
         self.width = 1024
         self.height = 768

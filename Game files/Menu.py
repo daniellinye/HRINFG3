@@ -50,7 +50,8 @@ class DrawButton:
 class Menu:
     def __init__(self):
         state = 0
-        while process_events():
+        running = True
+        while process_events() and running == True:
 
             game.clock.tick(game.fps)
             if state == 0:
@@ -77,10 +78,8 @@ class Menu:
                 exit = DrawButton(game.screen, game.green, game.white, "Exit", 200, 50, game.width * 0.5, game.height * 0.7)
 
                 start.follow(game.red)
-                instructions.follow()
                 highscores.follow((20, 40, 100))
                 settings.follow()
-                exit.follow()
 
                 game.screen.blit(score_surface, (16, 16))
 
@@ -90,10 +89,21 @@ class Menu:
                     state = 2
                     print(state)
 
+                if exit.follow(game.red):
+                    running = False
+
+
+
             elif state == 2:
                 game.screen.fill((0, 0, 0))
-                rRules = game.rulesfont.render(game.rules, 1, game.white)
-                game.screen.blit(rRules, (16, 16))
+                i = 1
+                for text in game.rules:
+                    rRules = game.rulesfont.render(text, 1, game.white)
+                    game.screen.blit(rRules, (16, 16*i))
+                    i += 1
+                exit = DrawButton(game.screen, game.green, game.white, "Exit", 200, 50, game.width-200, 50)
+                if exit.follow(game.white):
+                    state = 0
 
             pygame.display.flip()
 
