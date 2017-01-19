@@ -25,8 +25,10 @@ class Menu():
 
             # draw score
             score_surface = game.font.render("Score: {}".format(game.score), 1, game.white)
+            start_button = pygame.draw.rect(game.screen, game.green, (int(50), int(300)), 40)
             start_surface = game.font.render("Start", 1, game.white, (1, 1, 1))
 
+            game.screen.blit(start_button, (game.width * 0.5, game.width * 0.5))
             game.screen.blit(score_surface, (16, 16))
             game.screen.blit(start_surface, (game.width * 0.5, game.height * 0.5))
 

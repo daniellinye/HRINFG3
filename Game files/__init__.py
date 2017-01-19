@@ -39,7 +39,6 @@ class Background(pygame.sprite.Sprite):
 class Main():
     def __init__(self):
         self.option = 0
-        self.
 
 init = iV()
 
