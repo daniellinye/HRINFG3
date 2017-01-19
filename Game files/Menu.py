@@ -1,12 +1,12 @@
 import pygame
 
 #inspection cannot resolve names
-from __init__ import iV
+from __init__ import *
 
 #starting inits
 game = iV()
 
-#TODO sprint 24
+#TODO sprint 2
 #TODO have menu switch
 #TODO make menu interactive
 
@@ -17,7 +17,8 @@ class Menu():
             # update
 
             # draw logic
-            game.screen.fill(game.black)
+            background = game.background
+            game.screen.blit(background.image, background.rect)
 
             # draw entities
 
