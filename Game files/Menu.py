@@ -6,26 +6,46 @@ from __init__ import *
 #starting inits
 game = iV()
 
-#TODO sprint 2
-#TODO have menu switch
-#TODO make menu interactive
+# TODO sprint 2
+# TODO have menu switch
+# TODO make menu interactive
+
+# TODO put class DrawButton in separate file
 
 
 class DrawButton:
     def __init__(self, screen, b_color, t_color, text, b_width, b_height, position_x, position_y):
-        pygame.draw.rect(screen, b_color, [position_x, position_y, b_width, b_height], 0)
-        text = game.font.render(str(text), 1, t_color)
-        game.screen.blit(text, (position_x+(b_width*0.25), position_y+(b_height*0.25)))
+        self.screen = screen
+        self.b_color = b_color
+        self.t_color = t_color
+        self.text = text
+        self.b_width = b_width
+        self.b_height = b_height
+        self.position_x = position_x
+        self.position_y = position_y
 
+        self.draw()
+
+    def draw(self, image=""):
+        pygame.draw.rect(self.screen, self.b_color or image, [self.position_x, self.position_y, self.b_width, self.b_height], 0)
+        text = game.font.render(str(self.text), 1, self.t_color)
+        game.screen.blit(text, (self.position_x + self.b_width*0.5 - text.get_width()*0.5,
+                                self.position_y + self.b_height*0.5 - text.get_height()*0.5))
+
+    def follow(self, new_color=(0, 0, 0)):
+        # Check for collision with mouse and change background color
+        mouse = pygame.mouse.get_pos()
+        if (mouse[0] in range(int(self.position_x), int(self.position_x + self.b_width))) \
+                and (mouse[1] in range(int(self.position_y), int(self.position_y + self.b_height))):
+            self.b_color = new_color
+            self.draw()
+            
 
 class Menu:
     def __init__(self):
         while process_events():
             #FPS
             game.clock.tick(game.fps)
-
-            #updates variables
-            mousepos = pygame.mouse.get_pos()
 
             #background
             game.screen.fill((0,0,0))
@@ -35,13 +55,23 @@ class Menu:
             #fonts
             #scores
             score_surface = game.font.render("Score: {}".format(game.score), 1, game.white)
-            mouse = game.font.render("Mouse: {}".format(mousepos), 1, game.white)
 
+            #menu buttons
+            start = DrawButton(game.screen, game.green, game.white, "Start", 200, 50, game.width*0.5, game.height*0.3)
+            instructions = DrawButton(game.screen, game.green, game.white, "Instructions", 200, 50, game.width * 0.5,
+                                  game.height * 0.4)
+            highscores = DrawButton(game.screen, game.green, game.white, "Highscores", 200, 50, game.width * 0.5,
+                                      game.height * 0.5)
+            settings = DrawButton(game.screen, game.green, game.white, "Settings", 200, 50, game.width * 0.5,
+                                  game.height * 0.6)
+            exit = DrawButton(game.screen, game.green, game.white, "Exit", 200, 50, game.width * 0.5, game.height * 0.6)
 
-            DrawButton(game.screen, game.green, game.white, "Start", 125, 50, game.width*0.5, game.width*0.3)
-            DrawButton(game.screen, game.green, game.white, "Settings", 125, 50, game.width*0.5, game.width*0.5)
+            start.follow(game.red)
+            instructions.follow()
+            highscores.follow((20, 40, 100))
+            settings.follow()
+            exit.follow()
 
-            game.screen.blit(mouse, (game.width/2, 16))
             game.screen.blit(score_surface, (16, 16))
 
             #flip updated screen
