@@ -1,54 +1,60 @@
-import pygame
+#Copyright 2017 Daniel Lin
 
-#inspection cannot resolve names
-from __init__ import *
+import psycopg2
+#TODO still need to search for asset imports
+#connection = psycopg2.connect
 
-#starting inits
-game = iV()
+import pygame #helps us access pygame
 
-#TODO sprint 2
-#TODO have menu switch
-#TODO make menu interactive
+#RGB values (0-255) can also use other ways
+black = (0, 0, 0)
+green = (0, 255, 0)
+red = (255, 0, 0)
+score = 0
 
-
-class DrawButton:
-    def __init__(self, screen, b_color, t_color, text, b_width, b_height, position_x, position_y):
-        pygame.draw.rect(screen, b_color, [position_y, position_x, b_width, b_height], 0)
-        text = game.font.render(str(text), 1, t_color)
-        game.screen.blit(text, (position_x+(b_width*0.25), position_y+(b_height*0.25)))
-
-
-class Menu:
+class Game:
     def __init__(self):
+        # starts pygame
+        pygame.init()
+
+        self.font = pygame.font.Font(None, 40)
+
+        self.width = 800
+        self.height = 600
+        self.size = (self.width, self.height)
+
+        self.screen = pygame.display.set_mode(self.size)
+
+
         while process_events():
-            # update
 
             # draw logic
-            background = game.background
-            game.screen.blit(background.image, background.rect)
-
-            # draw entities
-
+            self.screen.fill(black)
 
             # draw score
-            score_surface = game.font.render("Score: {}".format(game.score), 1, game.white)
+            pygame.draw.rect(self.screen, red, (int(self.x), int(self.y)), int(self.r))
+            score_surface = self.font.render("Score: {}".format(score), 1, (255, 255, 255))
 
-            DrawButton(game.screen, game.green, game.white, "Start", 125, 50, game.width*0.5-50, game.width*0.5-50)
-
-            game.screen.blit(score_surface, (16, 16))
+            self.screen.blit(score_surface, (16, 16))
 
             # must also flip backscreen
             pygame.display.flip()
 
 
+
+#check function
 def process_events():
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             return False
     return True
 
-menu = Menu()
+#Main program logic
+def program():
+    game = Game()
 
 
+#run program
+program()
 
 
