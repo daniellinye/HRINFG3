@@ -21,24 +21,30 @@ class DrawButton:
 class Menu:
     def __init__(self):
         while process_events():
-            # update
+            #FPS
+            game.clock.tick(game.fps)
 
-            # draw logic
+            #updates variables
+            mousepos = pygame.mouse.get_pos()
+
+            #background
+            game.screen.fill((0,0,0))
             background = game.background
             game.screen.blit(background.image, background.rect)
 
-            # draw entities
-
-
-            # draw score
+            #fonts
+            #scores
             score_surface = game.font.render("Score: {}".format(game.score), 1, game.white)
+            mouse = game.font.render("Mouse: {}".format(mousepos), 1, game.white)
+
 
             DrawButton(game.screen, game.green, game.white, "Start", 125, 50, game.width*0.5, game.width*0.3)
             DrawButton(game.screen, game.green, game.white, "Settings", 125, 50, game.width*0.5, game.width*0.5)
 
+            game.screen.blit(mouse, (game.width/2, 16))
             game.screen.blit(score_surface, (16, 16))
 
-            # must also flip backscreen
+            #flip updated screen
             pygame.display.flip()
 
 

@@ -40,6 +40,8 @@ class Game:
         self.player = Player(self.width * 0.2, self.height * 0.5, self.height * 0.2)
 
         while process_events():
+
+
             # update
             self.player.update()
 
@@ -112,5 +114,7 @@ def program():
 
 #run program
 program()
+
+
 
 
