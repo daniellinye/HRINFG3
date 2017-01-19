@@ -13,7 +13,7 @@ game = iV()
 
 class DrawButton:
     def __init__(self, screen, b_color, t_color, text, b_width, b_height, position_x, position_y):
-        pygame.draw.rect(screen, b_color, [position_y, position_x, b_width, b_height], 0)
+        pygame.draw.rect(screen, b_color, [position_x, position_y, b_width, b_height], 0)
         text = game.font.render(str(text), 1, t_color)
         game.screen.blit(text, (position_x+(b_width*0.25), position_y+(b_height*0.25)))
 
@@ -33,7 +33,8 @@ class Menu:
             # draw score
             score_surface = game.font.render("Score: {}".format(game.score), 1, game.white)
 
-            DrawButton(game.screen, game.green, game.white, "Start", 125, 50, game.width*0.5-50, game.width*0.5-50)
+            DrawButton(game.screen, game.green, game.white, "Start", 125, 50, game.width*0.5, game.width*0.3)
+            DrawButton(game.screen, game.green, game.white, "Settings", 125, 50, game.width*0.5, game.width*0.5)
 
             game.screen.blit(score_surface, (16, 16))
 
