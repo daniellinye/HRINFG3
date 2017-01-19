@@ -20,6 +20,7 @@ class iV:
         self.mousepos = pygame.mouse.get_pos()
 
         self.font = pygame.font.SysFont("Times", 40)
+        self.rulesfont = pygame.font.SysFont("Times", 7)
 
         self.black = (0, 0, 0)
         self.green = (0, 255, 0)

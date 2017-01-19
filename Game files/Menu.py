@@ -42,43 +42,59 @@ class DrawButton:
 
             # If pressed on a button change state
             if pygame.mouse.get_pressed()[0]:
-                pygame.display.flip()
+
+                return True
+
 
 
 class Menu:
     def __init__(self):
+        state = 0
         while process_events():
-            #FPS
+
             game.clock.tick(game.fps)
+            if state == 0:
+                #FPS
 
-            #background
-            game.screen.fill((0,0,0))
-            background = game.background
-            game.screen.blit(background.image, background.rect)
 
-            #fonts
-            #title
-            score_surface = game.font.render("Euromast", 1, game.white)
+                #background
+                game.screen.fill((0,0,0))
+                background = game.background
+                game.screen.blit(background.image, background.rect)
 
-            #menu buttons
-            start = DrawButton(game.screen, game.green, game.white, "Start", 200, 50, game.width*0.5, game.height*0.3)
-            instructions = DrawButton(game.screen, game.green, game.white, "Instructions", 200, 50, game.width * 0.5,
-                                  game.height * 0.4)
-            highscores = DrawButton(game.screen, game.green, game.white, "Highscores", 200, 50, game.width * 0.5,
-                                      game.height * 0.5)
-            settings = DrawButton(game.screen, game.green, game.white, "Settings", 200, 50, game.width * 0.5,
-                                  game.height * 0.6)
-            exit = DrawButton(game.screen, game.green, game.white, "Exit", 200, 50, game.width * 0.5, game.height * 0.7)
+                #fonts
+                #title
+                score_surface = game.font.render("Euromast", 1, game.white)
 
-            start.follow(game.red)
-            instructions.follow()
-            highscores.follow((20, 40, 100))
-            settings.follow()
-            exit.follow()
+                #menu buttons
+                start = DrawButton(game.screen, game.green, game.white, "Start", 200, 50, game.width*0.5, game.height*0.3)
+                instructions = DrawButton(game.screen, game.green, game.white, "Instructions", 200, 50, game.width * 0.5
+                                          , game.height * 0.4)
+                highscores = DrawButton(game.screen, game.green, game.white, "Highscores", 200, 50, game.width * 0.5,
+                                          game.height * 0.5)
+                settings = DrawButton(game.screen, game.green, game.white, "Settings", 200, 50, game.width * 0.5,
+                                      game.height * 0.6)
+                exit = DrawButton(game.screen, game.green, game.white, "Exit", 200, 50, game.width * 0.5, game.height * 0.7)
 
-            game.screen.blit(score_surface, (16, 16))
+                start.follow(game.red)
+                instructions.follow()
+                highscores.follow((20, 40, 100))
+                settings.follow()
+                exit.follow()
 
-            #flip updated screen
+                game.screen.blit(score_surface, (16, 16))
+
+                #flip updated screen
+
+                if instructions.follow():
+                    state = 2
+                    print(state)
+
+            elif state == 2:
+                game.screen.fill((0, 0, 0))
+                rRules = game.rulesfont.render(game.rules, 1, game.white)
+                game.screen.blit(rRules, (16, 16))
+
             pygame.display.flip()
 
 
