@@ -6,7 +6,7 @@ from __init__ import iV
 #starting inits
 game = iV()
 
-#TODO sprint 24
+#TODO sprint 25
 #TODO have menu switch
 #TODO make menu interactive
 
