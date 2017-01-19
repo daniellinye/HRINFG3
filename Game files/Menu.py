@@ -39,7 +39,11 @@ class DrawButton:
                 and (mouse[1] in range(int(self.position_y), int(self.position_y + self.b_height))):
             self.b_color = new_color
             self.draw()
-            
+
+            # If pressed on a button change state
+            if pygame.mouse.get_pressed()[0]:
+                pygame.display.flip()
+
 
 class Menu:
     def __init__(self):
@@ -53,8 +57,8 @@ class Menu:
             game.screen.blit(background.image, background.rect)
 
             #fonts
-            #scores
-            score_surface = game.font.render("Score: {}".format(game.score), 1, game.white)
+            #title
+            score_surface = game.font.render("Euromast", 1, game.white)
 
             #menu buttons
             start = DrawButton(game.screen, game.green, game.white, "Start", 200, 50, game.width*0.5, game.height*0.3)
@@ -64,7 +68,7 @@ class Menu:
                                       game.height * 0.5)
             settings = DrawButton(game.screen, game.green, game.white, "Settings", 200, 50, game.width * 0.5,
                                   game.height * 0.6)
-            exit = DrawButton(game.screen, game.green, game.white, "Exit", 200, 50, game.width * 0.5, game.height * 0.6)
+            exit = DrawButton(game.screen, game.green, game.white, "Exit", 200, 50, game.width * 0.5, game.height * 0.7)
 
             start.follow(game.red)
             instructions.follow()
