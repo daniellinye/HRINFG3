@@ -28,7 +28,7 @@ class iV:
         self.background = Background('./assets/background.PNG', [0,0])
 
         #screen values
-        self.rules = Rules
+        self.rules = Rules().rules
         self.score = 0
         self.width = 1024
         self.height = 768
