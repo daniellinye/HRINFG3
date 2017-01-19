@@ -28,6 +28,25 @@ class Game:
         self.enemy = Enemy(self.width * 0.8, self.height * 0.5, self.height * 0.2)
         self.player = Player(self.width * 0.2, self.height * 0.5, self.height * 0.2)
 
+        while process_events():
+            # update
+            self.player.update()
+
+            # draw logic
+            self.screen.fill(black)
+
+            # draw entities
+            self.enemy.draw(self.screen)
+            self.player.draw(self.screen)
+
+            # draw score
+            score_surface = self.font.render("Score: {}".format(score), 1, (255, 255, 255))
+
+            self.screen.blit(score_surface, (16, 16))
+
+            # must also flip backscreen
+            pygame.display.flip()
+
 
 
 #check function
@@ -74,27 +93,8 @@ class Enemy:
 
 #Main program logic
 def program():
+    game = Game()
 
-
-
-    while process_events():
-        #update
-        Game.player.update()
-
-        #draw logic
-        Game.screen.fill(black)
-
-        #draw entities
-        Game.enemy.draw(Game.screen)
-        Game.player.draw(Game.screen)
-
-        #draw score
-        score_surface = Game.font.render("Score: {}".format(score), 1, (255, 255, 255))
-
-        Game.screen.blit(score_surface, (16,16))
-
-        #must also flip backscreen
-        pygame.display.flip()
 
 
 
