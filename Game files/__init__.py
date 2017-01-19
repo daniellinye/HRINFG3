@@ -14,6 +14,11 @@ class iV:
         pygame.init()
         #set values to be imported into another file
 
+        #system values
+        self.option = 0
+
+        self.mousepos = pygame.mouse.get_pos()
+
         self.font = pygame.font.SysFont("Times", 40)
 
         self.black = (0, 0, 0)
@@ -22,12 +27,14 @@ class iV:
         self.white = (255,255,255)
         self.background = Background('./assets/background.PNG', [0,0])
 
+        #screen values
         self.score = 0
-        self.width = 800
-        self.height = 600
+        self.width = 1024
+        self.height = 768
         self.size = (self.width, self.height)
 
         self.screen = pygame.display.set_mode(self.size)
+
 
 class Background(pygame.sprite.Sprite):
     def __init__(self, image, location):
@@ -36,10 +43,17 @@ class Background(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.rect.left, self.rect.top = location
 
-class Main():
-    def __init__(self):
-        self.option = 0
-        self.
+
+class MouseInput():
+    def __init__(self, x, y, input):
+        #TODO have a mouserange
+        if init.mousepos == (x,y) and pygame.mouse.get_pressed():
+            return True
+        else:
+            return False
+
+
+
 
 init = iV()
 
