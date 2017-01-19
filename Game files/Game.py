@@ -1,7 +1,17 @@
 #Copyright 2017 Daniel Lin
 
+
+
+
+#TODO THIS IS A TEST FILE
+#TODO THIS IS A TEST FILE
+#TODO THIS IS A TEST FILE
+#TODO THIS IS A TEST FILE
+#TODO THIS IS A TEST FILE
+
+
 import psycopg2
-from .Menu import *
+
 #TODO still need to search for asset imports
 #connection = psycopg2.connect
 

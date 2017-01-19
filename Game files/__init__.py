@@ -8,7 +8,7 @@ import pygame #helps us access pygame
 #RGB values (0-255) can also use other ways
 
 
-class initValues:
+class iV:
     def __init__(self):
         #init pygame
         pygame.init()
@@ -29,34 +29,8 @@ class initValues:
         self.screen = pygame.display.set_mode(self.size)
 
 
-        while process_events():
-            # update
-            self.player.update()
-
-            # draw logic
-            self.screen.fill(self.black)
-
-            # draw entities
 
 
-            # draw score
-            score_surface = self.font.render("Score: {}".format(self.score), 1, self.white)
-            start_surface = self.font.render("Start", 1, self.white, (1,1,1))
-
-            self.screen.blit(score_surface, (16, 16))
-            self.screen.blit(start_surface, (self.width*0.5, self.height*0.5))
-
-            # must also flip backscreen
-            pygame.display.flip()
-
-
-
-#check function
-def process_events():
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            return False
-    return True
 
 
 
