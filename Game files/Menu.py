@@ -1,9 +1,9 @@
 import pygame
 
+#inspection cannot resolve names
 from __init__ import iV
 
 #starting inits
-pygame.init()
 game = iV()
 
 #TODO make the menu
