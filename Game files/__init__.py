@@ -4,6 +4,7 @@ import psycopg2
 
 
 import pygame #helps us access pygame
+from rules import Rules
 
 #RGB values (0-255) can also use other ways
 
@@ -16,7 +17,6 @@ class iV:
 
         #system values
         self.option = 0
-
         self.mousepos = pygame.mouse.get_pos()
 
         self.font = pygame.font.SysFont("Times", 40)
@@ -28,6 +28,7 @@ class iV:
         self.background = Background('./assets/background.PNG', [0,0])
 
         #screen values
+        self.rules = Rules
         self.score = 0
         self.width = 1024
         self.height = 768
