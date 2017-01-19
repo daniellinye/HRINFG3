@@ -1,6 +1,7 @@
 #Copyright 2017 Daniel Lin
 
 import psycopg2
+from .Menu import *
 #TODO still need to search for asset imports
 #connection = psycopg2.connect
 
@@ -10,15 +11,15 @@ import pygame #helps us access pygame
 black = (0, 0, 0)
 green = (0, 255, 0)
 red = (255, 0, 0)
-score = 0
 
 class Game:
     def __init__(self):
         # starts pygame
         pygame.init()
 
-        self.font = pygame.font.Font(None, 40)
+        self.font = pygame.font.SysFont("Times", 40)
 
+        self.score = 0
         self.width = 800
         self.height = 600
         self.size = (self.width, self.height)
@@ -36,13 +37,14 @@ class Game:
             self.screen.fill(black)
 
             # draw entities
-            self.enemy.draw(self.screen)
-            self.player.draw(self.screen)
+
 
             # draw score
-            score_surface = self.font.render("Score: {}".format(score), 1, (255, 255, 255))
+            score_surface = self.font.render("Score: {}".format(self.score), 1, (255, 255, 255))
+            start_surface = self.font.render("Start", 1, (255,255,255), (1,1,1))
 
             self.screen.blit(score_surface, (16, 16))
+            self.screen.blit(start_surface, (self.width*0.5, self.height*0.5))
 
             # must also flip backscreen
             pygame.display.flip()
