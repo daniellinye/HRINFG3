@@ -44,6 +44,7 @@ class Background(pygame.sprite.Sprite):
         self.rect.left, self.rect.top = location
 
 
+
 class MouseInput():
     def __init__(self, x, y, input):
         #TODO have a mouserange
@@ -51,7 +52,6 @@ class MouseInput():
             return True
         else:
             return False
-
 
 
 
