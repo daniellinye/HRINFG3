@@ -45,17 +45,17 @@ class DrawButton:
 
                 return True
 
-
+#TODO cleanup code
 
 class Menu:
     def __init__(self):
         state = 0
         running = True
         while process_events() and running == True:
-
+            #FPS
             game.clock.tick(game.fps)
             if state == 0:
-                #FPS
+
 
 
                 #background
@@ -63,11 +63,11 @@ class Menu:
                 background = game.background
                 game.screen.blit(background.image, background.rect)
 
-                #fonts
-                #title
+                #fonts:
+                #-title
                 score_surface = game.font.render("Euromast", 1, game.white)
 
-                #menu buttons
+                #-menu buttons
                 start = DrawButton(game.screen, game.green, game.white, "Start", 200, 50, game.width*0.5, game.height*0.3)
                 instructions = DrawButton(game.screen, game.green, game.white, "Instructions", 200, 50, game.width * 0.5
                                           , game.height * 0.4)
@@ -108,6 +108,7 @@ class Menu:
             pygame.display.flip()
 
 
+#force quit event
 def process_events():
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
