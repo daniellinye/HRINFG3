@@ -21,26 +21,21 @@ class Menu:
         state = 0
         running = True
         toDraw = DrawMenu()
-        while process_events() and running == True:
+        while process_events() and running:
             #FPS
             game.clock.tick(game.fps)
             if state == 0:
                 #keeps drawing menu
                 toDraw.draw0()
-
                 #logic0
                 if toDraw.logic0() == 2:
                     state = 2
-                elif toDraw.logic0() == False:
+                elif toDraw.logic0() is False:
                     running = False
-
-
             elif state == 2:
                 toDraw.draw2()
                 if toDraw.logic2() == 0:
                     state = 0
-
-
 
             pygame.display.flip()
 
