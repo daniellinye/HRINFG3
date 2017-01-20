@@ -67,8 +67,8 @@ class DrawButton:
 
     def draw(self, image=""):
         pygame.draw.rect(self.screen, self.b_color or image, [self.position_x, self.position_y, self.b_width, self.b_height], 0)
-        text = game.font.render(str(self.text), 1, self.t_color)
-        game.screen.blit(text, (self.position_x + self.b_width*0.5 - text.get_width()*0.5,
+        text = init.font.render(str(self.text), 1, self.t_color)
+        init.screen.blit(text, (self.position_x + self.b_width*0.5 - text.get_width()*0.5,
                                 self.position_y + self.b_height*0.5 - text.get_height()*0.5))
 
     def collision(self, new_color=(0, 0, 0)):
