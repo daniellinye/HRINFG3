@@ -9,6 +9,9 @@ game = iV()
 # TODO sprint 2
 # TODO have menu switch
 # TODO make menu interactive
+# TODO add to sprint backlog database
+# TODO make a database
+# TODO make a proper game-file
 
 # TODO put class DrawButton in separate file
 
