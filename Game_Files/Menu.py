@@ -13,8 +13,6 @@ game = IV()
 # TODO make a database
 # TODO make a proper game-file
 
-# TODO put class DrawButton in separate file
-
 
 class DrawButton:
     def __init__(self, screen, b_color, t_color, text, b_width, b_height, position_x, position_y):
