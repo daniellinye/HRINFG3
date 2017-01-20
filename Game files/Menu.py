@@ -4,13 +4,11 @@ import pygame
 from __init__ import *
 
 #starting inits
-game = iV()
+game = IV()
 
 # TODO sprint 2
 # TODO have menu switch
 # TODO make menu interactive
-
-# TODO put class DrawButton in separate file
 
 
 class DrawButton:
@@ -32,7 +30,7 @@ class DrawButton:
         game.screen.blit(text, (self.position_x + self.b_width*0.5 - text.get_width()*0.5,
                                 self.position_y + self.b_height*0.5 - text.get_height()*0.5))
 
-    def follow(self, new_color=(0, 0, 0)):
+    def collision(self, new_color=(0, 0, 0)):
         # Check for collision with mouse and change background color
         mouse = pygame.mouse.get_pos()
         if (mouse[0] in range(int(self.position_x), int(self.position_x + self.b_width))) \
@@ -42,7 +40,6 @@ class DrawButton:
 
             # If pressed on a button change state
             if pygame.mouse.get_pressed()[0]:
-
                 return True
 
 
@@ -77,19 +74,19 @@ class Menu:
                                       game.height * 0.6)
                 exit = DrawButton(game.screen, game.green, game.white, "Exit", 200, 50, game.width * 0.5, game.height * 0.7)
 
-                start.follow(game.red)
-                highscores.follow((20, 40, 100))
-                settings.follow()
+                start.collision(game.red)
+                highscores.collision((20, 40, 100))
+                settings.collision()
 
                 game.screen.blit(score_surface, (16, 16))
 
                 #flip updated screen
 
-                if instructions.follow():
+                if instructions.collision():
                     state = 2
                     print(state)
 
-                if exit.follow(game.red):
+                if exit.collision(game.red):
                     running = False
 
 
@@ -102,7 +99,7 @@ class Menu:
                     game.screen.blit(rRules, (16, 16*i))
                     i += 1
                 exit = DrawButton(game.screen, game.green, game.white, "Exit", 200, 50, game.width-200, 50)
-                if exit.follow(game.white):
+                if exit.collision(game.white):
                     state = 0
 
             pygame.display.flip()
