@@ -49,6 +49,7 @@ class DrawButton:
                 return True
 
 #TODO cleanup code
+#TODO make extra buttons interactive
 
 class Menu:
     def __init__(self):
