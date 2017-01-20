@@ -61,7 +61,6 @@ class Menu:
             if state == 0:
 
 
-
                 #background
                 game.screen.fill((0,0,0))
                 background = game.background
