@@ -29,7 +29,7 @@ class IV:
         self.green = (0, 255, 0)
         self.red = (255, 0, 0)
         self.white = (255,255,255)
-        self.background = Background('./assets/background.PNG', [0,0])
+
 
         # screen values
         self.rules = Rules().editedrules
@@ -41,6 +41,26 @@ class IV:
         self.fps = 60
 
         self.screen = pygame.display.set_mode(self.size)
+
+        #asset imports:
+        self.background = Background('./assets/background.jpeg', [0, 0])
+
+        #cardbacks
+        self.bbackmul = pygame.image.load('./assets/CBacks/BlueMul.png')
+        self.bbackop = pygame.image.load('./assets/CBacks/BlueOp.png')
+        self.gbackmul = pygame.image.load('./assets/CBacks/GreenMul.png')
+        self.gbackop = pygame.image.load('./assets/CBacks/GreenMul.png')
+        self.rbackmul = pygame.image.load('./assets/CBacks/RedMul.png')
+        self.rbackop = pygame.image.load('./assets/CBacks/RedOp.png')
+        self.ybackmul = pygame.image.load('./assets/CBacks/YellowMul.png')
+        self.ybackop = pygame.image.load('./assets/CBacks/YelloweOp.png')
+
+        #cardfronts
+        self.bfront = pygame.image.load('./assets/CFronts/Blue.png')
+        self.gfront = pygame.image.load('./assets/CFronts/Green.png')
+        self.rfront = pygame.image.load('./assets/CFronts/Red.ong')
+        self.yfront = pygame.image.load('./assets/CFronts/Yellow.ong')
+
 
 
 class Background(pygame.sprite.Sprite):
