@@ -34,8 +34,8 @@ class DrawDiceScreen:
         # background
         game.screen.fill((255, 255, 255))
         # dice image
-        img = pygame.image.load('./assets/white_dice/{}.png'.format(self.number))
-        game.screen.blit(img, [game.width*0.5-60, game.height*0.2])
+        img = './assets/white_dice/{}.png'.format(self.number)
+        self.image = DrawImage(game.screen, img, game.width-512, game.height*0.2)
         # text beneath image
         self.text = DrawText(game.screen, "You rolled a {}!".format(self.number), game.red, game.width-512, game.height*0.4)
         # continue button

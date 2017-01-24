@@ -62,3 +62,15 @@ class DrawText:
         self.text = self.font.render(self.text, self.transparent, self.color)
         self.screen.blit(self.text,
                          (self.position_x - self.text.get_width()*0.5, self.position_y - self.text.get_height()*0.5))
+
+class DrawImage:
+    def __init__(self, screen, image, position_x, position_y):
+        self.screen = screen
+        self.image = pygame.image.load(image)
+        self.position_x = position_x
+        self.position_y = position_y
+
+        self.draw()
+
+    def draw(self):
+        self.screen.blit(self.image,(self.position_x - self.image.get_rect().size[0]*0.5, self.position_y - self.image.get_rect().size[1]*0.5))
