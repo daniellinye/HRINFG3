@@ -1,8 +1,10 @@
 import pygame
+import time
 
 #inspection cannot resolve names
 from __init__ import *
 from libdef import *
+
 
 #starting inits
 game = IV()
@@ -106,11 +108,23 @@ class DrawMenu:
 
     #instructions menu
     def draw2(self):
+
         game.screen.fill((0, 0, 0))
         self.i = 1
-        for text in game.rules:
+
+        if game.page > 0:
+            self.back = DrawButton(game.screen, game.green, game.white, "Back", 200, 50, 16, game.height - 50)
+        else:
+            self.back = DrawButton(game.screen, game.green, game.white, "Back", 200, 50, -200, -50)
+
+        if len(game.ruleslist) == (game.page+1):
+            self.next = DrawButton(game.screen, game.green, game.white, "Next", 200, 50, -200, -50)
+        else:
+            self.next = DrawButton(game.screen, game.green, game.white, "Next", 200, 50, game.width-200, game.height-50)
+
+        for text in game.ruleslist[game.page]:
             rRules = game.rulesfont.render(text, 1, game.white)
-            game.screen.blit(rRules, (16, 16 * self.i))
+            game.screen.blit(rRules, (16, 16 *self.i))
             self.i += 1
         self.exit = DrawButton(game.screen, game.green, game.white, "Exit", 200, 50, game.width - 200, 50)
 
@@ -118,6 +132,14 @@ class DrawMenu:
 
         if self.exit.collision(game.white):
             return 0
+        if self.next.collision(game.white):
+            time.sleep(.1)
+            game.page += 1
+
+        if self.back.collision(game.white):
+            time.sleep(.1)
+            game.page -= 1
+
 
     #---------------------------------------------------------
 

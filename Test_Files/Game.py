@@ -41,7 +41,9 @@ class Game:
 
         while process_events():
 
-
+            def get_key():
+                return pygame.key.name()
+            print(get_key())
             # update
             self.player.update()
 
@@ -112,34 +114,9 @@ def program():
 
 
 
+
+
+
 #run program
 program()
-
-
-
-class Card:
-    def __init__(self, keywords, name):
-        self.keywords = keywords
-        self.name = name
-
-
-class Deck:
-    def __init__(self, cards):
-        i = 0
-        self.deck = []
-        for card in cards:
-            self.deck[i] =+ card
-
-
-    def addCard(self, card):
-        self.deck[self.deck.length] =+ card
-
-    def shuffle(self):
-        i = 0
-        for cards in self.deck:
-            return Deck(cards)
-
-
-p1 = Deck(Card("lel", "lel"))
-
 

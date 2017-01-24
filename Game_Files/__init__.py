@@ -24,6 +24,9 @@ class IV:
         self.option = 0
         self.mousepos = pygame.mouse.get_pos()
 
+        self.page = 0
+        self.ruleslist = Rules().ruleslist
+
         self.font = pygame.font.SysFont("Arial", 40)
         self.rulesfont = pygame.font.SysFont("Arial", 18)
 
@@ -37,6 +40,7 @@ class IV:
         # screen values
         self.rules = Rules().editedrules
         self.main_game = Game(self)
+        self.main_game = Game()
         self.score = 0
         self.width = 1024
         self.height = 720
@@ -81,7 +85,6 @@ class IV:
 
 
 init = IV()
-
 
 
 
