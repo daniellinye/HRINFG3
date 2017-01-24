@@ -10,6 +10,7 @@ Classes in this file:
 import psycopg2
 import pygame  # helps us access pygame
 from rules import Rules
+from game import Game
 
 
 class IV:
@@ -33,6 +34,7 @@ class IV:
 
         # screen values
         self.rules = Rules().editedrules
+        self.main_game = Game()
         self.score = 0
         self.width = 1024
         self.height = 768

@@ -28,10 +28,14 @@ class Menu:
                 #keeps drawing menu
                 toDraw.draw0()
                 #logic0
-                if toDraw.logic0() == 2:
+                if toDraw.logic0() == 1:
+                    state = 1
+                elif toDraw.logic0() == 2:
                     state = 2
                 elif toDraw.logic0() is False:
                     running = False
+            elif state == 1:
+                game.main_game
             elif state == 2:
                 toDraw.draw2()
                 if toDraw.logic2() == 0:
@@ -64,14 +68,14 @@ class DrawMenu:
         self.score_surface = game.font.render("Euromast", 1, game.white)
         game.screen.blit(self.score_surface, (16, 16))
 
-
     def logic0(self):
-
         self.start.collision(game.red)
         self.highscores.collision((20, 40, 100))
         self.settings.collision()
 
         # flip updated screen
+        if self.start.collision():
+            return 1
 
         if self.instructions.collision():
             return 2
