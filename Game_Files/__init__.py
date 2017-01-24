@@ -11,6 +11,7 @@ import psycopg2
 import pygame  # helps us access pygame
 from rules import Rules
 from game import Game
+import pygame_textinput
 
 
 class IV:
@@ -29,20 +30,21 @@ class IV:
         self.font = pygame.font.SysFont("Arial", 40)
         self.rulesfont = pygame.font.SysFont("Arial", 18)
 
+        self.textinput = pygame_textinput.TextInput()
+
         self.black = (0, 0, 0)
         self.green = (0, 255, 0)
         self.red = (255, 0, 0)
         self.white = (255,255,255)
 
-
         # screen values
-        self.main_game = Game()
+        self.main_game = Game(self)
         self.score = 0
         self.width = 1024
         self.height = 720
         self.size = (self.width, self.height)
         self.clock = pygame.time.Clock()
-        self.fps = 60
+        self.fps = 30
 
         self.screen = pygame.display.set_mode(self.size)
 
@@ -81,7 +83,6 @@ class IV:
 
 
 init = IV()
-
 
 
 

@@ -22,6 +22,7 @@ game = IV()
 class Menu:
     def __init__(self):
         state = 0
+        sub_state = 0
         running = True
         toDraw = DrawMenu()
         while process_events() and running:
@@ -40,7 +41,11 @@ class Menu:
                     running = False
             #-----------------------------
             elif state == 1:
-                toDraw.draw1()
+                if toDraw.draw1() and sub_state == 0:
+                    sub_state = 1
+                    player_amount = toDraw.draw1()
+                elif sub_state == 1:
+                    game.main_game.draw_players(player_amount, 1)
                 if toDraw.logic1() == 0:
                     state = 0
             #-----------------------------
@@ -93,7 +98,7 @@ class DrawMenu:
 
     #--------------------------------------------------------
     def draw1(self):
-        game.main_game.choose_players(game)
+        return game.main_game.choose_players()
 
     def logic1(self):
         if self.exit.collision(game.white):
