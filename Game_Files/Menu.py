@@ -2,6 +2,7 @@ import pygame
 
 #inspection cannot resolve names
 from __init__ import *
+from libdef import *
 
 #starting inits
 game = IV()
@@ -57,7 +58,7 @@ class DrawMenu:
     def draw0(self):
         # background
         game.screen.fill((0, 0, 0))
-        self.background = game.background
+        self.background = Background('./assets/background.png', [0, 0])
         game.screen.blit(self.background.image, self.background.rect)
 
         # fonts:
@@ -85,13 +86,12 @@ class DrawMenu:
         if self.instructions.collision():
             return 2
 
-
         if self.exit.collision(game.red):
             return False
 
     #--------------------------------------------------------
     def draw1(self):
-        game.main_game.choose_players()
+        game.main_game.choose_players(game)
 
     def logic1(self):
         if self.exit.collision(game.white):

@@ -44,9 +44,6 @@ class IV:
 
         self.screen = pygame.display.set_mode(self.size)
 
-        #asset imports:
-        self.background = Background('./assets/background.png', [0, 0])
-
         #cardbacks
         self.bbackmul = pygame.image.load('./assets/CBacks/BlueMul.png')
         self.bbackop = pygame.image.load('./assets/CBacks/BlueOp.png')
@@ -79,48 +76,6 @@ class IV:
         self.rd4 = pygame.image.load('./assets/red_dice/4.png')
         self.rd5 = pygame.image.load('./assets/red_dice/5.png')
         self.rd6 = pygame.image.load('./assets/red_dice/6.png')
-
-
-
-class Background(pygame.sprite.Sprite):
-    def __init__(self, image, location):
-        # Call Sprite initializer
-        pygame.sprite.Sprite.__init__(self)
-        self.image = pygame.image.load(image)
-        self.rect = self.image.get_rect()
-        self.rect.left, self.rect.top = location
-
-
-class DrawButton:
-    def __init__(self, screen, b_color, t_color, text, b_width, b_height, position_x, position_y):
-        self.screen = screen
-        self.b_color = b_color
-        self.t_color = t_color
-        self.text = text
-        self.b_width = b_width
-        self.b_height = b_height
-        self.position_x = position_x
-        self.position_y = position_y
-
-        self.draw()
-
-    def draw(self, image=""):
-        pygame.draw.rect(self.screen, self.b_color or image, [self.position_x, self.position_y, self.b_width, self.b_height], 0)
-        text = init.font.render(str(self.text), 1, self.t_color)
-        init.screen.blit(text, (self.position_x + self.b_width*0.5 - text.get_width()*0.5,
-                                self.position_y + self.b_height*0.5 - text.get_height()*0.5))
-
-    def collision(self, new_color=(0, 0, 0)):
-        # Check for collision with mouse and change background color
-        mouse = pygame.mouse.get_pos()
-        if (mouse[0] in range(int(self.position_x), int(self.position_x + self.b_width))) \
-                and (mouse[1] in range(int(self.position_y), int(self.position_y + self.b_height))):
-            self.b_color = new_color
-            self.draw()
-
-            # If pressed on a button change state
-            if pygame.mouse.get_pressed()[0]:
-                return True
 
 
 init = IV()
