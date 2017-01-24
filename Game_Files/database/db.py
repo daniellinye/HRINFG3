@@ -10,14 +10,15 @@ class Database:
         buf = open(path.join(path.dirname(__file__), 'data.sql'), 'r')
         sql = buf.read()
         buf.close()
-        sqlCommand = sql.split(';')
+        sqlCommand = sql.split(';')[:-1]
+
         curr = self.conn.cursor()
 
         for command in sqlCommand:
             try:
                 curr.execute(command)
             except Exception as e:
-                print(e)
+                    print(e)
 
         self.conn.commit()
         curr.close()
