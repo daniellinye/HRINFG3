@@ -26,12 +26,13 @@ class Rules:
                       "-numbers 3 and 4 = 2 steps in chosen direction\n " \
                       "-numbers 5 and 6 = 3 steps in chosen direction\n \n " \
 
-        self.rules2 =             "-	There is only one player allowed in a hole. If a player ends up on another players hole, the player who was already on that hole throws a dice. \n" \
-                      "The number given after throwing the dice (numbers 1 to 6) is the number the player has to go down.\n \n" \
+        self.rules2 = "-	There is only one player allowed in a hole. If a player ends up on another players hole, the player who was already on that hole throws a dice. \n" \
+                      "The number given after throwing the dice (numbers 1 to 6) is the number the player has to go down.\n " \
                       " -	A non-playing player will read the question out loud. Try not to show the answer given on the card. After a question is answered, the question is put aside.\n " \
                       "- If the player gives a wrong answer, doesn’t understand the question or doesn’t give an answer within 50 seconds it will be considered wrong and the turn goes to the next player.\n " \
-                      "- If the player answers the question correctly, he/she must move the character the amount of steps in the chosen direction.\n \n " \
-                      "-	If a category runs out of questions, move to the category on your right.\n \n \n How to win and what to do after you win:\n " \
+                      "- If the player answers the question correctly, he/she must move the character the amount of steps in the chosen direction.\n  " \
+                      "-	If a category runs out of questions, move to the category on your right.\n \n \n " \
+                      "How to win and what to do after you win:\n " \
                       "-	The character must pass the last hole to win the game. (Hole number 15 is not the end!)\n The game has only one winner.\n \n After you pass the final hole:\n " \
                       "-	Put your character on top of the Euromast and put the flag in your character’s hand.\n \n \n \n Voor het spelen van het spel:\n " \
                       "-	Er zijn 2-4 spelers (leeftijd 14+)\n \n " \
@@ -41,7 +42,7 @@ class Rules:
                       "Cijfers: 1 – 3 – 5 = open vraag  (symbool open vraag  )\n " \
                       "Cijfers: 2 – 4 – 6 = meerkeuze vraag (symbool meerkeuze vraag    )\n \n " \
 
-        self.rules3 =               "-	Er zijn vier verschillende categorieën, elk met zijn eigen kleur en vragen:\n " \
+        self.rules3 = "-	Er zijn vier verschillende categorieën, elk met zijn eigen kleur en vragen:\n " \
                       "Blauw = Sport\n " \
                       "Groen = Geografie\n " \
                       "Rood = Entertainment\n " \
