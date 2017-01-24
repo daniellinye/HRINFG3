@@ -90,8 +90,7 @@ class DrawMenu:
 
     #--------------------------------------------------------
     def draw1(self):
-        game.screen.fill((0,0,0))
-        self.exit = DrawButton(game.screen, game.green, game.white, "Exit", 200, 200, game.width - 200, 50)
+        game.main_game.choose_players()
 
     def logic1(self):
         if self.exit.collision(game.white):
