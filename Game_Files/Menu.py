@@ -24,6 +24,7 @@ class Menu:
         while process_events() and running:
             #FPS
             game.clock.tick(game.fps)
+            #-----------------------------
             if state == 0:
                 #keeps drawing menu
                 toDraw.draw0()
@@ -33,14 +34,17 @@ class Menu:
                 elif toDraw.logic0() == 2:
                     state = 2
                 elif toDraw.logic0() is False:
-                    running = False
+            #-----------------------------
             elif state == 1:
-                game.main_game
+                toDraw.draw1()
+                if toDraw.logic1() == 0:
+                    state = 0
+            #-----------------------------
             elif state == 2:
                 toDraw.draw2()
                 if toDraw.logic2() == 0:
                     state = 0
-
+            #-----------------------------
             pygame.display.flip()
 
 
@@ -79,10 +83,19 @@ class DrawMenu:
 
         if self.instructions.collision():
             return 2
-            print(state)
+
 
         if self.exit.collision(game.red):
             return False
+
+    #--------------------------------------------------------
+    def draw1(self):
+        game.screen.fill((0,0,0))
+        self.exit = DrawButton(game.screen, game.green, game.white, "Exit", 200, 200, game.width - 200, 50)
+
+    def logic1(self):
+        if self.exit.collision(game.white):
+            return 0
     #--------------------------------------------------------
 
 
