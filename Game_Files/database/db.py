@@ -3,7 +3,7 @@ from os import environ, path
 
 class Database:
     def __init__(self):
-        self.conn = psycopg2.connect('postgresql://localhost/?user=postgres&password=postgres')
+        self.conn = psycopg2.connect(environ.get('DATABASE_URL'))
 
 
     def migrateAndSeed(self):
