@@ -38,7 +38,6 @@ class IV:
         self.white = (255,255,255)
 
         # screen values
-        self.rules = Rules().editedrules
         self.main_game = Game(self)
         self.main_game = Game()
         self.score = 0
