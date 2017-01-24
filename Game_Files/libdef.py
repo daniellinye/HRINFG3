@@ -63,6 +63,7 @@ class DrawText:
         self.screen.blit(self.text,
                          (self.position_x - self.text.get_width()*0.5, self.position_y - self.text.get_height()*0.5))
 
+
 class DrawImage:
     def __init__(self, screen, image, position_x, position_y):
         self.screen = screen
