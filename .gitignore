@@ -2,3 +2,4 @@
 .idea
 Game files/__pycache__/rules.cpython-35.pyc
 *.pyc
+.env
