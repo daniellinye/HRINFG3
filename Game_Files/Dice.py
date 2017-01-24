@@ -3,7 +3,7 @@ import time
 from random import randint
 
 #inspection cannot resolve names
-from __init__ import *
+from IV import *
 import libdef
 
 #starting inits

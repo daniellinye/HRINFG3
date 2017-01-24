@@ -2,7 +2,7 @@ import pygame
 import time
 
 #inspection cannot resolve names
-from __init__ import *
+from IV import *
 from libdef import *
 
 
