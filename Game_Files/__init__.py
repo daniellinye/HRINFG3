@@ -37,7 +37,7 @@ class IV:
         self.main_game = Game()
         self.score = 0
         self.width = 1024
-        self.height = 768
+        self.height = 720
         self.size = (self.width, self.height)
         self.clock = pygame.time.Clock()
         self.fps = 60
@@ -45,7 +45,7 @@ class IV:
         self.screen = pygame.display.set_mode(self.size)
 
         #asset imports:
-        self.background = Background('./assets/background.jpeg', [0, 0])
+        self.background = Background('./assets/background.png', [0, 0])
 
         #cardbacks
         self.bbackmul = pygame.image.load('./assets/CBacks/BlueMul.png')

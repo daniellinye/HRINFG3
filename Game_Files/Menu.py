@@ -34,6 +34,7 @@ class Menu:
                 elif toDraw.logic0() == 2:
                     state = 2
                 elif toDraw.logic0() is False:
+                    running = False
             #-----------------------------
             elif state == 1:
                 toDraw.draw1()
