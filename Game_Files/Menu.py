@@ -1,6 +1,12 @@
 import pygame
 import time
 
+from os.path import join, dirname
+from os import environ
+from dotenv import load_dotenv
+dotenv_path = join(dirname(__file__), '../.env')
+load_dotenv(dotenv_path)
+
 #inspection cannot resolve names
 from IV import *
 from libdef import *
@@ -155,7 +161,3 @@ def process_events():
     return True
 
 menu = Menu()
-
-
-
-

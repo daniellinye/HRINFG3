@@ -6,8 +6,8 @@ class Database:
         self.conn = psycopg2.connect('postgresql://localhost/?user=postgres&password=postgres')
 
 
-    def seed(self):
-        buf = open(path.join(path.dirname(__file__), 'database.sql'), 'r')
+    def migrateAndSeed(self):
+        buf = open(path.join(path.dirname(__file__), 'data.sql'), 'r')
         sql = buf.read()
         buf.close()
         sqlCommand = sql.split(';')
@@ -21,7 +21,3 @@ class Database:
 
         self.conn.commit()
         curr.close()
-
-
-db = Database()
-db.seed()
