@@ -1,4 +1,5 @@
 import pygame
+import time
 from random import randint
 
 #inspection cannot resolve names
@@ -70,12 +71,14 @@ class RollDice:
             toDraw.drawScreen()
             # logic0
             if toDraw.logicDrawScreen() == 101:
+                time.sleep(0.1)
                 state = 101
         # -----------------------------
         elif state == 101:
             toDraw.drawScreen1()
             if toDraw.logicDrawScreen1() == 102:
-                state = 102
+                time.sleep(0.1)
+                state = 100
         elif state == 102:
             running = False
         pygame.display.flip()
