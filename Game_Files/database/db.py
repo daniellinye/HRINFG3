@@ -4,7 +4,18 @@ from os import environ, path
 class Database:
     def __init__(self):
         self.conn = psycopg2.connect(environ.get('DATABASE_URL'))
+        self.openCur = None
+    def getConn(self):
+        self.openCur = self.conn.cursor()
+        return self.openCur
 
+    def closeConn(self):
+        self.openCur.close()
+        self.conn.close()
+        self.openCur = None
+
+    def commit(self):
+        return self.conn.commit()
 
     def migrateAndSeed(self):
         buf = open(path.join(path.dirname(__file__), 'data.sql'), 'r')
@@ -12,7 +23,7 @@ class Database:
         buf.close()
         sqlCommand = sql.split(';')[:-1]
 
-        curr = self.conn.cursor()
+        curr = self.getConn()
 
         for command in sqlCommand:
             try:
@@ -20,5 +31,5 @@ class Database:
             except Exception as e:
                     print(e)
 
-        self.conn.commit()
-        curr.close()
+        self.commit()
+        self.closeConn()

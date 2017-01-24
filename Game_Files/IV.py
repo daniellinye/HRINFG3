@@ -36,6 +36,12 @@ class IV:
         self.green = (0, 255, 0)
         self.red = (255, 0, 0)
         self.white = (255,255,255)
+        self.colors = {
+            'black': self.black,
+            'green': self.green,
+            'red': self.red,
+            'white': self.white
+        }
 
         # screen values
         self.main_game = Game(self)
@@ -83,7 +89,3 @@ class IV:
 
 
 init = IV()
-
-
-
-
