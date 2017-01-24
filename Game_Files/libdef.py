@@ -26,7 +26,8 @@ class DrawButton:
         self.draw()
 
     def draw(self, image=""):
-        pygame.draw.rect(self.screen, self.b_color or image, [self.position_x, self.position_y, self.b_width, self.b_height], 0)
+        pygame.draw.rect(self.screen, self.b_color or image,
+                         [self.position_x, self.position_y, self.b_width, self.b_height], 0)
         text = self.font.render(str(self.text), 1, self.t_color)
         self.screen.blit(text, (self.position_x + self.b_width*0.5 - text.get_width()*0.5,
                                 self.position_y + self.b_height*0.5 - text.get_height()*0.5))
@@ -59,4 +60,5 @@ class DrawText:
 
     def draw(self):
         self.text = self.font.render(self.text, self.transparent, self.color)
-        self.screen.blit(self.text, (self.position_x, self.position_y))
+        self.screen.blit(self.text,
+                         (self.position_x - self.text.get_width()*0.5, self.position_y - self.text.get_height()*0.5))
