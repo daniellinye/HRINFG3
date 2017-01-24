@@ -39,7 +39,6 @@ class IV:
 
         # screen values
         self.main_game = Game(self)
-        self.main_game = Game()
         self.score = 0
         self.width = 1024
         self.height = 720
