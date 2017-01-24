@@ -19,8 +19,8 @@ class DrawDiceScreen:
         game.screen.fill((255, 255, 255))
 
         # roll button
-        self.roll = DrawButton(game.screen, game.green, game.white, "Roll Dice", 500, 125, (game.width * 0.5)-250,
-                               (game.height * 0.5)-62.5)
+        self.roll = DrawButton(game.screen, game.green, game.white, "Roll Dice", 500, 125, (game.width * 0.5),
+                               (game.height * 0.5))
 
     def logicDrawScreen(self):
         self.roll.collision(game.red)
@@ -39,7 +39,7 @@ class DrawDiceScreen:
         # text beneath image
         self.text = DrawText(game.screen, "You rolled a {}!".format(self.number), game.red, game.width-512, game.height*0.4)
         # continue button
-        self.continu = DrawButton(game.screen, game.green, game.white, "Continue", 200, 50, (game.width * 0.5)-100,(game.height * 0.5)-25)
+        self.continu = DrawButton(game.screen, game.green, game.white, "Continue", 200, 50, (game.width * 0.5),(game.height * 0.5))
 
     def logicDrawScreen1(self):
         self.continu.collision(game.red)
