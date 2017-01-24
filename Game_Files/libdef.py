@@ -62,3 +62,4 @@ class DrawText:
         self.text = self.font.render(self.text, self.transparent, self.color)
         self.screen.blit(self.text,
                          (self.position_x - self.text.get_width()*0.5, self.position_y - self.text.get_height()*0.5))
+
