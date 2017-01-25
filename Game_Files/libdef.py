@@ -132,3 +132,5 @@ class Sections:
     def getpoint(self, category, x, y):
         return self.listc[category][x][y]
 
+
+
