@@ -29,6 +29,7 @@ class Menu:
     def __init__(self):
         state = 0
         player = 1
+        categoryorder = 1
         players = []
         running = True
         toDraw = DrawMenu()
@@ -62,7 +63,10 @@ class Menu:
                     else:
                         state = 1.2
                 elif state == 1.2:
-                    toDraw.draw1_1()
+                    if categoryorder <= player_amount:
+                        print(players)
+                        toDraw.draw1_1(players[categoryorder-1])
+                        categoryorder += 1
                     if toDraw.logic1_1() == 1.3:
                         state = 1.3
                 elif state == 1.3:
@@ -122,8 +126,8 @@ class DrawMenu:
     def draw1(self):
         return game.main_game.choose_players()
     #--------------------------------------------------------
-    def draw1_1(self):
-        return game.dice.drawScreen()
+    def draw1_1(self, player):
+        return game.dice.drawScreen(player)
 
     def logic1_1(self):
         return game.dice.logicDrawScreen()

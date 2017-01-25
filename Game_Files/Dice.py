@@ -12,12 +12,13 @@ class DrawDiceScreen:
         self.drawing = True
         self.game = game
 
-    def drawScreen(self):
+    def drawScreen(self, player):
         # background
         self.game.screen.fill((255, 255, 255))
+        self.player = player
 
         # roll button
-        self.roll = libdef.DrawButton(self.game.screen, self.game.green, self.game.white, "Roll Dice", 500, 125, (self.game.width * 0.5),
+        self.roll = libdef.DrawButton(self.game.screen, self.game.green, self.game.white, "Player {} Roll Dice".format(self.player.id), 500, 125, (self.game.width * 0.5),
                                (self.game.height * 0.5))
 
     def logicDrawScreen(self):
