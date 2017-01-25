@@ -28,7 +28,8 @@ game = IV()
 class Menu:
     def __init__(self):
         state = 0
-        sub_state = 0
+        player = 1
+        players = []
         running = True
         toDraw = DrawMenu()
         while process_events() and running:
@@ -46,14 +47,27 @@ class Menu:
                 elif toDraw.logic0() is False:
                     running = False
             #-----------------------------
-            elif state == 1:
-                if toDraw.draw1() and sub_state == 0:
-                    sub_state = 1
+            elif 1 <= state < 2:
+                if state == 1 and toDraw.draw1():
+                    state = 1.1
                     player_amount = toDraw.draw1()
-                elif sub_state == 1:
-                    game.main_game.draw_players(player_amount, 1)
-                if toDraw.logic1() == 0:
-                    state = 0
+                elif state == 1.1:
+                    if player <= player_amount:
+                        new_player = game.main_game.customize_players(player)
+                        if new_player:
+                            players.append(new_player)
+                            player += 1
+                        elif new_player is False:
+                            state = 0
+                    else:
+                        state = 1.2
+                elif state == 1.2:
+                    # game continues here
+                    if state == 1.2:
+                        import webbrowser
+                        webbrowser.open('https://www.youtube.com/watch?v=dQw4w9WgXcQ')
+                    print(players)
+                    state = 69
             #-----------------------------
             elif state == 2:
                 toDraw.draw2()
@@ -105,10 +119,6 @@ class DrawMenu:
     #--------------------------------------------------------
     def draw1(self):
         return game.main_game.choose_players()
-
-    def logic1(self):
-        if self.exit.collision(game.white):
-            return 0
     #--------------------------------------------------------
 
 
