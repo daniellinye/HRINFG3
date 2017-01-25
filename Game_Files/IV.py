@@ -43,6 +43,7 @@ class IV:
             'red': self.red,
             'white': self.white
         }
+        self.colorlist = ((255,0,0), (0,0,255), (255, 255, 0), (0,255, 0))
 
         # screen values
         self.main_game = Game(self)
@@ -56,38 +57,30 @@ class IV:
 
         self.screen = pygame.display.set_mode(self.size)
 
-        #cardbacks
-        self.bbackmul = pygame.image.load('./assets/CBacks/BlueMul.png')
-        self.bbackop = pygame.image.load('./assets/CBacks/BlueOp.png')
-        self.gbackmul = pygame.image.load('./assets/CBacks/GreenMul.png')
-        self.gbackop = pygame.image.load('./assets/CBacks/GreenMul.png')
-        self.rbackmul = pygame.image.load('./assets/CBacks/RedMul.png')
-        self.rbackop = pygame.image.load('./assets/CBacks/RedOp.png')
-        self.ybackmul = pygame.image.load('./assets/CBacks/YellowMul.png')
-        self.ybackop = pygame.image.load('./assets/CBacks/YellowOp.png')
+        try:
+            #cardbacks
+            self.bbackmul = pygame.image.load('./assets/CBacks/BlueMul.png')
+            self.bbackop = pygame.image.load('./assets/CBacks/BlueOp.png')
+            self.gbackmul = pygame.image.load('./assets/CBacks/GreenMul.png')
+            self.gbackop = pygame.image.load('./assets/CBacks/GreenMul.png')
+            self.rbackmul = pygame.image.load('./assets/CBacks/RedMul.png')
+            self.rbackop = pygame.image.load('./assets/CBacks/RedOp.png')
+            self.ybackmul = pygame.image.load('./assets/CBacks/YellowMul.png')
+            self.ybackop = pygame.image.load('./assets/CBacks/YellowOp.png')
 
-        #cardfronts
-        self.bfront = pygame.image.load('./assets/CFronts/Blue.png')
-        self.gfront = pygame.image.load('./assets/CFronts/Green.png')
-        self.rfront = pygame.image.load('./assets/CFronts/Red.png')
-        self.yfront = pygame.image.load('./assets/CFronts/Yellow.png')
+            #cardfronts
+            self.bfront = pygame.image.load('./assets/CFronts/Blue.png')
+            self.gfront = pygame.image.load('./assets/CFronts/Green.png')
+            self.rfront = pygame.image.load('./assets/CFronts/Red.png')
+            self.yfront = pygame.image.load('./assets/CFronts/Yellow.png')
 
-        #whitedice
-        self.wd1 = pygame.image.load('./assets/white_dice/1.png')
-        self.wd2 = pygame.image.load('./assets/white_dice/2.png')
-        self.wd3 = pygame.image.load('./assets/white_dice/3.png')
-        self.wd4 = pygame.image.load('./assets/white_dice/4.png')
-        self.wd5 = pygame.image.load('./assets/white_dice/5.png')
-        self.wd6 = pygame.image.load('./assets/white_dice/6.png')
+            #dice
+            for x in range(1,7):
+                self.rdlist = pygame.image.load('./assets/red_dice/{}.png'.format(x))
+                self.wdlist = pygame.image.load('./assets/white_dice/{}.png'.format(x))
+        except:
+            print("Warning: Some files are missing")
 
-
-        #reddice
-        self.rd1 = pygame.image.load('./assets/red_dice/1.png')
-        self.rd2 = pygame.image.load('./assets/red_dice/2.png')
-        self.rd3 = pygame.image.load('./assets/red_dice/3.png')
-        self.rd4 = pygame.image.load('./assets/red_dice/4.png')
-        self.rd5 = pygame.image.load('./assets/red_dice/5.png')
-        self.rd6 = pygame.image.load('./assets/red_dice/6.png')
 
 
 init = IV()

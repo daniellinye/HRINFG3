@@ -161,3 +161,50 @@ def drawTextInRect(surface, text, color, rect, font, aa=False, bkg=None):
         text = text[i:]
 
     return text
+
+
+class Point:
+    def __init__(self, x, y, category):
+        self.x = x
+        self.y = y
+        self.category = category
+        self.highlight = 0
+
+
+    def returnx(self):
+        return self.x
+
+    def returny(self):
+        return self.y
+
+    def returnc(self):
+        return self.category
+
+    def drawself(self, screen, width, height):
+        pygame.draw.rect(screen, (0,0,0), [width/4*self.category + width/8*self.x + 50,height/10 *self.y + 30, 8*(1+self.highlight), 8*(1+self.highlight)], 2)
+
+    def highlight(self):
+        if self.highlight == 0:
+            self.highlight = 1
+        else:
+            self.highlight = 0
+
+class Sections:
+    def __init__(self, screen, width, height):
+        self.listc = []
+        self.listx = []
+        self.listy = []
+        self.screen = screen
+        for category in range(0, 4):
+            for x in range(0,2):
+                for y in range(0,11):
+                    Point(x, y, category).drawself(self.screen, width, height)
+                    self.listc.append(self.listx.append(self.listy.append(Point(x, y, category))))
+
+        #to get a point do: listc[<category>][<x>][<y>]
+
+    def getpoint(self, category, x, y):
+        return self.listc[category][x][y]
+
+
+
