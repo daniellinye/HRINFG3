@@ -100,7 +100,7 @@ class DrawMenu:
 
         # -title
         self.score_surface = game.font.render("Euromast", 1, game.white)
-        game.screen.blit(self.score_surface, (16, 16))
+        game.screen.blit(self.score_surface, (512-(self.score_surface.get_width()*0.5), 16))
 
     def logic0(self):
         self.start.collision(game.red)

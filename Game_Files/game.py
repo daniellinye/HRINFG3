@@ -23,7 +23,7 @@ class Game:
                  self.game.white, self.game.width - 512, 100)
 
         self.game.textinput.update(pygame.event.get())
-        self.game.screen.blit(self.game.textinput.get_surface(), (10, 10))
+        self.game.screen.blit(self.game.textinput.get_surface(), (512, 175))
 
         next = DrawButton(self.game.screen, self.game.green, self.game.white, "Next", 200, 50,
                           self.game.width-200, self.game.height-50)
@@ -31,7 +31,7 @@ class Game:
                           200, self.game.height-50)
 
         if next.collision():
-            return {"id": current_player, "name": self.game.textinput.get_text()}
+            return Player(current_player, self.game.textinput.get_text(), (0, 0), 0)
         if quit.collision():
             return False
 

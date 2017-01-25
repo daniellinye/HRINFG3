@@ -76,3 +76,11 @@ class DrawImage:
     def draw(self):
         self.screen.blit(self.image, (self.position_x - self.image.get_rect().size[0]*0.5,
                                       self.position_y - self.image.get_rect().size[1]*0.5))
+
+
+class Player:
+    def __init__(self, id, name, score, position):
+        self.id = id
+        self.name = name
+        self.score = score
+        self.position = position
