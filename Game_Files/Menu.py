@@ -61,12 +61,12 @@ class Menu:
                         elif new_player is False:
                             state = 0
                     else:
-                        players = players.reverse()
+                        print(players.reverse())
                         state = 1.2
                 elif state == 1.2:
                     if categoryorder <= player_amount:
                         print(players)
-                        toDraw.draw1_1(players[categoryorder-1])
+                        toDraw.draw1_1(players[int(categoryorder-1)])
                         categoryorder += 1
                     if toDraw.logic1_1() == 1.3:
                         state = 1.3
