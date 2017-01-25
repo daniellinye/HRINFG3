@@ -30,6 +30,7 @@ class Menu:
         state = 0
         player = 1
         categoryorder = 1
+        rollbuttonscreen = True
         players = []
         running = True
         toDraw = DrawMenu()
@@ -61,17 +62,28 @@ class Menu:
                         elif new_player is False:
                             state = 0
                     else:
-                        players = players.reverse()
                         state = 1.2
                 elif state == 1.2:
                     if categoryorder <= player_amount:
-                        print(players)
-                        toDraw.draw1_1(players[categoryorder-1])
-                        categoryorder += 1
-                    if toDraw.logic1_1() == 1.3:
+                        if rollbuttonscreen:
+                            dice_roll = toDraw.draw1_1(players[categoryorder-1])
+                            if dice_roll:
+                                rollbuttonscreen = False
+                        else:
+                            dice_click = toDraw.draw1_2()
+                            if dice_click:
+                                rollbuttonscreen = True
+                                categoryorder += 1
+                    else:
                         state = 1.3
                 elif state == 1.3:
-                    toDraw.draw1_2()
+                    state = 0
+
+
+
+
+
+
 
 
 
@@ -129,9 +141,6 @@ class DrawMenu:
     #--------------------------------------------------------
     def draw1_1(self, player):
         return game.dice.drawScreen(player)
-
-    def logic1_1(self):
-        return game.dice.logicDrawScreen()
 
     def draw1_2(self):
         return game.dice.drawScreen1()
