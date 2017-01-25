@@ -11,6 +11,7 @@ import psycopg2
 import pygame  # helps us access pygame
 from rules import Rules
 from game import Game
+from Dice import DrawDiceScreen
 import pygame_textinput
 
 
@@ -45,6 +46,7 @@ class IV:
 
         # screen values
         self.main_game = Game(self)
+        self.dice = DrawDiceScreen(self)
         self.score = 0
         self.width = 1024
         self.height = 720

@@ -62,13 +62,14 @@ class Menu:
                     else:
                         state = 1.2
                 elif state == 1.2:
-                    # game continues here
-                    game.screen.fill((0, 0, 0))
-                    if state == 1.2:
-                        import webbrowser
-                        webbrowser.open('https://www.youtube.com/watch?v=dQw4w9WgXcQ')
-                    print(players)
-                    state = 69
+                    toDraw.draw1_1()
+                    if toDraw.logic1_1() == 1.3:
+                        state = 1.3
+                elif state == 1.3:
+                    toDraw.draw1_2()
+
+
+
             #-----------------------------
             elif state == 2:
                 toDraw.draw2()
@@ -121,7 +122,14 @@ class DrawMenu:
     def draw1(self):
         return game.main_game.choose_players()
     #--------------------------------------------------------
+    def draw1_1(self):
+        return game.dice.drawScreen()
 
+    def logic1_1(self):
+        return game.dice.logicDrawScreen()
+
+    def draw1_2(self):
+        return game.dice.drawScreen1()
 
     #instructions menu
     def draw2(self):
