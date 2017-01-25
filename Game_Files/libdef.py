@@ -47,6 +47,10 @@ class DrawButton:
                 return True
 
 
+def checkCollision(mouse, posX, posY, width, height):
+    return (mouse[0] in range(int(posX - width*0.5), int(posX - width*0.5 + width))) \
+            and (mouse[1] in range(int(posY - height * 0.5), int(posY - height * 0.5 + height)))
+
 class DrawText:
     def __init__(self, screen, text, color, position_x, position_y, transparent=1):
         self.screen = screen
@@ -66,6 +70,7 @@ class DrawText:
                          (self.position_x - self.text.get_width()*0.5, self.position_y - self.text.get_height()*0.5))
 
 
+
 class DrawImage:
     def __init__(self, screen, image, position_x, position_y):
         self.screen = screen
@@ -79,6 +84,34 @@ class DrawImage:
         self.screen.blit(self.image, (self.position_x - self.image.get_rect().size[0]*0.5,
                                       self.position_y - self.image.get_rect().size[1]*0.5))
 
+class BaseImage:
+    def __init__(self, screen, image, position_x, position_y):
+        self.screen = screen
+        self.image = pygame.image.load(image)
+        self.position_x = position_x
+        self.position_y = position_y
+
+    def draw(self):
+        self.screen.blit(self.image, (self.position_x - self.image.get_rect().size[0]*0.5,
+                                      self.position_y - self.image.get_rect().size[1]*0.5))
+
+class DrawCard(BaseImage):
+    def __init__(self, screen, image, posX, postY, cardId):
+        super(DrawCard, self).__init__(screen, image, posX, postY)
+        size = self.image.get_rect().size
+        self.image = pygame.transform.scale(self.image, (int(size[0] / 3), int(size[1] / 3)))
+        size = self.image.get_rect().size
+        self.cardId =  cardId
+        self.width = size[0]
+        self.height = size[1]
+        self.draw()
+
+    def collision(self):
+        mouse = pygame.mouse.get_pos()
+        if checkCollision(mouse, self.position_x, self.position_y, self.width, self.height):
+            if pygame.mouse.get_pressed()[0]:
+                time.sleep(0.3)
+                return True
 
 class Player:
     def __init__(self, player_id, name, score, position, roll = 0):
