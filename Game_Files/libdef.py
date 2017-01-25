@@ -81,8 +81,9 @@ class DrawImage:
 
 
 class Player:
-    def __init__(self, player_id, name, score, position):
+    def __init__(self, player_id, name, score, position, roll = 0):
         self.id = player_id
         self.name = name
         self.score = score
         self.position = position
+        self.roll = roll
