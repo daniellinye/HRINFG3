@@ -73,23 +73,10 @@ class IV:
         self.rfront = pygame.image.load('./assets/CFronts/Red.png')
         self.yfront = pygame.image.load('./assets/CFronts/Yellow.png')
 
-        #whitedice
-        self.wd1 = pygame.image.load('./assets/white_dice/1.png')
-        self.wd2 = pygame.image.load('./assets/white_dice/2.png')
-        self.wd3 = pygame.image.load('./assets/white_dice/3.png')
-        self.wd4 = pygame.image.load('./assets/white_dice/4.png')
-        self.wd5 = pygame.image.load('./assets/white_dice/5.png')
-        self.wd6 = pygame.image.load('./assets/white_dice/6.png')
-
-
-        #reddice
-        self.rd1 = pygame.image.load('./assets/red_dice/1.png')
-        self.rd2 = pygame.image.load('./assets/red_dice/2.png')
-        self.rd3 = pygame.image.load('./assets/red_dice/3.png')
-        self.rd4 = pygame.image.load('./assets/red_dice/4.png')
-        self.rd5 = pygame.image.load('./assets/red_dice/5.png')
-        self.rd6 = pygame.image.load('./assets/red_dice/6.png')
-
+        #dice
+        for x in range(1,7):
+            self.rdlist = pygame.image.load('./assets/red_dice/{}.png'.format(x))
+            self.wdlist = pygame.image.load('./assets/white_dice/{}.png'.format(x))
 
 
 
