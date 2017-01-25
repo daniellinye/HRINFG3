@@ -62,7 +62,6 @@ class Menu:
                         elif new_player is False:
                             state = 0
                     else:
-                        print(players.reverse())
                         state = 1.2
                 elif state == 1.2:
                     if categoryorder <= player_amount:
