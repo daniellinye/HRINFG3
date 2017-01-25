@@ -41,6 +41,9 @@ class DrawDiceScreen:
         self.image2 = libdef.DrawImage(game.screen, img2, game.width - 412, game.height * 0.2)
         # text beneath image
         self.text = libdef.DrawText(game.screen, "You rolled a {} and a {}!".format(self.number,self.number2), game.red, game.width-512, game.height*0.4)
+        # text next to dice
+        self.text2 = libdef.DrawText(game.screen, "What kind of question", (0, 0, 0), 180, game.height*0.2)
+        self.text3 = libdef.DrawText(game.screen, "How may steps", (0, 0, 0), 824, game.height * 0.2)
         # continue button
         self.continu = libdef.DrawButton(game.screen, game.green, game.white, "Continue", 200, 50, (game.width * 0.5),(game.height * 0.5))
 
