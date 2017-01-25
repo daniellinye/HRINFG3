@@ -66,13 +66,6 @@ class Menu:
                         state = 1.2
                 elif state == 1.2:
                     if categoryorder <= player_amount:
-                        print(players)
-                        toDraw.draw1_1(players[int(categoryorder-1)])
-                        categoryorder += 1
-                    if toDraw.logic1_1() == 1.3:
-                        state = 1.2
-                elif state == 1.2:
-                    if categoryorder <= player_amount:
                         if rollbuttonscreen:
                             dice_roll = toDraw.draw1_1(players[categoryorder-1])
                             if dice_roll:
