@@ -63,6 +63,7 @@ class Menu:
                         state = 1.2
                 elif state == 1.2:
                     # game continues here
+                    game.screen.fill((0, 0, 0))
                     if state == 1.2:
                         import webbrowser
                         webbrowser.open('https://www.youtube.com/watch?v=dQw4w9WgXcQ')
