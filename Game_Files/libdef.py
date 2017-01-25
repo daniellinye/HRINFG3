@@ -94,7 +94,7 @@ class Point:
         self.x = x
         self.y = y
         self.category = category
-        self.hightlight = 0
+        self.highlight = 0
 
 
     def returnx(self):
@@ -109,7 +109,7 @@ class Point:
     def drawself(self, screen, width, height):
         pygame.draw.rect(screen, (0,0,0), [width/4*self.category + width/8*self.x + 50,height/10 *self.y + 30, 8*(1+self.highlight), 8*(1+self.highlight)], 2)
 
-    def hightlight(self):
+    def highlight(self):
         if self.highlight == 0:
             self.highlight = 1
         else:
