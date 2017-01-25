@@ -75,7 +75,9 @@ class Menu:
                                 rollbuttonscreen = True
                                 categoryorder += 1
                     else:
-                        state = 1.3
+                        order = toDraw.draw1_3(players)
+                        if order:
+                            state = 1.3
                 elif state == 1.3:
                     state = 0
 
@@ -144,6 +146,9 @@ class DrawMenu:
 
     def draw1_2(self):
         return game.dice.drawScreen1()
+
+    def draw1_3(self, players):
+        return game.dice.drawScreen2(players)
 
     #instructions menu
     def draw2(self):
