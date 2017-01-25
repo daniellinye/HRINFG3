@@ -18,20 +18,27 @@ class Point:
         return self.category
 
     def drawself(self, screen, width, height):
-        pygame.draw.rect(screen, (0,0,0), [50 + width/4*self.category + width/8*self.x, 50 + height/10 *self.y + 10, 4, 4], 0)
+        pygame.draw.rect(screen, (0,0,0), [50 + width/4*self.category + width/8*self.x, 20 + height/10 *self.y + 10, 8*(1+self.highlight), 8*(1+self.highlight)], 2)
 
     def hightlight(self):
         self.highlight = 1
 
 class Sections:
     def __init__(self, screen, width, height):
-        self.totallist = [0,50]
+        self.listc = []
+        self.listx = []
+        self.listy = []
         self.screen = screen
         for category in range(0, 4):
             for x in range(0,2):
-                for y in range(0,10):
+                for y in range(0,11):
                     Point(x, y, category).drawself(self.screen, width, height)
+                    self.listc.append(self.listx.append(self.listy.append(Point(x, y, category))))
 
+        #to get a point do: listc[<value>].listx[<value>].listy[<value>].<command>
+
+    def getpoint(self, category, x, y):
+        return self.listc[category][x][y]
 
 
 
