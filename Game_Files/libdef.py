@@ -1,4 +1,5 @@
 import pygame
+import time
 
 
 class Background(pygame.sprite.Sprite):
@@ -42,6 +43,7 @@ class DrawButton:
 
             # If pressed on a button change state
             if pygame.mouse.get_pressed()[0]:
+                time.sleep(0.3)
                 return True
 
 
