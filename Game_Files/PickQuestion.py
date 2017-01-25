@@ -1,18 +1,21 @@
 import pygame
 from IV import IV
 import libdef
+import random
 from math import floor
 game = IV()
 
 class DrawPickQuestion:
-    def __init__(self, questions):
+    def __init__(self, questions, onQuestionPicked = lambda x, y: None):
         self.drawing = True
         self.questions = questions
+        self.onQuestionPicked = onQuestionPicked
         self.xPosFirstRow = 180
+        self.opOrMul = {'multiple_choice': 'Mul', 'open': 'Op'}
         self.yPosFirstRow = 150
         self.incrRowPosBy = 200
         self.maxCardsPerRow = int(floor((game.width - self.xPosFirstRow) / self.xPosFirstRow))
-        print(self.maxCardsPerRow)
+
     def drawScreen(self):
         rowX = self.xPosFirstRow
         rowY = self.yPosFirstRow
@@ -23,9 +26,11 @@ class DrawPickQuestion:
                 cardsInRow = 0
                 rowY += self.incrRowPosBy
                 rowX = self.xPosFirstRow
-            card = libdef.DrawCard(game.screen, './assets/CBacks/BlueMul.png', rowX, rowY, 12)
+            img = './assets/CBacks/{0}{1}.png'.format(question.get('color').title(), self.opOrMul.get(question.get('type')))
+            card = libdef.DrawCard(game.screen,img, rowX, rowY, 12)
             if card.collision():
-                print(card.cardId)
+                self.onQuestionPicked(question.get('id'), question)
+                print(question.get('id'))
             rowX += self.incrRowPosBy
             cardsInRow = cardsInRow + 1
 # force quit event
@@ -41,46 +46,56 @@ def PickQuestion():
     toDraw = DrawPickQuestion([{
         'id': 1,
         'name': 'Hoeveel tulpen zitten in een dozijn',
-        'color': game.green
+        'type': 'multiple_choice',
+        'color': 'yellow'
     }, {
         'id': 2,
         'name': 'Wat is 1 + 1',
-        'color': game.red
+        'type': 'open',
+        'color': 'red'
     }, {
         'id': 3,
         'name': 'Hoeveel tulpen zitten in een dozijn',
-        'color': game.green
+        'type': 'multiple_choice',
+        'color': 'green'
     }, {
         'id': 4,
         'name': 'Wat is 1 + 1',
-        'color': game.red
+        'type': 'multiple_choice',
+        'color': 'red'
     },
     {
         'id': 5,
         'name': 'Hoeveel tulpen zitten in een dozijn',
-        'color': game.green
+        'type': 'open',
+        'color': 'green'
     }, {
         'id': 6,
         'name': 'Wat is 1 + 1',
-        'color': game.red
+        'type': 'open',
+        'color': 'yellow'
     },
     {
         'id': 7,
         'name': 'Hoeveel tulpen zitten in een dozijn',
-        'color': game.green
+        'type': 'multiple_choice',
+        'color': 'green'
     }, {
         'id': 8,
         'name': 'Wat is 1 + 1',
-        'color': game.red
+        'type': 'multiple_choice',
+        'color': 'blue'
     },
     {
         'id': 7,
         'name': 'Hoeveel tulpen zitten in een dozijn',
-        'color': game.green
+        'type': 'open',
+        'color': 'green'
     }, {
         'id': 8,
         'name': 'Wat is 1 + 1',
-        'color': game.red
+        'type': 'multiple_choice',
+        'color': 'blue'
     }])
     while process_events() and running:
         # FPS
