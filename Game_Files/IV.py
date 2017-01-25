@@ -43,6 +43,7 @@ class IV:
             'red': self.red,
             'white': self.white
         }
+        self.colorlist = ((255,0,0), (0,0,255), (255, 255, 0), (0,255, 0))
 
         # screen values
         self.main_game = Game(self)
@@ -88,6 +89,12 @@ class IV:
         self.rd4 = pygame.image.load('./assets/red_dice/4.png')
         self.rd5 = pygame.image.load('./assets/red_dice/5.png')
         self.rd6 = pygame.image.load('./assets/red_dice/6.png')
+
+    def drawtower(self):
+        i = 1
+        for counter in range(0, 4):
+            pygame.draw.rect(self.screen, self.colorlist[counter], [i, 0, self.width / 4, self.height], 0)
+            i += self.width / 4
 
 
 init = IV()
