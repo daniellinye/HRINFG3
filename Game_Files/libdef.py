@@ -42,9 +42,17 @@ class DrawButton:
             self.b_color = new_color
             self.draw()
 
-            for event in pygame.event.get():
-                if event.type == pygame.MOUSEBUTTONUP:
-                    return True
+            # If pressed on a button change state
+            if pygame.mouse.get_pressed()[0]:
+                time.sleep(0.3)
+                return True
+
+    def singleclick(self, new_color=(0,0,0)):
+        if self.collision(new_color) and self.clicked == False:
+            self.clicked = True
+            return True
+        else:
+            return False
 
 
 
@@ -206,16 +214,17 @@ class Sections:
         #colors are: red, blue, yellow, green
         self.colorlist = ((255,0,0), (0,0,255), (255, 255, 0), (0,255, 0))
         i = 1
-        for player in players:
-            self.updateplayer(player)
+
 
         for counter in range(0, 4):
             pygame.draw.rect(self.screen, self.colorlist[counter], [i, 0, self.width / 4, self.height], 0)
             i += self.width / 4
+        for player in players:
+            self.updateplayer(player)
         for category in range(0, categories):
             for x in range(0, self.grid_width):
-                for y in range(0, self.grid_heigth):
-                    Point(x, y, category).drawself(self.screen, self.width, self.height, self.grid_heigth)
+                for y in range(0, self.grid_height):
+                    Point(x, y, category).drawself(self.screen, self.width, self.height, self.grid_height)
                     self.listc.append(self.listx.append(self.listy.append(Point(x, y, category))))
 
 
@@ -233,9 +242,11 @@ class Sections:
         else:
             drawTextInRect(self.screen, "Player {} Wins!".format(player.name), (0,0,0),(self.width/2, self.height/2), pygame.font.SysFont("Arial", 40))
 
-    def moveplayer(self, player, moves):
-        self.players[player].update(moves)
+    def moveplayer(self, player):
+        self.players[player].update(self.steps)
 
+    def addplayer(self, player):
+        self.players.append(player)
 
 
 
@@ -282,8 +293,10 @@ def drawTextInRect(surface, text, color, rect, font, aa=False, bkg=None):
 
     return text
 
+
 class getPressed:
     def __init__(self, waittime):
+        self.done = False
         self.boolswitch = False
         self.timer = 0.0
         self.clock = time.time()
@@ -300,6 +313,5 @@ class getPressed:
             self.click = pygame.mouse.get_pressed()
             if self.click[0] == 1:
                 self.boolswitch = False
+                self.done = True
                 self.clock = time.time()
-
-                return True

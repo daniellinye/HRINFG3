@@ -13,6 +13,7 @@ from rules import Rules
 from game import Game
 from Dice import DrawDiceScreen
 import pygame_textinput
+from libdef import *
 
 
 class IV:
@@ -28,6 +29,7 @@ class IV:
         self.page = 0
         self.ruleslist = Rules().ruleslist
 
+
         self.font = pygame.font.SysFont("Arial", 40)
         self.rulesfont = pygame.font.SysFont("Arial", 18)
 
@@ -37,9 +39,13 @@ class IV:
         self.green = (0, 255, 0)
         self.red = (255, 0, 0)
         self.white = (255,255,255)
+        self.blue = (30,144,255)
+        self.yellow = (255,255,0)
         self.colors = {
             'black': self.black,
             'green': self.green,
+            'yellow': self.yellow,
+            'blue': self.blue,
             'red': self.red,
             'white': self.white
         }
@@ -56,6 +62,8 @@ class IV:
         self.fps = 30
 
         self.screen = pygame.display.set_mode(self.size)
+
+        self.grid = Sections(self.screen, self.width, self.height, [])
 
         try:
             #cardbacks
@@ -81,6 +89,16 @@ class IV:
         except:
             print("Warning: Some files are missing")
 
-
+        self.dummyQuestions = [{
+            'id': 1,
+            'name': 'Hoeveel tulpen zitten in een dozijn',
+            'type': 'multiple_choice',
+            'color': 'green',
+            'answers': [
+                {'id': 1, 'name': 'Wrong answer 2', 'isCorrect': False},
+                {'id': 2, 'name': 'Long ass Wrong answer 20000000000000000000', 'isCorrect': False},
+                {'id': 3,  'name': 'Correct answer', 'isCorrect': True}
+            ]
+        }]
 
 init = IV()

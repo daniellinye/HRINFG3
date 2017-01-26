@@ -5,10 +5,9 @@ import libdef
 game = IV()
 
 class DrawQuestion:
-    def __init__(self, question, answers, handleAnswered = lambda x: None):
+    def __init__(self, question, answers):
         self.drawing = True
         self.ins = game.height * .25
-        self.handleAnswered = handleAnswered
         self.middleOfScreen = game.width * .5
         self.questionAsked = question;
         self.answers = answers;
@@ -40,15 +39,15 @@ class DrawQuestion:
                 buttonColor = game.green
             button = libdef.DrawButton(game.screen, cardColor, buttonColor, buttonText, 200, 100, self.middleOfScreen, startPosTop)
             if button.collision(cardColor):
-                self.checkCorrect(answer)
+                return self.checkCorrect(answer)
             c = c + 1
 
     def checkCorrect(self, answer):
         self.answeredId = answer.get('id')
         if answer.get('isCorrect'):
-            self.handleAnswered(True)
+            return True
         else:
-            self.handleAnswered(False)
+            return False
 
 # force quit event
 def process_events():
@@ -79,4 +78,4 @@ def Question():
 
         pygame.display.flip()
 
-Question()
+# Question()

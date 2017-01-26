@@ -2,14 +2,21 @@ import pygame
 from IV import IV
 import libdef
 import random
+import time
 from math import floor
 game = IV()
 
 class DrawPickQuestion:
-    def __init__(self, questions, onQuestionPicked = lambda x, y: None):
+    def __init__(self, category, questions):
         self.drawing = True
         self.questions = questions
-        self.onQuestionPicked = onQuestionPicked
+        self.colorOfCat = {
+            'sports':{ 'name': 'Blue', 'rgb': game.colors.get('blue')},
+            'entertainment': { 'name': 'Red', 'rgb': game.colors.get('red')},
+            'history': { 'name': 'Yellow', 'rgb':game.colors.get('yellow')},
+            'geography': { 'name':'Green', 'rgb':game.colors.get('green')}
+        }
+        self.color = self.colorOfCat.get(category);
         self.xPosFirstRow = 180
         self.opOrMul = {'multiple_choice': 'Mul', 'open': 'Op'}
         self.yPosFirstRow = 150
@@ -17,6 +24,7 @@ class DrawPickQuestion:
         self.maxCardsPerRow = int(floor((game.width - self.xPosFirstRow) / self.xPosFirstRow))
 
     def drawScreen(self):
+        game.screen.fill((255, 255, 255))
         rowX = self.xPosFirstRow
         rowY = self.yPosFirstRow
         cardsInRow = 0;
@@ -26,11 +34,11 @@ class DrawPickQuestion:
                 cardsInRow = 0
                 rowY += self.incrRowPosBy
                 rowX = self.xPosFirstRow
-            img = './assets/CBacks/{0}{1}.png'.format(question.get('color').title(), self.opOrMul.get(question.get('type')))
+            img = './assets/CBacks/{0}{1}.png'.format(self.color.get('name'), self.opOrMul.get(question.get('type')))
             card = libdef.DrawCard(game.screen,img, rowX, rowY, 12)
             if card.collision():
-                self.onQuestionPicked(question.get('id'), question)
-                print(question.get('id'))
+                return {'questionId': question.get('id'), 'question': question}
+
             rowX += self.incrRowPosBy
             cardsInRow = cardsInRow + 1
 # force quit event
@@ -43,60 +51,7 @@ def process_events():
 def PickQuestion():
     state = 1
     running = True
-    toDraw = DrawPickQuestion([{
-        'id': 1,
-        'name': 'Hoeveel tulpen zitten in een dozijn',
-        'type': 'multiple_choice',
-        'color': 'yellow'
-    }, {
-        'id': 2,
-        'name': 'Wat is 1 + 1',
-        'type': 'open',
-        'color': 'red'
-    }, {
-        'id': 3,
-        'name': 'Hoeveel tulpen zitten in een dozijn',
-        'type': 'multiple_choice',
-        'color': 'green'
-    }, {
-        'id': 4,
-        'name': 'Wat is 1 + 1',
-        'type': 'multiple_choice',
-        'color': 'red'
-    },
-    {
-        'id': 5,
-        'name': 'Hoeveel tulpen zitten in een dozijn',
-        'type': 'open',
-        'color': 'green'
-    }, {
-        'id': 6,
-        'name': 'Wat is 1 + 1',
-        'type': 'open',
-        'color': 'yellow'
-    },
-    {
-        'id': 7,
-        'name': 'Hoeveel tulpen zitten in een dozijn',
-        'type': 'multiple_choice',
-        'color': 'green'
-    }, {
-        'id': 8,
-        'name': 'Wat is 1 + 1',
-        'type': 'multiple_choice',
-        'color': 'blue'
-    },
-    {
-        'id': 7,
-        'name': 'Hoeveel tulpen zitten in een dozijn',
-        'type': 'open',
-        'color': 'green'
-    }, {
-        'id': 8,
-        'name': 'Wat is 1 + 1',
-        'type': 'multiple_choice',
-        'color': 'blue'
-    }])
+    toDraw = DrawPickQuestion('entertainment', game.dummyQuestions)
     while process_events() and running:
         # FPS
         game.clock.tick(game.fps)
@@ -107,4 +62,4 @@ def PickQuestion():
 
         pygame.display.flip()
 
-PickQuestion()
+# PickQuestion()
