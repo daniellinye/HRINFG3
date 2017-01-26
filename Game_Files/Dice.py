@@ -29,6 +29,7 @@ class DrawDiceScreen:
             self.player.roll = self.number
             return 500
 
+
     def drawScreen1(self):
         # background
         self.game.screen.fill((255, 255, 255))
