@@ -9,3 +9,4 @@ class SQLInsterter:
         for i in range (0,len(self.values)):
             for items in self.list:
                 print("INSTERT INTO {} ".format(self.table) + "({})".format(self.values))
+
