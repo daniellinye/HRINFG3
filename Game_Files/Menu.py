@@ -28,10 +28,10 @@ game = IV()
 class Menu:
     def __init__(self):
         state = 0
-        player = 1
-        categoryorder = 1
+        counter = 1
         rollbuttonscreen = True
         players = []
+        categories = []
         running = True
         toDraw = DrawMenu()
         while process_events() and running:
@@ -54,32 +54,44 @@ class Menu:
                     state = 1.1
                     player_amount = toDraw.draw1()
                 elif state == 1.1:
-                    if player <= player_amount:
-                        new_player = game.main_game.customize_players(player)
+                    if counter <= player_amount:
+                        new_player = game.main_game.customize_players(counter)
                         if new_player:
                             players.append(new_player)
-                            player += 1
+                            counter += 1
                         elif new_player is False:
                             state = 0
                     else:
+                        counter = 1
                         state = 1.2
                 elif state == 1.2:
-                    if categoryorder <= player_amount:
+                    if counter <= player_amount:
                         if rollbuttonscreen:
-                            dice_roll = toDraw.draw1_1(players[categoryorder-1])
+                            dice_roll = toDraw.draw1_1(players[counter-1])
                             if dice_roll:
                                 rollbuttonscreen = False
                         else:
                             dice_click = toDraw.draw1_2()
                             if dice_click:
                                 rollbuttonscreen = True
-                                categoryorder += 1
+                                counter += 1
                     else:
                         order = toDraw.draw1_3(players)
                         if order:
+                            counter = 0
                             state = 1.3
                 elif state == 1.3:
+                    if len(categories) != len(order):
+                        catScreen = toDraw.draw1_4(order[counter], categories)
+                        if catScreen:
+                            categories = catScreen
+                            counter += 1
+                    else:
+                        state = 1.4
+                elif state == 1.4:
                     state = 0
+
+
 
 
 
@@ -149,6 +161,9 @@ class DrawMenu:
 
     def draw1_3(self, players):
         return game.dice.drawScreen2(players)
+
+    def draw1_4(self, player, categories):
+        return game.main_game.choose_category(player, categories)
 
     #instructions menu
     def draw2(self):

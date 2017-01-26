@@ -35,6 +35,41 @@ class Game:
         if quit.collision():
             return False
 
+    def choose_category(self, player, categories):
+        self.player = player
+        self.categories = categories
+        # background
+        self.game.screen.fill((255, 255, 255))
+        if "sports"  not in categories:
+            self.sports = DrawButton(self.game.screen, (0,0,255), (0,0,0), "Sports", 300, 300, 150, 150)
+        if "geography"  not in categories:
+            self.geography = DrawButton(self.game.screen, (0,255,0), (0,0,0), "Geography", 300, 300, 750, 150)
+        if "entertainment"  not in categories:
+            self.entertainment = DrawButton(self.game.screen, (255,0,0), (0,0,0), "Entertainment", 300, 300, 150, 550)
+        if "history" not in categories:
+            self.history =  DrawButton(self.game.screen, (255,255,0), (0,0,0), "History", 300, 300, 750, 550)
+        text = DrawText(self.game.screen, "{} choose a catergory".format(player.name), (0,0,0), self.game.width*0.5, self.game.height*0.5)
 
+        if "sports"  not in categories:
+            if self.sports.collision():
+                player.add_category("sports")
+                categories.append("sports")
+                return categories
+        if "geography" not in categories:
+            if self.geography.collision():
+                player.add_category("geography")
+                categories.append("geography")
+                return categories
+        if "entertainment" not in categories:
+            if self.entertainment.collision():
+                player.add_category("entertainment")
+                categories.append("entertainment")
+                return categories
+
+        if "history" not in categories:
+            if self.history.collision():
+                player.add_category("history")
+                categories.append("history")
+                return categories
 
 

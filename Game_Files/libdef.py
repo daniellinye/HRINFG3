@@ -143,6 +143,9 @@ class Player:
         self.y = y
         self.location = (x,y)
 
+    def add_category(self, category):
+            self.category = category
+
 class Point:
     def __init__(self, x, y, category):
         self.x = x
