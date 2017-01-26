@@ -15,15 +15,6 @@ from libdef import *
 #starting inits
 game = IV()
 
-# TODO sprint 2
-# TODO have menu switch
-# TODO make menu interactive
-# TODO add to sprint backlog database
-# TODO make a database
-# TODO make a proper game-file
-
-
-# TODO make extra buttons interactive
 
 class Menu:
     def __init__(self):
