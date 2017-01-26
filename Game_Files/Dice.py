@@ -68,7 +68,7 @@ class DrawDiceScreen:
         self.continu2.collision((0,0,0))
 
         if self.continu2.collision():
-            return 500
+            return sort
 
 
 
