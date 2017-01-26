@@ -160,7 +160,7 @@ class DrawMenu:
         return game.main_game.choose_category(player, categories)
 
     def draw1_5(self):
-        return game.dice.drawScreen3()  
+        return game.dice.drawScreen3()
 
     #instructions menu
     def draw2(self):
