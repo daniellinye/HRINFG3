@@ -186,7 +186,7 @@ class Sections:
     def getpoint(self, category, x, y):
         return self.listc[category][x][y]
 
-    def drawplayer(self, player):
+    def drawplayer(self, player = Player()):
         if player.x >= 0 and player.y >= 0:
             self.getpoint(player.category, player.x, player.y)
         else:
