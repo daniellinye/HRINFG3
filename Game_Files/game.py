@@ -72,4 +72,16 @@ class Game:
                 categories.append("history")
                 return categories
 
+    def choose_direction(self, player):
+        self.game.screen.fill((255, 255, 255))
+        directions = [["left", 150, 150, (0, 0, 255)], ["right", 750, 150, (0, 255, 0)], ["up", 150, 550, (255, 0, 0)],
+                      ["down", 750, 550, (255, 255, 0)]]
+        DrawText(self.game.screen, "{} choose a catergory".format(player.name), (0, 0, 0), self.game.width * 0.5,
+                 self.game.height * 0.5)
 
+        directions[3][0]
+        for i in directions:
+                direction_choice = DrawButton(self.game.screen, i[3], (0, 0, 0), i[0], 300, 300, i[1], i[2])
+
+                if direction_choice.collision():
+                    return i[0]

@@ -78,19 +78,22 @@ class Menu:
                             categories = catScreen
                             counter += 1
                     else:
+                        counter = 1
                         state = 1.4
-                elif state == 1.4:
-                    state = 0
-
-
-
-
-
-
-
-
-
-
+                elif 1.4 <= state < 1.5:
+                    if counter <= player_amount:
+                        if state == 1.4:
+                            direction = game.main_game.choose_direction(order[counter-1])
+                            if direction:
+                                players[counter-1].direction = direction
+                                state = 1.41
+                        if state == 1.41:
+                            # Counter and state must ONLY change after someones turn
+                            counter += 1
+                            state = 1.4
+                    else:
+                        counter = 1
+                        state = 0
 
             #-----------------------------
             elif state == 2:
