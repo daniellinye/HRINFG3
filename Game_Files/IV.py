@@ -13,6 +13,7 @@ from rules import Rules
 from game import Game
 from Dice import DrawDiceScreen
 import pygame_textinput
+from libdef import *
 
 
 class IV:
@@ -27,6 +28,7 @@ class IV:
 
         self.page = 0
         self.ruleslist = Rules().ruleslist
+
 
         self.font = pygame.font.SysFont("Arial", 40)
         self.rulesfont = pygame.font.SysFont("Arial", 18)
@@ -61,6 +63,8 @@ class IV:
 
         self.screen = pygame.display.set_mode(self.size)
 
+        self.grid = Sections(self.screen, self.width, self.height, [])
+
         try:
             #cardbacks
             self.bbackmul = pygame.image.load('./assets/CBacks/BlueMul.png')
@@ -88,82 +92,6 @@ class IV:
         self.dummyQuestions = [{
             'id': 1,
             'name': 'Hoeveel tulpen zitten in een dozijn',
-            'type': 'multiple_choice',
-            'answers': [
-                {'id': 1, 'name': 'Wrong answer 2', 'isCorrect': False},
-                {'id': 2, 'name': 'Long ass Wrong answer 20000000000000000000', 'isCorrect': False},
-                {'id': 3,  'name': 'Correct answer', 'isCorrect': True}
-            ]
-        }, {
-            'id': 2,
-            'name': 'Wat is 1 + 1',
-            'type': 'open',
-            'answers': [
-                {'id': 3,  'name': 'Correct answer', 'isCorrect': True}
-            ]
-        }, {
-            'id': 3,
-            'name': 'Hoeveel tulpen zitten in een dozijn',
-            'type': 'multiple_choice',
-            'answers': [
-                {'id': 1, 'name': 'Wrong answer 2', 'isCorrect': False},
-                {'id': 2, 'name': 'Long ass Wrong answer 20000000000000000000', 'isCorrect': False},
-                {'id': 3,  'name': 'Correct answer', 'isCorrect': True}
-            ]
-        }, {
-            'id': 4,
-            'name': 'Wat is 1 + 1',
-            'type': 'multiple_choice',
-            'answers': [
-                {'id': 1, 'name': 'Wrong answer 2', 'isCorrect': False},
-                {'id': 2, 'name': 'Long ass Wrong answer 20000000000000000000', 'isCorrect': False},
-                {'id': 3,  'name': 'Correct answer', 'isCorrect': True}
-            ]
-        },
-        {
-            'id': 5,
-            'name': 'Hoeveel tulpen zitten in een dozijn',
-            'type': 'open',
-            'answers': [
-                {'id': 3,  'name': 'Correct answer', 'isCorrect': True}
-            ]
-        }, {
-            'id': 6,
-            'name': 'Wat is 1 + 1',
-            'type': 'open',
-            'answers': [
-                {'id': 3,  'name': 'Correct answer', 'isCorrect': True}
-            ]
-        },
-        {
-            'id': 7,
-            'name': 'Hoeveel tulpen zitten in een dozijn',
-            'type': 'multiple_choice',
-            'answers': [
-                {'id': 1, 'name': 'Wrong answer 2', 'isCorrect': False},
-                {'id': 2, 'name': 'Long ass Wrong answer 20000000000000000000', 'isCorrect': False},
-                {'id': 3,  'name': 'Correct answer', 'isCorrect': True}
-            ]
-        }, {
-            'id': 8,
-            'name': 'Wat is 1 + 1',
-            'type': 'multiple_choice',
-            'answers': [
-                {'id': 1, 'name': 'Wrong answer 2', 'isCorrect': False},
-                {'id': 2, 'name': 'Long ass Wrong answer 20000000000000000000', 'isCorrect': False},
-                {'id': 3,  'name': 'Correct answer', 'isCorrect': True}
-            ]
-        },
-        {
-            'id': 7,
-            'name': 'Hoeveel tulpen zitten in een dozijn',
-            'type': 'open',
-            'answers': [
-                {'id': 1, 'name': 'Correct answer', 'isCorrect': True},
-            ]
-        }, {
-            'id': 8,
-            'name': 'Wat is 1 + 1',
             'type': 'multiple_choice',
             'answers': [
                 {'id': 1, 'name': 'Wrong answer 2', 'isCorrect': False},

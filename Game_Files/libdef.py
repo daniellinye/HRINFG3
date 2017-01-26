@@ -223,8 +223,8 @@ class Sections:
             self.updateplayer(player)
         for category in range(0, categories):
             for x in range(0, self.grid_width):
-                for y in range(0, self.grid_heigth):
-                    Point(x, y, category).drawself(self.screen, self.width, self.height, self.grid_heigth)
+                for y in range(0, self.grid_height):
+                    Point(x, y, category).drawself(self.screen, self.width, self.height, self.grid_height)
                     self.listc.append(self.listx.append(self.listy.append(Point(x, y, category))))
 
 
@@ -245,6 +245,8 @@ class Sections:
     def moveplayer(self, player):
         self.players[player].update(self.steps)
 
+    def addplayer(self, player):
+        self.players.append(player)
 
 
 
