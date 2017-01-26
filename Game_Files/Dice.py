@@ -65,6 +65,7 @@ class DrawDiceScreen:
         if self.continu2.collision():
             return sort
 
+
     def drawScreen3(self, player):
         self.player = player
         # background
@@ -80,10 +81,10 @@ class DrawDiceScreen:
         self.text2 = libdef.DrawText(self.game.screen, "What type of question", (0, 0, 0), 180, self.game.height*0.2)
         self.text3 = libdef.DrawText(self.game.screen, "How may steps", (0, 0, 0), 824, self.game.height * 0.2)
         # continue button
-        self.continu = libdef.DrawButton(self.game.screen, self.game.green, self.game.white, "Are you ready?", 250, 50, (self.game.width * 0.5),(self.game.height * 0.5))
+        self.continu3 = libdef.DrawButton(self.game.screen, self.game.green, self.game.white, "Are you ready?", 250, 50, (self.game.width * 0.5),(self.game.height * 0.5))
 
         # flip updated screen
-        if self.continu.collision():
+        if self.continu3.collision():
             if self.number == 1 or self.number == 3 or self.number == 5:
                 player.type = "open"
             else:
