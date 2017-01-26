@@ -289,3 +289,23 @@ def drawTextInRect(surface, text, color, rect, font, aa=False, bkg=None):
         text = text[i:]
 
     return text
+
+class getPressed:
+    def __init__(self, waittime):
+        self.boolswitch = False
+        self.timer = 0.0
+        self.clock = time.time()
+        self.x = time
+        if self.timer > waittime:
+            self.boolswitch = True
+            timer = 0.0
+        else:
+            self.x = time.time()
+            self.timer += (self.x - self.clock)
+            self.clock = self.x
+
+        if self.boolswitch:
+            self.click = pygame.mouse.get_pressed()
+            if self.click[0] == 1:
+                self.boolswitch = False
+                self.clock = time.time()
