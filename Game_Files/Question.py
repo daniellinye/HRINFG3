@@ -8,7 +8,6 @@ class DrawQuestion:
     def __init__(self, question, answers):
         self.drawing = True
         self.ins = game.height * .25
-        self.handleAnswered = handleAnswered
         self.middleOfScreen = game.width * .5
         self.questionAsked = question;
         self.answers = answers;
@@ -79,4 +78,4 @@ def Question():
 
         pygame.display.flip()
 
-Question()
+# Question()
