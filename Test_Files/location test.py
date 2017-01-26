@@ -55,11 +55,11 @@ class Player:
 
 
 class Point:
-    def __init__(self, x, y, category):
+    def __init__(self, x, y, category, highlight):
         self.x = x
         self.y = y
         self.category = category
-        self.highlight = 0
+        self.highlight = highlight
 
 
     def highlight(self):
@@ -79,10 +79,9 @@ class Point:
 #call Sections to draw grid and players
 #
 class Sections:
-    def __init__(self, screen, width, height, categories=4, grid_width=2, grid_heigth=10):
+    def __init__(self, screen, width, height, players, categories=4, grid_width=2, grid_heigth=10):
         self.listc = []
-
-        self.player = Player(1,"Bob", 0)
+        self.players = players
 
         self.screen = screen
         self.width = width
@@ -99,34 +98,54 @@ class Sections:
         for counter in range(0, 4):
             pygame.draw.rect(self.screen, self.colorlist[counter], [i, 0, self.width / 4, self.height], 0)
             i += self.width / 4
-
-        self.updateplayer(self.player)
-        for category in range(0, self.categories):
+        for category in range(0, categories):
             for x in range(0, self.grid_width):
                 for y in range(0, self.grid_height):
-                    Point(x, y, category).drawself(self.screen, self.width, self.height, self.grid_height)
-                    self.listc.append(Point(x, y, category))
-
+                    Point(x, y, category, 0).drawself(self.screen, self.width, self.height, self.grid_height)
+                    self.listc.append(Point(x, y, category, 0))
 
 
     def drawplayer(self, player, c, x, y):
         player.relocate(c, x, y)
 
+    def draw(self, player):
+        i = 0
+        for counter in range(0, 4):
+            pygame.draw.rect(self.screen, self.colorlist[counter], [i, 0, self.width / 4, self.height], 0)
+            i += self.width / 4
+        self.updateplayer(player)
+        for category in range(0, self.categories):
+            for x in range(0, self.grid_width):
+                for y in range(0, self.grid_height):
+                    if player.x == x and player.y == y and player.category == category:
+                        Point(x, y, category, 2).drawself(self.screen, self.width, self.height, self.grid_height)
+                    else:
+                        Point(x, y, category, 0).drawself(self.screen, self.width, self.height, self.grid_height)
+
+
     def getpoint(self, category, x, y):
-        return self.listc.index(category, x, y).highlight()
+        for items in self.listc:
+            if items.x == self.players.x and items.y == self.players.y:
+                return items
+
 
 
     def updateplayer(self, player):
         if player.y >= 0:
             self.getpoint(player.category, player.x, player.y).highlight()
         else:
-            print("player wins!")
+            drawTextInRect(self.screen, "Player {} Wins!".format(player.name), (0,0,0),(self.width/2, self.height/2), pygame.font.SysFont("Arial", 40))
 
-    def moveplayer(self):
 
 
     def addplayer(self, player):
-        self.players.append(player)
+        self.players = player
+
+
+
+
+
+
 
 
 
@@ -155,8 +174,7 @@ class Game:
 
             # draw logic
             self.screen.fill((0,0,0))
-            menu = Sections(self.screen, self.width, self.height)
-            menu.addplayer(bob)
+            menu = Sections(self.screen, self.width, self.height, bob)
             bob.update(20)
 
             # must also flip backscreen
