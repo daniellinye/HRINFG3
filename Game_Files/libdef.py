@@ -120,6 +120,19 @@ class Player:
         self.score = score
         self.position = position
         self.roll = roll
+        self.category = 0
+        self.x = -1
+        self.y = -1
+        self.rect = (self.x, self.y)
+        #y = 10 because 0,10 is the left bottom of the screen
+
+    def newcategory(self,x):
+        self.category = x
+
+    def relocate(self, x, y):
+        self.x = x
+        self.y - y
+        self.location = (x,y)
 
 class Point:
     def __init__(self, x, y, category):
@@ -163,6 +176,12 @@ class Sections:
 
     def getpoint(self, category, x, y):
         return self.listc[category][x][y]
+
+    def drawplayer(self, player):
+        if player.x >= 0 and player.y >= 0:
+            self.getpoint(player.category, player.x, player.y)
+        else:
+            print("Player {} starts".format(player.name))
 
 
 # draw some text into an area of a surface
