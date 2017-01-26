@@ -144,6 +144,13 @@ class Player:
     def add_category(self, category):
         self.category = category
 
+    def add_steps(self, steps):
+        self.steps = steps
+
+    def add_kind(self, kind):
+        self.kind = kind
+
+
     def update(self, moves):
         if moves > 0:
             set = False

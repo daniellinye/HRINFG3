@@ -88,9 +88,15 @@ class Menu:
                                 players[counter-1].direction = direction
                                 state = 1.41
                         if state == 1.41:
-                            # Counter and state must ONLY change after someones turn
-                            counter += 1
-                            state = 1.4
+                            dice2_roll = toDraw.draw1_1(order[counter - 1])
+                            if dice2_roll:
+                                state = 1.42
+                        if state == 1.42:
+                            dice2_click = toDraw.draw1_5(order[counter - 1])
+                            if dice2_click:
+                                # Counter and state must ONLY change after someones turn
+                                counter += 1
+                                state = 1.4
                     else:
                         counter = 1
                         state = 0
@@ -159,8 +165,8 @@ class DrawMenu:
     def draw1_4(self, player, categories):
         return game.main_game.choose_category(player, categories)
 
-    def draw1_5(self):
-        return game.dice.drawScreen3()
+    def draw1_5(self,player):
+        return game.dice.drawScreen3(player)
 
     #instructions menu
     def draw2(self):
