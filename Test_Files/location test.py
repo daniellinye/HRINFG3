@@ -80,7 +80,7 @@ class Game:
             self.screen.fill((0,0,0))
 
 
-            menu = Sections(self.screen, self.width/2, self.height/2)
+            menu = Sections(self.screen, self.width/3, self.height/3)
 
 
             # must also flip backscreen
