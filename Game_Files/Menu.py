@@ -105,8 +105,7 @@ class Menu:
                             isCorrectAnswer = Question.DrawQuestion(game.dummyQuestions[0], game.dummyQuestions[0].get('answers')).drawScreen()
 
                             if isCorrectAnswer:
-                                Sections().moveplayer(order[counter -1])
-                                game.grid
+                                game.grid.draw
                                 game.grid.addplayer(order[counter - 1])
                                 game.grid.moveplayer(order[counter - 1])
                                 counter += 1

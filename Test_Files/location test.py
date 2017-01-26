@@ -1,6 +1,7 @@
 #a beautiful grid pattern on the screen
 
 import pygame
+import time
 
 class Player:
     def __init__(self, player_id, name, score, position = (-1,11), roll = 0):
@@ -80,9 +81,8 @@ class Point:
 class Sections:
     def __init__(self, screen, width, height, categories=4, grid_width=2, grid_heigth=10):
         self.listc = []
-        self.listx = []
-        self.listy = []
-        self.players = []
+
+        self.player = Player(1,"Bob", 0)
 
         self.screen = screen
         self.width = width
@@ -97,31 +97,23 @@ class Sections:
 
 
         for counter in range(0, 4):
-            i += self.width / 4
-        if not self.players == None:
-            for player in self.players:
-                self.updateplayer(player)
-        for category in range(0, self.categories):
-            for x in range(0, self.grid_width):
-                for y in range(0, self.grid_height):
-                    self.listc.append(self.listx.append(self.listy.append(Point(x, y, category))))
-
-
-    def draw(self, player):
-        i = 1
-
-        self.updateplayer(player)
-        for counter in range(0, 4):
             pygame.draw.rect(self.screen, self.colorlist[counter], [i, 0, self.width / 4, self.height], 0)
             i += self.width / 4
+
+        self.updateplayer(self.player)
         for category in range(0, self.categories):
             for x in range(0, self.grid_width):
                 for y in range(0, self.grid_height):
                     Point(x, y, category).drawself(self.screen, self.width, self.height, self.grid_height)
+                    self.listc.append(Point(x, y, category))
 
+
+
+    def drawplayer(self, player, c, x, y):
+        player.relocate(c, x, y)
 
     def getpoint(self, category, x, y):
-        return self.listc[category]
+        return self.listc.index(category, x, y).highlight()
 
 
     def updateplayer(self, player):
@@ -130,8 +122,8 @@ class Sections:
         else:
             print("player wins!")
 
-    def moveplayer(self, player):
-        self.players[player].update(self.steps)
+    def moveplayer(self):
+
 
     def addplayer(self, player):
         self.players.append(player)
@@ -158,18 +150,19 @@ class Game:
 
         bob = Player(1, "Bob", 0)
 
-        menu = Sections(self.screen, self.width, self.height)
-        menu.addplayer(bob)
 
         while process_events():
 
             # draw logic
             self.screen.fill((0,0,0))
-
-            menu.draw(menu.players[0])
+            menu = Sections(self.screen, self.width, self.height)
+            menu.addplayer(bob)
+            bob.update(20)
 
             # must also flip backscreen
             pygame.display.flip()
+
+
 
 
 def process_events():

@@ -174,11 +174,11 @@ class Player:
 
 
 class Point:
-    def __init__(self, x, y, category):
+    def __init__(self, x, y, category, highlight):
         self.x = x
         self.y = y
         self.category = category
-        self.highlight = 0
+        self.highlight = highlight
 
 
     def highlight(self):
@@ -200,8 +200,6 @@ class Point:
 class Sections:
     def __init__(self, screen, width, height, players, categories=4, grid_width=2, grid_heigth=10):
         self.listc = []
-        self.listx = []
-        self.listy = []
         self.players = players
 
         self.screen = screen
@@ -231,9 +229,23 @@ class Sections:
     def drawplayer(self, player, c, x, y):
         player.relocate(c, x, y)
 
+    def draw(self, player):
+        i = 0
+        for counter in range(0, 4):
+            pygame.draw.rect(self.screen, self.colorlist[counter], [i, 0, self.width / 4, self.height], 0)
+            i += self.width / 4
+        self.updateplayer(player)
+        for category in range(0, self.categories):
+            for x in range(0, self.grid_width):
+                for y in range(0, self.grid_height):
+                    if player.x == x and player.y == y and player.category == category:
+                        Point(x, y, category, 2).drawself(self.screen, self.width, self.height, self.grid_height)
+                    else:
+                        Point(x, y, category, 0).drawself(self.screen, self.width, self.height, self.grid_height)
+                    self.listc.append(Point(x, y, category))
 
     def getpoint(self, category, x, y):
-        return self.listc[category][x][y]
+        return self.listc.index(category, x, y)
 
 
     def updateplayer(self, player):
