@@ -147,8 +147,8 @@ class Player:
     def add_steps(self, steps):
         self.steps = steps
 
-    def add_kind(self, kind):
-        self.kind = kind
+    def add_type(self, type):
+        self.type = type
 
 
     def update(self, moves):

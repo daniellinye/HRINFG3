@@ -77,7 +77,7 @@ class DrawDiceScreen:
         # text beneath image
         self.text = libdef.DrawText(self.game.screen, "You rolled a {} and a {}!".format(self.number,self.number2), self.game.red, self.game.width-512, self.game.height*0.4)
         # text next to dice
-        self.text2 = libdef.DrawText(self.game.screen, "What kind of question", (0, 0, 0), 180, self.game.height*0.2)
+        self.text2 = libdef.DrawText(self.game.screen, "What type of question", (0, 0, 0), 180, self.game.height*0.2)
         self.text3 = libdef.DrawText(self.game.screen, "How may steps", (0, 0, 0), 824, self.game.height * 0.2)
         # continue button
         self.continu = libdef.DrawButton(self.game.screen, self.game.green, self.game.white, "Are you ready?", 250, 50, (self.game.width * 0.5),(self.game.height * 0.5))
@@ -85,9 +85,9 @@ class DrawDiceScreen:
         # flip updated screen
         if self.continu.collision():
             if self.number == 1 or self.number == 3 or self.number == 5:
-                player.kind = "open"
+                player.type = "open"
             else:
-                player.kind = "mul"
+                player.type = "mul"
             if self.number2 == 1 or self.number2 == 2:
                 player.steps = 1
             elif self.number2 == 3 or self.number2 == 4:
