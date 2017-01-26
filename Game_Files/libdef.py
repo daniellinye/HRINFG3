@@ -234,6 +234,8 @@ class Sections:
         else:
             drawTextInRect(self.screen, "Player {} Wins!".format(player.name), (0,0,0),(self.width/2, self.height/2), pygame.font.SysFont("Arial", 40))
 
+    def moveplayer(self, player, moves):
+        self.players[player].update(moves)
 
 
 
