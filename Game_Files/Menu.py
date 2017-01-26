@@ -108,6 +108,7 @@ class Menu:
                                 game.grid.draw
                                 game.grid.addplayer(order[counter - 1])
                                 game.grid.updateplayer(order[counter - 1])
+                                pygame.display.flip()
                                 time.sleep(5)
 
                                 counter += 1

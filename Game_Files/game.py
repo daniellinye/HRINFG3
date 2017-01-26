@@ -49,7 +49,7 @@ class Game:
             self.entertainment = DrawButton(self.game.screen, (255,0,0), (0,0,0), "Entertainment", 300, 300, 150, 550)
         if "history" not in categories:
             self.history =  DrawButton(self.game.screen, (255,255,0), (0,0,0), "History", 300, 300, 750, 550)
-        text = DrawText(self.game.screen, "{} choose a catergory".format(player.name), (0,0,0), self.game.width*0.5, self.game.height*0.5)
+        text = DrawText(self.game.screen, "{} choose a category".format(player.name), (0,0,0), self.game.width*0.5, self.game.height*0.5)
 
         if "sports"  not in categories:
             if self.sports.collision():
@@ -75,9 +75,9 @@ class Game:
 
     def choose_direction(self, player):
         self.game.screen.fill((255, 255, 255))
-        directions = [["left", 150, 150, (0, 0, 255)], ["right", 750, 150, (0, 255, 0)], ["up", 150, 550, (255, 0, 0)],
-                      ["down", 750, 550, (255, 255, 0)]]
-        DrawText(self.game.screen, "{} choose a catergory".format(player.name), (0, 0, 0), self.game.width * 0.5,
+        directions = [["Left", 150, 150, (0, 0, 255)], ["Right", 750, 150, (0, 255, 0)], ["Up", 150, 550, (255, 0, 0)],
+                      ["Down", 750, 550, (255, 255, 0)]]
+        DrawText(self.game.screen, "{} choose a direction".format(player.name), (0, 0, 0), self.game.width * 0.5,
                  self.game.height * 0.5)
 
         for i in directions:

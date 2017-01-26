@@ -253,7 +253,7 @@ class Sections:
 
     def updateplayer(self, player):
         if player.y >= 0:
-            self.getpoint(player.category, player.x, player.y).highlight()
+            pass
         else:
             drawTextInRect(self.screen, "Player {} Wins!".format(player.name), (0,0,0),(self.width/2, self.height/2), pygame.font.SysFont("Arial", 40))
 

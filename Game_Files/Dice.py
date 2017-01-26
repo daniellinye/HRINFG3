@@ -19,7 +19,7 @@ class DrawDiceScreen:
         self.player = player
 
         # roll button
-        self.roll = libdef.DrawButton(self.game.screen, self.game.green, self.game.white, "Player {} Roll Dice".format(self.player.id), 500, 125, (self.game.width * 0.5),
+        self.roll = libdef.DrawButton(self.game.screen, self.game.green, self.game.white, "{} Roll Dice".format(self.player.name), 500, 125, (self.game.width * 0.5),
                                (self.game.height * 0.5))
 
         # flip updated screen
