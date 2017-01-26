@@ -99,10 +99,9 @@ class Menu:
                         if state == 1.43:
                             question = PickQuestion.DrawPickQuestion(order[counter -1].category, game.dummyQuestions).drawScreen()
                             if question:
-                                # Counter and state must ONLY change after someones turn
-                                state = 1.4
+                                state = 1.44
                         if state == 1.44:
-                            isCorrectAnswer = Question.DrawQuestion(self.dummyQuestions[0], self.dummyQuestions[0].get('answers'))
+                            isCorrectAnswer = Question.DrawQuestion(game.dummyQuestions[0], game.dummyQuestions[0].get('answers'))
                             if isCorrectAnswer:
                                 Sections().moveplayer(order[counter -1])
                                 
