@@ -94,12 +94,13 @@ class Menu:
                         if state == 1.42:
                             dice2_click = toDraw.draw1_5(order[counter - 1])
                             if dice2_click:
-                                # Counter and state must ONLY change after someones turn
-                                counter += 1
-                                state = 1.4
+                                state = 1.43
+                        if state == 1.43:
+                            # Counter and state must ONLY change after someones turn
+                            counter += 1
+                            state = 1.4
                     else:
                         counter = 1
-                        state = 0
 
             #-----------------------------
             elif state == 2:
