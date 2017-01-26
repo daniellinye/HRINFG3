@@ -140,7 +140,7 @@ class Player:
 
     def relocate(self, x, y):
         self.x = x
-        self.y - y
+        self.y = y
         self.location = (x,y)
 
 class Point:
