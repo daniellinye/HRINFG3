@@ -193,7 +193,7 @@ class Sections:
                     Point(x, y, category).drawself(self.screen, width, height, grid_heigth)
                     self.listc.append(self.listx.append(self.listy.append(Point(x, y, category))))
 
-    def drawplayer(self, player = Player()):
+    def drawplayer(self, player):
         if player.x >= 0 and player.y >= 0:
             self.getpoint(player.category, player.x, player.y)
         else:
