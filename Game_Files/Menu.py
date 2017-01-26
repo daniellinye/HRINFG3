@@ -107,7 +107,9 @@ class Menu:
                             if isCorrectAnswer:
                                 game.grid.draw
                                 game.grid.addplayer(order[counter - 1])
-                                game.grid.moveplayer(order[counter - 1])
+                                game.grid.updateplayer(order[counter - 1])
+                                time.sleep(5)
+
                                 counter += 1
                                 state = 1.4
                             elif False:

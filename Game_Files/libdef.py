@@ -222,8 +222,8 @@ class Sections:
         for category in range(0, categories):
             for x in range(0, self.grid_width):
                 for y in range(0, self.grid_height):
-                    Point(x, y, category).drawself(self.screen, self.width, self.height, self.grid_height)
-                    self.listc.append(self.listx.append(self.listy.append(Point(x, y, category))))
+                    Point(x, y, category, 0).drawself(self.screen, self.width, self.height, self.grid_height)
+                    self.listc.append(Point(x, y, category, 0))
 
 
     def drawplayer(self, player, c, x, y):
@@ -242,10 +242,13 @@ class Sections:
                         Point(x, y, category, 2).drawself(self.screen, self.width, self.height, self.grid_height)
                     else:
                         Point(x, y, category, 0).drawself(self.screen, self.width, self.height, self.grid_height)
-                    self.listc.append(Point(x, y, category))
+
 
     def getpoint(self, category, x, y):
-        return self.listc.index(category, x, y)
+        for items in self.listc:
+            if items.x == self.players.x and items.y == self.players.y:
+                return items
+
 
 
     def updateplayer(self, player):
@@ -254,11 +257,10 @@ class Sections:
         else:
             drawTextInRect(self.screen, "Player {} Wins!".format(player.name), (0,0,0),(self.width/2, self.height/2), pygame.font.SysFont("Arial", 40))
 
-    def moveplayer(self, player):
-        self.players[player].update(self.steps)
+
 
     def addplayer(self, player):
-        self.players.append(player)
+        self.players = player
 
 
 
