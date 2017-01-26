@@ -48,7 +48,7 @@ class DrawButton:
                 return True
 
     def singleclick(self, new_color=(0,0,0)):
-        if self.collision(new_color) and self.clicked:
+        if self.collision(new_color) and self.clicked == False:
             self.clicked = True
             return True
         else:
@@ -291,6 +291,7 @@ def drawTextInRect(surface, text, color, rect, font, aa=False, bkg=None):
 
     return text
 
+
 class getPressed:
     def __init__(self, waittime):
         self.done = False
@@ -312,4 +313,3 @@ class getPressed:
                 self.boolswitch = False
                 self.done = True
                 self.clock = time.time()
-

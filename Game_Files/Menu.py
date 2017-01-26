@@ -1,6 +1,7 @@
 import pygame
 import time
-
+import PickQuestion
+import Question
 from os.path import join, dirname
 from os import environ
 from dotenv import load_dotenv
@@ -96,7 +97,15 @@ class Menu:
                             if dice2_click:
                                 state = 1.43
                         if state == 1.43:
-                            # Counter and state must ONLY change after someones turn
+                            question = PickQuestion.DrawPickQuestion(order[counter -1].category, game.dummyQuestions).drawScreen()
+                            if question:
+                                # Counter and state must ONLY change after someones turn
+                                state = 1.4
+                        if state == 1.44:
+                            isCorrectAnswer = Question.DrawQuestion(self.dummyQuestions[0], self.dummyQuestions[0].get('answers'))
+                            if isCorrectAnswer:
+                                Sections().moveplayer(order[counter -1])
+                                
                             counter += 1
                             state = 1.4
                     else:

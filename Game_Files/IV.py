@@ -37,9 +37,13 @@ class IV:
         self.green = (0, 255, 0)
         self.red = (255, 0, 0)
         self.white = (255,255,255)
+        self.blue = (30,144,255)
+        self.yellow = (255,255,0)
         self.colors = {
             'black': self.black,
             'green': self.green,
+            'yellow': self.yellow,
+            'blue': self.blue,
             'red': self.red,
             'white': self.white
         }
@@ -81,6 +85,91 @@ class IV:
         except:
             print("Warning: Some files are missing")
 
-
+        self.dummyQuestions = [{
+            'id': 1,
+            'name': 'Hoeveel tulpen zitten in een dozijn',
+            'type': 'multiple_choice',
+            'answers': [
+                {'id': 1, 'name': 'Wrong answer 2', 'isCorrect': False},
+                {'id': 2, 'name': 'Long ass Wrong answer 20000000000000000000', 'isCorrect': False},
+                {'id': 3,  'name': 'Correct answer', 'isCorrect': True}
+            ]
+        }, {
+            'id': 2,
+            'name': 'Wat is 1 + 1',
+            'type': 'open',
+            'answers': [
+                {'id': 3,  'name': 'Correct answer', 'isCorrect': True}
+            ]
+        }, {
+            'id': 3,
+            'name': 'Hoeveel tulpen zitten in een dozijn',
+            'type': 'multiple_choice',
+            'answers': [
+                {'id': 1, 'name': 'Wrong answer 2', 'isCorrect': False},
+                {'id': 2, 'name': 'Long ass Wrong answer 20000000000000000000', 'isCorrect': False},
+                {'id': 3,  'name': 'Correct answer', 'isCorrect': True}
+            ]
+        }, {
+            'id': 4,
+            'name': 'Wat is 1 + 1',
+            'type': 'multiple_choice',
+            'answers': [
+                {'id': 1, 'name': 'Wrong answer 2', 'isCorrect': False},
+                {'id': 2, 'name': 'Long ass Wrong answer 20000000000000000000', 'isCorrect': False},
+                {'id': 3,  'name': 'Correct answer', 'isCorrect': True}
+            ]
+        },
+        {
+            'id': 5,
+            'name': 'Hoeveel tulpen zitten in een dozijn',
+            'type': 'open',
+            'answers': [
+                {'id': 3,  'name': 'Correct answer', 'isCorrect': True}
+            ]
+        }, {
+            'id': 6,
+            'name': 'Wat is 1 + 1',
+            'type': 'open',
+            'answers': [
+                {'id': 3,  'name': 'Correct answer', 'isCorrect': True}
+            ]
+        },
+        {
+            'id': 7,
+            'name': 'Hoeveel tulpen zitten in een dozijn',
+            'type': 'multiple_choice',
+            'answers': [
+                {'id': 1, 'name': 'Wrong answer 2', 'isCorrect': False},
+                {'id': 2, 'name': 'Long ass Wrong answer 20000000000000000000', 'isCorrect': False},
+                {'id': 3,  'name': 'Correct answer', 'isCorrect': True}
+            ]
+        }, {
+            'id': 8,
+            'name': 'Wat is 1 + 1',
+            'type': 'multiple_choice',
+            'answers': [
+                {'id': 1, 'name': 'Wrong answer 2', 'isCorrect': False},
+                {'id': 2, 'name': 'Long ass Wrong answer 20000000000000000000', 'isCorrect': False},
+                {'id': 3,  'name': 'Correct answer', 'isCorrect': True}
+            ]
+        },
+        {
+            'id': 7,
+            'name': 'Hoeveel tulpen zitten in een dozijn',
+            'type': 'open',
+            'answers': [
+                {'id': 1, 'name': 'Correct answer', 'isCorrect': True},
+            ]
+        }, {
+            'id': 8,
+            'name': 'Wat is 1 + 1',
+            'type': 'multiple_choice',
+            'answers': [
+                {'id': 1, 'name': 'Wrong answer 2', 'isCorrect': False},
+                {'id': 2, 'name': 'Long ass Wrong answer 20000000000000000000', 'isCorrect': False},
+                {'id': 3,  'name': 'Correct answer', 'isCorrect': True}
+            ]
+        }]
 
 init = IV()
