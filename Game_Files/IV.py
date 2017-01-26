@@ -13,6 +13,7 @@ from rules import Rules
 from game import Game
 from Dice import DrawDiceScreen
 import pygame_textinput
+from libdef import *
 
 
 class IV:
@@ -27,6 +28,7 @@ class IV:
 
         self.page = 0
         self.ruleslist = Rules().ruleslist
+
 
         self.font = pygame.font.SysFont("Arial", 40)
         self.rulesfont = pygame.font.SysFont("Arial", 18)
@@ -60,6 +62,8 @@ class IV:
         self.fps = 30
 
         self.screen = pygame.display.set_mode(self.size)
+
+        self.grid = Sections(self.screen, self.width, self.height, [])
 
         try:
             #cardbacks

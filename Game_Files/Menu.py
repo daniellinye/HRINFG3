@@ -103,8 +103,10 @@ class Menu:
                         if state == 1.44:
                             isCorrectAnswer = Question.DrawQuestion(game.dummyQuestions[0], game.dummyQuestions[0].get('answers'))
                             if isCorrectAnswer:
-                                Sections().moveplayer(order[counter -1])
-                                
+                                game.grid
+                                game.grid.addplayer(order[counter - 1])
+                                game.grid.moveplayer(order[counter - 1])
+
                             counter += 1
                             state = 1.4
                     else:
