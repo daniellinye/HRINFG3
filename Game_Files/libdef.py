@@ -44,7 +44,7 @@ class DrawButton:
 
             # If pressed on a button change state
             if pygame.mouse.get_pressed()[0]:
-                time.sleep(0.3)
+                getPressed(0.3)
                 return True
 
     def singleclick(self, new_color=(0,0,0)):
