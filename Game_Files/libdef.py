@@ -133,18 +133,35 @@ class Player:
         self.x = -1
         self.y = -1
         self.rect = (self.x, self.y)
-        #y = 10 because 0,10 is the left bottom of the screen
+        self.moved = True
 
-    def newcategory(self,x):
-        self.category = x
-
-    def relocate(self, x, y):
+    def relocate(self, c, x, y):
+        self.c = c
         self.x = x
         self.y = y
         self.location = (x,y)
 
     def add_category(self, category):
-            self.category = category
+        self.category = category
+
+    def update(self, moves):
+        if moves > 0:
+
+            keys = pygame.key.get_pressed()
+            if keys[pygame.K_LEFT]:
+                self.x -= 1
+            elif keys[pygame.K_RIGHT]:
+                self.x += 1
+
+            if keys[pygame.K_UP]:
+                self.y -= 1
+            elif keys[pygame.K_DOWN]:
+                self.y += 1
+
+            if keys[pygame.K_LEFT] or keys[pygame.K_RIGHT] or keys[pygame.K_UP] or keys[pygame.K_DOWN]:
+                moves =- 1
+                time.sleep(0.3)
+
 
 class Point:
     def __init__(self, x, y, category):
@@ -180,24 +197,41 @@ class Sections:
         self.listc = []
         self.listx = []
         self.listy = []
+
         self.screen = screen
+        self.width = width
+        self.height = height
+        self.categories = categories
+        self.grid_width = grid_width
+        self.grid_height = grid_heigth
+
         #colors are: red, blue, yellow, green
         self.colorlist = ((255,0,0), (0,0,255), (255, 255, 0), (0,255, 0))
         i = 1
         for counter in range(0, 4):
-            pygame.draw.rect(self.screen, self.colorlist[counter], [i, 0, width / 4, height], 0)
-            i += width / 4
+            pygame.draw.rect(self.screen, self.colorlist[counter], [i, 0, self.width / 4, self.height], 0)
+            i += self.width / 4
         for category in range(0, categories):
-            for x in range(0, grid_width):
-                for y in range(0, grid_heigth):
-                    Point(x, y, category).drawself(self.screen, width, height, grid_heigth)
+            for x in range(0, self.grid_width):
+                for y in range(0, self.grid_heigth):
+                    Point(x, y, category).drawself(self.screen, self.width, self.height, self.grid_heigth)
                     self.listc.append(self.listx.append(self.listy.append(Point(x, y, category))))
 
-    def drawplayer(self, player):
-        if player.x >= 0 and player.y >= 0:
-            self.getpoint(player.category, player.x, player.y)
+    def drawplayer(self, player, c, x, y):
+        player.relocate(c, x, y)
+
+
+    def getpoint(self, category, x, y):
+        return self.listc[category][x][y]
+
+
+    def updateplayer(self, player):
+        if player.x >= 0:
+            self.getpoint(player.category, player.x, player.y).highlight()
         else:
-            print("Player {} starts".format(player.name))
+            drawTextInRect(self.screen, "Player {} Wins!".format(player.name), (0,0,0),(self.width/2, self.height/2), pygame.font.SysFont("Arial", 40))
+
+
 
 
 # draw some text into an area of a surface
