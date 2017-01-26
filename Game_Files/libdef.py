@@ -42,17 +42,9 @@ class DrawButton:
             self.b_color = new_color
             self.draw()
 
-            # If pressed on a button change state
-            if pygame.mouse.get_pressed()[0]:
-                time.sleep(0.3)
-                return True
-
-    def singleclick(self, new_color=(0,0,0)):
-        if self.collision(new_color) and self.clicked:
-            self.clicked = True
-            return True
-        else:
-            return False
+            for event in pygame.event.get():
+                if event.type == pygame.MOUSEBUTTONUP:
+                    return True
 
 
 

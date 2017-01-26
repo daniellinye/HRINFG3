@@ -31,6 +31,7 @@ class Game:
                           200, self.game.height-50)
 
         if next.collision():
+            print(3)
             return Player(current_player, self.game.textinput.get_text() or "Player {}".format(current_player), (0, 0), 0)
         if quit.collision():
             return False

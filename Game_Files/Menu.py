@@ -41,9 +41,10 @@ class Menu:
                     running = False
             #-----------------------------
             elif 1 <= state < 2:
-                if state == 1 and toDraw.draw1():
+                returned_players = toDraw.draw1()
+                if state == 1 and returned_players:
                     state = 1.1
-                    player_amount = toDraw.draw1()
+                    player_amount = returned_players
                 elif state == 1.1:
                     if counter <= player_amount:
                         new_player = game.main_game.customize_players(counter)
@@ -136,7 +137,6 @@ class DrawMenu:
         game.screen.blit(self.score_surface, (512-(self.score_surface.get_width()*0.5), 16))
 
     def logic0(self):
-        self.start.collision(game.red)
         self.highscores.collision((20, 40, 100))
         self.settings.collision()
 
