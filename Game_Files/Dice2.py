@@ -31,7 +31,7 @@ class DrawDiceScreen:
             self.number2 = randint(1,6)
             return 101
 
-    def drawScreen1(self):
+    def drawScreen3(self):
         # background
         game.screen.fill((255, 255, 255))
         # dice image
@@ -45,47 +45,18 @@ class DrawDiceScreen:
         self.text2 = libdef.DrawText(game.screen, "What kind of question", (0, 0, 0), 180, game.height*0.2)
         self.text3 = libdef.DrawText(game.screen, "How may steps", (0, 0, 0), 824, game.height * 0.2)
         # continue button
-        self.continu = libdef.DrawButton(game.screen, game.green, game.white, "Continue", 200, 50, (game.width * 0.5),(game.height * 0.5))
-
-    def logicDrawScreen1(self):
-        self.continu.collision(game.red)
+        self.continu = libdef.DrawButton(game.screen, game.green, game.white, "Are you ready?", 200, 50, (game.width * 0.5),(game.height * 0.5))
 
         # flip updated screen
         if self.continu.collision():
-            return 102
-
-
-
-
-# force quit event
-def process_events():
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            return False
-    return True
-
-class RollDice:
-    state = 100
-    running = True
-    toDraw = DrawDiceScreen()
-    while process_events() and running:
-        # FPS
-        game.clock.tick(game.fps)
-        # -----------------------------
-        if state == 100:
-            # keeps drawing screen
-            toDraw.drawScreen()
-            # logic0
-            if toDraw.logicDrawScreen() == 101:
-                state = 101
-        # -----------------------------
-        elif state == 101:
-            toDraw.drawScreen1()
-            if toDraw.logicDrawScreen1() == 102:
-                state = 102
-        elif state == 102:
-            running = False
-        pygame.display.flip()
-
-
-rollDice = RollDice()
+            if self.number == 1 or self.number == 3 or self.number == 5:
+                kind = "open"
+            else:
+                kind = "mul"
+            if self.number2 == 1 or self.number2 == 2:
+                steps = 1
+            elif self.number2 == 3 or self.number2 == 4:
+                steps = 2
+            else:
+                steps = 3
+            return [kind, steps]
