@@ -21,6 +21,7 @@ class DrawButton:
         self.b_height = b_height
         self.position_x = position_x
         self.position_y = position_y
+        self.clicked = False
 
         self.font = pygame.font.SysFont("Times", 40)
 
@@ -45,6 +46,14 @@ class DrawButton:
             if pygame.mouse.get_pressed()[0]:
                 time.sleep(0.3)
                 return True
+
+    def singleclick(self, new_color=(0,0,0)):
+        if self.collision(new_color) and self.clicked == False:
+            self.clicked = True
+            return True
+        else:
+            return False
+
 
 
 def checkCollision(mouse, posX, posY, width, height):
