@@ -123,7 +123,7 @@ class DrawCard(BaseImage):
                 return True
 
 class Player:
-    def __init__(self, player_id, name, score, position, roll = 0):
+    def __init__(self, player_id, name, score, position = (-1,-1), roll = 0):
         self.id = player_id
         self.name = name
         self.score = score
@@ -164,7 +164,10 @@ class Point:
         return self.category
 
     def drawself(self, screen, width, height, grid_height):
-        pygame.draw.rect(screen, (0,0,0), [width/20 + width/4*self.category + width/8*self.x, height/grid_height *self.y + height/50, 8*(1+self.highlight), 8*(1+self.highlight)], 2)
+        if self.x >= 0 and self.y >= 0:
+            pygame.draw.rect(screen, (0,0,0), [width/20 + width/4*self.category + width/8*self.x, height/grid_height *self.y + height/50, 8*(1+self.highlight), 8*(1+self.highlight)], 2)
+        else:
+            print("Player is not in game yet")
 
     def highlight(self):
         if self.highlight == 0:
