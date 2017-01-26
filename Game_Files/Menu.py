@@ -101,18 +101,18 @@ class Menu:
                             if question:
                                 state = 1.44
                         if state == 1.44:
-                            isCorrectAnswer = Question.DrawQuestion(game.dummyQuestions[0], game.dummyQuestions[0].get('answers'))
+                            isCorrectAnswer = Question.DrawQuestion(game.dummyQuestions[0], game.dummyQuestions[0].get('answers')).drawScreen()
+
                             if isCorrectAnswer:
-
                                 Sections().moveplayer(order[counter -1])
-
                                 game.grid
                                 game.grid.addplayer(order[counter - 1])
                                 game.grid.moveplayer(order[counter - 1])
-
-
-                            counter += 1
-                            state = 1.4
+                                counter += 1
+                                state = 1.4
+                            elif False:
+                                counter += 1
+                                state = 1.4
                     else:
                         counter = 1
 

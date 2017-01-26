@@ -24,7 +24,7 @@ class DrawPickQuestion:
         self.maxCardsPerRow = int(floor((game.width - self.xPosFirstRow) / self.xPosFirstRow))
 
     def drawScreen(self):
-        # game.screen.fill((255, 255, 255))
+        game.screen.fill((255, 255, 255))
         rowX = self.xPosFirstRow
         rowY = self.yPosFirstRow
         cardsInRow = 0;

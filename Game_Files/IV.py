@@ -93,6 +93,7 @@ class IV:
             'id': 1,
             'name': 'Hoeveel tulpen zitten in een dozijn',
             'type': 'multiple_choice',
+            'color': 'green',
             'answers': [
                 {'id': 1, 'name': 'Wrong answer 2', 'isCorrect': False},
                 {'id': 2, 'name': 'Long ass Wrong answer 20000000000000000000', 'isCorrect': False},
