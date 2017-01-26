@@ -214,12 +214,13 @@ class Sections:
         #colors are: red, blue, yellow, green
         self.colorlist = ((255,0,0), (0,0,255), (255, 255, 0), (0,255, 0))
         i = 1
-        for player in players:
-            self.updateplayer(player)
+
 
         for counter in range(0, 4):
             pygame.draw.rect(self.screen, self.colorlist[counter], [i, 0, self.width / 4, self.height], 0)
             i += self.width / 4
+        for player in players:
+            self.updateplayer(player)
         for category in range(0, categories):
             for x in range(0, self.grid_width):
                 for y in range(0, self.grid_heigth):
@@ -241,8 +242,8 @@ class Sections:
         else:
             drawTextInRect(self.screen, "Player {} Wins!".format(player.name), (0,0,0),(self.width/2, self.height/2), pygame.font.SysFont("Arial", 40))
 
-    def moveplayer(self, player, moves):
-        self.players[player].update(moves)
+    def moveplayer(self, player):
+        self.players[player].update(self.steps)
 
 
 
@@ -292,6 +293,7 @@ def drawTextInRect(surface, text, color, rect, font, aa=False, bkg=None):
 
 class getPressed:
     def __init__(self, waittime):
+        self.done = False
         self.boolswitch = False
         self.timer = 0.0
         self.clock = time.time()
@@ -308,6 +310,6 @@ class getPressed:
             self.click = pygame.mouse.get_pressed()
             if self.click[0] == 1:
                 self.boolswitch = False
+                self.done = True
                 self.clock = time.time()
 
-                return True
