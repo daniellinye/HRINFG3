@@ -79,7 +79,6 @@ class Game:
         DrawText(self.game.screen, "{} choose a catergory".format(player.name), (0, 0, 0), self.game.width * 0.5,
                  self.game.height * 0.5)
 
-        directions[3][0]
         for i in directions:
                 direction_choice = DrawButton(self.game.screen, i[3], (0, 0, 0), i[0], 300, 300, i[1], i[2])
 
