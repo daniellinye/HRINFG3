@@ -102,10 +102,10 @@ class Menu:
                                 # Counter and state must ONLY change after someones turn
                                 state = 1.4
                         if state == 1.44:
-                            isCorrectAnswer = Question.DrawQuestion(self.dummyQuestions[0], self.dummyQuestions[0].get('answers'))
+                            isCorrectAnswer = Question.DrawQuestion(game.dummyQuestions[0], game.dummyQuestions[0].get('answers'))
                             if isCorrectAnswer:
                                 Sections().moveplayer(order[counter -1])
-                                
+
                             counter += 1
                             state = 1.4
                     else:
