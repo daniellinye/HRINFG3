@@ -192,30 +192,31 @@ class DrawMenu:
         self.i = 1
 
         if game.page > 0:
-            self.back = DrawButton(game.screen, game.green, game.white, "Back", 200, 50, 16, game.height - 50)
+            self.back = DrawButton(game.screen, game.green, game.white, "Back", 200, 50, 100, game.height -
+                                   25)
         else:
             self.back = DrawButton(game.screen, game.green, game.white, "Back", 200, 50, -200, -50)
 
         if len(game.ruleslist) == (game.page+1):
             self.next = DrawButton(game.screen, game.green, game.white, "Next", 200, 50, -200, -50)
         else:
-            self.next = DrawButton(game.screen, game.green, game.white, "Next", 200, 50, game.width-200, game.height-50)
+            self.next = DrawButton(game.screen, game.green, game.white, "Next", 200, 50, game.width-100, game.height-25)
 
         for text in game.ruleslist[game.page]:
             rRules = game.rulesfont.render(text, 1, game.white)
             game.screen.blit(rRules, (16, 16 *self.i))
             self.i += 1
-        self.exit = DrawButton(game.screen, game.green, game.white, "Exit", 200, 50, game.width - 200, 50)
+        self.exit = DrawButton(game.screen, game.green, game.white, "Exit", 200, 50, game.width - 512, game.height-25)
 
     def logic2(self):
 
-        if self.exit.collision(game.white):
+        if self.exit.collision():
             return 0
-        if self.next.collision(game.white):
+        if self.next.collision():
             time.sleep(.1)
             game.page += 1
 
-        if self.back.collision(game.white):
+        if self.back.collision():
             time.sleep(.1)
             game.page -= 1
 
