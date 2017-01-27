@@ -59,7 +59,7 @@ class IV:
         self.height = 720
         self.size = (self.width, self.height)
         self.clock = pygame.time.Clock()
-        self.fps = 30
+        self.fps = 60
 
         self.screen = pygame.display.set_mode(self.size)
 
