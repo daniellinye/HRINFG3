@@ -3,15 +3,20 @@ from functools import partial
 import pygame as pg
 
 class MenuScene(stateManagment.BaseScene):
-    def __init__(self, screen, helpers):
+    def __init__(self, surface, helpers):
         super(MenuScene, self).__init__()
-        # self.title = self.font.render("Splash Screen", True, pg.Color("dodgerblue"))
-        # self.title_rect = self.title.get_rect(center=self.screen_rect.center)
-        self.screen = screen
+        self.surface = surface
         self.vars = helpers['vars']
         self.assets =  helpers['assets']
-        self.persist["screen_color"] = "black"
-        self.next_state = "GAMEPLAY"
+        self.next_state = ""
+        self.persist['game_state'] = {
+            "playerCount": 0,
+            "players": [],
+            "startFromIndex": 0,
+            "currentPlayerIndex": 0,
+            "reuse_scene": None,
+            "skip_to_scene": None 
+        }
         Button = formControl.Button
         gameWidth = self.vars['pygame']['width']
         gameHeight = self.vars['pygame']['height']
@@ -46,26 +51,24 @@ class MenuScene(stateManagment.BaseScene):
             font=buttonFont)
         self.exitButton = Button((centerOfScreen, gameHeight * .7, buttonWidths,50),
             (255, 0, 0),
-            partial(self.goToScene, 'EXIT'),
+            self.exit,
             text="EXIT",
             hover_color=buttonHoverColor,
             font=buttonFont)
 
+    def exit(self):
+        self.quit = True
+
     def goToScene(self, sceneName):
         self.next_state = sceneName
         self.done = True
+
     def goNext(self, screenName):
-        self.persist['screen_color'] = 'gold';
         self.done = True
+
     def get_event(self, event):
         if event.type == pg.QUIT:
             self.quit = True
-        elif event.type == pg.KEYUP:
-            self.persist["screen_color"] = "gold"
-            self.done = False
-        elif event.type == pg.MOUSEBUTTONUP:
-            self.persist["screen_color"] = "dodgerblue"
-            self.done = False
         self.startButton.check_event(event)
         self.highscoresButton.check_event(event)
         self.instructionsButton.check_event(event)
@@ -74,11 +77,9 @@ class MenuScene(stateManagment.BaseScene):
 
     def draw(self, surface):
         surface.fill(pg.Color("white"))
-
         surface.blit(self.background.image, self.background.rect)
-        self.startButton.update(self.screen)
-        self.instructionsButton.update(self.screen)
-        self.highscoresButton.update(self.screen)
-        self.settingsButton.update(self.screen)
-        self.exitButton.update(self.screen)
-        # surface.blit(self.title, self.title_rect)
+        self.startButton.update(surface)
+        self.instructionsButton.update(surface)
+        self.highscoresButton.update(surface)
+        self.settingsButton.update(surface)
+        self.exitButton.update(surface)

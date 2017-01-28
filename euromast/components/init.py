@@ -11,7 +11,9 @@ class LoadVariables(object):
         }
         self.vars['pygame'] = {
             'width': 1024,
-            'height': 720
+            'height': 720,
+            'center_of_screen': 1024 / 2,
+            'vertical_center_of_screen': 720 / 2
         }
         self.vars['dummyQuestions'] = [{
             'id': 1,

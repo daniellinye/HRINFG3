@@ -28,12 +28,14 @@ class Background(pg.sprite.Sprite):
         self.rect.left, self.rect.top = location
 
 class Image:
-    def __init__(self, position, image):
+    def __init__(self, position, image=None):
         self.image = image
         self.position_x = position[0]
         self.position_y = position[1]
 
-    def draw(self, surface):
+    def draw(self, surface, image=None):
+        if image:
+            self.image = image
         surface.blit(self.image, (self.position_x - self.image.get_rect().size[0]*0.5,
                                       self.position_y - self.image.get_rect().size[1]*0.5))
 class Button(object):

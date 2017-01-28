@@ -1,6 +1,8 @@
 import sys
 import pygame as pg
-from scenes import menu, selectPlayer, insertPlayerNames, roll_dice_order
+from scenes import menu, selectPlayer, insertPlayerNames, roll_dice, \
+    choose_category, choose_direction, roll_dice_button, turn_order, \
+    roll_double_dice
 from components import init
 
 class Game(object):
@@ -34,10 +36,6 @@ class Game(object):
 
     def flip_state(self):
         """Switch to the next game state."""
-        if(self.state.next_state == 'EXIT'):
-            self.done = True
-            return
-
         current_state = self.state_name
         next_state = self.state.next_state
         self.state.done = False
@@ -86,13 +84,16 @@ if __name__ == "__main__":
         "vars": variables
     }
     states = {
-                "SPLASH": menu.MenuScene(screen, helpers),
+                "MENU": menu.MenuScene(screen, helpers),
                 "SELECT_PLAYER": selectPlayer.SelectPlayerScene(screen, helpers),
                 "INSERT_PLAYERS_NAMES": insertPlayerNames.InsertNamesScene(screen, helpers),
-                "ROLL_DICE_TURNS.ROLL": roll_dice_order.Start(screen, helpers),
-                "ROLL_DICE_TURNS.ROLLED": roll_dice_order.Roll(screen, helpers),
-                "EXIT": None,
-                "__sartScene__": "SPLASH"
+                "ROLL_DICE.BUTTON": roll_dice_button.Scene(screen, helpers),
+                "ROLL_DICE.ROLLED": roll_dice.Scene(screen, helpers),
+                "SHOW_TURN_ORDER": turn_order.Scene(screen, helpers),
+                "CHOOSE_CATEGORY": choose_category.Scene(screen, helpers),
+                "CHOOSE_DIRECTION": choose_direction.Scene(screen, helpers),
+                "ROLL_DOUBLE_DICE": roll_double_dice.Scene(screen, helpers),
+                "__sartScene__": "MENU"
              }
 
     game = Game(screen, states)

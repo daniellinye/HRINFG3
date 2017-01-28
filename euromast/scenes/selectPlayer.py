@@ -5,7 +5,6 @@ import pygame as pg
 class SelectPlayerScene(stateManagment.BaseScene):
     def __init__(self, screen, helpers):
         super(SelectPlayerScene, self).__init__()
-        self.screen = screen
         self.vars = helpers['vars']
         self.assets =  helpers['assets']
         self.background = formControl.Background(self.assets['background-erasmus'], [0,0])
@@ -37,17 +36,11 @@ class SelectPlayerScene(stateManagment.BaseScene):
             font=self.vars['fonts']['medium'])
 
     def registerPlayers(self, amount):
-
-        self.persist['game_state'] = {
-            "playerCount": amount,
-            "players": [],
-            "startFromIndex": 0,
-            "currentPlayerIndex": 0
-        }
+        self.persist['game_state']['playerCount'] = amount
         self.done = True
 
     def startup(self, persistent):
-        pass
+        self.persist = persistent
 
     def get_event(self, event):
         if event.type == pg.QUIT:

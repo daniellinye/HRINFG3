@@ -7,7 +7,7 @@ class InsertNamesScene(stateManagment.BaseScene):
         super(InsertNamesScene, self).__init__()
         self.screen = screen
         self.done = False
-        self.next_state = 'ROLL_DICE_TURNS.ROLL'
+        self.next_state = 'ROLL_DICE.BUTTON'
         self.vars = helpers['vars']
         self.assets =  helpers['assets']
         self.screen_color = pg.Color('white')

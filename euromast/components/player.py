@@ -6,6 +6,7 @@ class createPlayer(object):
         self.name = name
         self.score = 0
         self.position = position
+        self.direction = None
         self.category = 0
         self.x = -1
         self.y = 11
@@ -20,9 +21,11 @@ class createPlayer(object):
         self.location = (x,y)
     def set_roll(self, rolled):
         self.roll = rolled
-        
+
     def get_name(self):
         return self.name
+    def set_direction(self, direction):
+        self.direction = direction
     def set_category(self, category):
         self.category = category
 
