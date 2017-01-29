@@ -2,7 +2,7 @@ from components import stateManagment, formControl
 from functools import partial
 import pygame as pg
 
-class SelectPlayerScene(stateManagment.BaseScene):
+class Scene(stateManagment.BaseScene):
     def __init__(self, screen, helpers):
         super(SelectPlayerScene, self).__init__()
         self.vars = helpers['vars']

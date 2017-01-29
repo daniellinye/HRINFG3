@@ -1,6 +1,6 @@
 import sys
 import pygame as pg
-from scenes import menu, selectPlayer, insertPlayerNames, roll_dice, \
+from scenes import menu, select_players, insert_player_name, roll_dice, \
     choose_category, choose_direction, roll_dice_button, turn_order, \
     roll_double_dice
 from components import init
@@ -84,9 +84,9 @@ if __name__ == "__main__":
         "vars": variables
     }
     states = {
-                "MENU": menu.MenuScene(screen, helpers),
-                "SELECT_PLAYER": selectPlayer.SelectPlayerScene(screen, helpers),
-                "INSERT_PLAYERS_NAMES": insertPlayerNames.InsertNamesScene(screen, helpers),
+                "MENU": menu.Scene(screen, helpers),
+                "SELECT_PLAYER": select_players.Scene(screen, helpers),
+                "INSERT_PLAYERS_NAMES": insert_player_name.Scene(screen, helpers),
                 "ROLL_DICE.BUTTON": roll_dice_button.Scene(screen, helpers),
                 "ROLL_DICE.ROLLED": roll_dice.Scene(screen, helpers),
                 "SHOW_TURN_ORDER": turn_order.Scene(screen, helpers),

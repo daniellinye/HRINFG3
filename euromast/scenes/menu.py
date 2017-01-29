@@ -2,7 +2,7 @@ from components import stateManagment, formControl
 from functools import partial
 import pygame as pg
 
-class MenuScene(stateManagment.BaseScene):
+class Scene(stateManagment.BaseScene):
     def __init__(self, surface, helpers):
         super(MenuScene, self).__init__()
         self.surface = surface
@@ -15,7 +15,7 @@ class MenuScene(stateManagment.BaseScene):
             "startFromIndex": 0,
             "currentPlayerIndex": 0,
             "reuse_scene": None,
-            "skip_to_scene": None 
+            "skip_to_scene": None
         }
         Button = formControl.Button
         gameWidth = self.vars['pygame']['width']
