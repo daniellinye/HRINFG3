@@ -105,14 +105,16 @@ class Menu:
                             isCorrectAnswer = Question.DrawQuestion(game.dummyQuestions[0], game.dummyQuestions[0].get('answers')).drawScreen()
 
                             if isCorrectAnswer:
-                                game.grid.draw
                                 game.grid.addplayer(order[counter - 1])
-                                game.grid.updateplayer(order[counter - 1])
-                                pygame.display.flip()
-                                time.sleep(5)
+                                if game.grid.draw(game.screen, game.width, game.height):
+                                    time.sleep(5)
+                                    state = 0
+                                else:
+                                    pygame.display.flip()
+                                    time.sleep(5)
 
-                                counter += 1
-                                state = 1.4
+                                    counter += 1
+                                    state = 1.4
                             elif False:
                                 counter += 1
                                 state = 1.4

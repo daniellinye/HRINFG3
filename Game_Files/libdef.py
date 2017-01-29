@@ -135,6 +135,7 @@ class Player:
         self.rect = (self.x, self.y)
         self.moved = True
 
+
     def relocate(self, c, x, y):
         self.c = c
         self.x = x
@@ -195,73 +196,52 @@ class Point:
 
 
 
-#call Sections to draw grid and players
-#
-class Sections:
-    def __init__(self, screen, width, height, players, categories=4, grid_width=2, grid_heigth=10):
-        self.listc = []
-        self.players = players
+class Grid:
+    def __init__(self, grid_width=2, grid_height=10):
+        self.points =[]
+        self.players =[]
 
-        self.screen = screen
-        self.width = width
-        self.height = height
-        self.categories = categories
         self.grid_width = grid_width
-        self.grid_height = grid_heigth
+        self.grid_height = grid_height
 
-        #colors are: red, blue, yellow, green
         self.colorlist = ((255,0,0), (0,0,255), (255, 255, 0), (0,255, 0))
-        i = 1
-
-
-        for counter in range(0, 4):
-            pygame.draw.rect(self.screen, self.colorlist[counter], [i, 0, self.width / 4, self.height], 0)
-            i += self.width / 4
-        for player in players:
-            self.updateplayer(player)
-        for category in range(0, categories):
-            for x in range(0, self.grid_width):
-                for y in range(0, self.grid_height):
-                    Point(x, y, category, 0).drawself(self.screen, self.width, self.height, self.grid_height)
-                    self.listc.append(Point(x, y, category, 0))
-
-
-    def drawplayer(self, player, c, x, y):
-        player.relocate(c, x, y)
-
-    def draw(self, player):
-        i = 0
-        for counter in range(0, 4):
-            pygame.draw.rect(self.screen, self.colorlist[counter], [i, 0, self.width / 4, self.height], 0)
-            i += self.width / 4
-        self.updateplayer(player)
-        for category in range(0, self.categories):
-            for x in range(0, self.grid_width):
-                for y in range(0, self.grid_height):
-                    if player.x == x and player.y == y and player.category == category:
-                        Point(x, y, category, 2).drawself(self.screen, self.width, self.height, self.grid_height)
-                    else:
-                        Point(x, y, category, 0).drawself(self.screen, self.width, self.height, self.grid_height)
-
-
-    def getpoint(self, category, x, y):
-        for items in self.listc:
-            if items.x == self.players.x and items.y == self.players.y:
-                return items
-
-
-
-    def updateplayer(self, player):
-        if player.y >= 0:
-            pass
-        else:
-            drawTextInRect(self.screen, "Player {} Wins!".format(player.name), (0,0,0),(self.width/2, self.height/2), pygame.font.SysFont("Arial", 40))
-
 
 
     def addplayer(self, player):
-        self.players = player
+        if not self.players.__contains__(player):
+            self.players.append(player)
 
+#draw the grid and update whilst checking if someone wins
+#if someone wins, def returns True
+    def draw(self, screen, width, height):
+
+        #draw backgroundcolors
+        i = 1
+        for counter in range(0,4):
+            pygame.draw.rect(screen, self.colorlist[counter], [i, 0, width / 4, height], 0)
+            i += width / 4
+
+
+        #TODO fix player highlight and movement
+        for c in range(0,4):
+            templist = []
+            for x in range(0, self.grid_width):
+                for y in range(0, self.grid_height):
+                    for player in self.players:
+                        if player.y < 0:
+                            drawTextInRect(screen, "Player {} Wins!".format(player.name), (0, 0, 0),
+                                           (width / 2, height / 2), pygame.font.SysFont("Arial", 40))
+                            print("Terminate Game")
+                            return True
+                        else:
+                            if player.highlight == 1 and player.x == x and player.y == y and player.category == c:
+                                Point(x, y ,c, 1).drawself(screen, width, height, self.grid_height)
+                                templist.append(Point(x, y ,c, 1))
+                            else:
+                                Point(x, y ,c, 0).drawself(screen, width, height, self.grid_height)
+                                templist.append(Point(x, y ,c, 0))
+                templist.append(Point(x, y ,c, 1))
+            self.points.append(templist)
 
 
 

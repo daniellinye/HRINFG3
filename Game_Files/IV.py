@@ -63,7 +63,7 @@ class IV:
 
         self.screen = pygame.display.set_mode(self.size)
 
-        self.grid = Sections(self.screen, self.width, self.height, [])
+        self.grid = Grid()
 
         try:
             #cardbacks

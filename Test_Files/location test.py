@@ -75,6 +75,55 @@ class Point:
             print("Player is not in game yet")
 
 
+class Grid:
+    def __init__(self, grid_width=2, grid_height=10):
+        self.points =[]
+        self.players =[]
+
+        self.grid_width = grid_width
+        self.grid_height = grid_height
+
+        self.colorlist = ((255,0,0), (0,0,255), (255, 255, 0), (0,255, 0))
+
+
+    def addplayer(self, player):
+        if not self.players.__contains__(player):
+            self.players.append(player)
+
+#draw the grid and update whilst checking if someone wins
+#if someone wins, def returns True
+    def drawgrid(self, screen, width, height):
+
+        #draw backgroundcolors
+        i = 1
+        for counter in range(0,4):
+            pygame.draw.rect(screen, self.colorlist[counter], [i, 0, width / 4, height], 0)
+            i += self.width / 4
+
+
+
+        for c in range(0,4):
+            templist = []
+            for x in range(0, self.grid_width):
+                for y in range(0, self.grid_height):
+                    for player in self.players:
+                        if player.y < 0:
+                            drawTextInRect(self.screen, "Player {} Wins!".format(player.name), (0, 0, 0),
+                                           (self.width / 2, self.height / 2), pygame.font.SysFont("Arial", 40))
+                            print("Terminate Game")
+                            return True
+                        else:
+                            if player.highlight == 1 and player.x == x and player.y == y and player.category == c:
+                                Point(x, y ,c, 1).drawself(screen, width, height, self.grid_height)
+                                templist.append(Point(x, y ,c, 1))
+                            else:
+                                Point(x, y ,c, 0).drawself(screen, width, height, self.grid_height)
+                                templist.append(Point(x, y ,c, 0))
+                templist.append(Point(x, y ,c, 1))
+            self.points.append(templist)
+
+
+
 
 #call Sections to draw grid and players
 #
