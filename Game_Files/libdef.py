@@ -134,6 +134,7 @@ class Player:
         self.y = 11
         self.rect = (self.x, self.y)
         self.moved = True
+        self.steps = 0
 
 
     def relocate(self, c, x, y):
@@ -152,8 +153,8 @@ class Player:
         self.type = type
 
 
-    def update(self, moves):
-        if moves > 0:
+    def update(self):
+        if self.moves > 0:
             set = False
             keys = pygame.key.get_pressed()
             if keys[pygame.K_LEFT] and 0 > self.x >= 8:
@@ -229,8 +230,7 @@ class Grid:
                 for y in range(0, self.grid_height):
                     for player in self.players:
                         if player.y < 0:
-                            drawTextInRect(screen, "Player {} Wins!".format(player.name), (0, 0, 0),
-                                           (width / 2, height / 2), pygame.font.SysFont("Arial", 40))
+                            drawTextInRect(screen, "Player {} Wins!".format(player.name), (0, 0, 0), (width / 2, height / 2), pygame.font.SysFont("Arial", 40))
                             print("Terminate Game")
                             return True
                         else:
