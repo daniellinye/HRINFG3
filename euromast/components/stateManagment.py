@@ -8,6 +8,7 @@ class BaseScene(object):
         self.done = False
         self.quit = False
         self.next_state = None
+        self.wait = None
         self.screen_rect = pg.display.get_surface().get_rect()
         self.persist = {}
         self.font = pg.font.Font(None, 24)

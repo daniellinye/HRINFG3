@@ -51,18 +51,18 @@ class Scene(stateManagment.BaseScene):
             font=self.vars['fonts']['large']
         )
 
-    def nextPlayer(self, direction):
+    def nextPlayer(self, direction, id):
         self.directions.append(direction)
         self.player.set_direction(direction)
-        self.persist['game_state']['currentPlayerIndex'] += 1
+        self.persist['game_state']['current_player_index'] += 1
         game_state = self.persist['game_state']
         len_players = len(game_state['players'])
-        current_index = game_state['currentPlayerIndex']
+        current_index = game_state['current_player_index']
         if current_index != len_players and current_index < len_players:
             self.player = self.persist['game_state']['players'][current_index]
             return
 
-        self.persist['game_state']['currentPlayerIndex'] = 0
+        self.persist['game_state']['current_player_index'] = 0
         self.persist['game_state']['reuse_scene'] = self.next_state
         self.persist['game_state']['skip_to_scene'] = 'ROLL_DOUBLE_DICE'
 
@@ -70,7 +70,7 @@ class Scene(stateManagment.BaseScene):
 
     def startup(self, persistent):
         self.persist = persistent
-        current_player_idx = self.persist['game_state']['currentPlayerIndex']
+        current_player_idx = self.persist['game_state']['current_player_index']
         self.player = self.persist['game_state']['players'][current_player_idx]
 
     def get_event(self, event):
@@ -83,7 +83,7 @@ class Scene(stateManagment.BaseScene):
 
 
     def update(self, dt):
-        self.turn_text.updateText('{0} choose a direction'.format(self.player.name))
+        self.turn_text.update_text('{0} choose a direction'.format(self.player.name))
 
     def draw(self, surface):
         directions = self.directions

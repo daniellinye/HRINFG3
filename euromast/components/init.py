@@ -32,14 +32,14 @@ class LoadAssets(object):
         self.assets = {'rdlist':{}, 'wdlist':{}}
         try:
             #cardbacks
-            self.assets['bbackmul'] = pg.image.load('./assets/CBacks/BlueMul.png')
-            self.assets['bbackop'] = pg.image.load('./assets/CBacks/BlueOp.png')
-            self.assets['gbackmul'] = pg.image.load('./assets/CBacks/GreenMul.png')
-            self.assets['gbackop'] = pg.image.load('./assets/CBacks/GreenMul.png')
-            self.assets['rbackmul'] = pg.image.load('./assets/CBacks/RedMul.png')
-            self.assets['rbackop'] = pg.image.load('./assets/CBacks/RedOp.png')
-            self.assets['ybackmul'] = pg.image.load('./assets/CBacks/YellowMul.png')
-            self.assets['ybackop'] = pg.image.load('./assets/CBacks/YellowOp.png')
+            self.assets['lightsteelbluemul'] = pg.image.load('./assets/CBacks/BlueMul.png')
+            self.assets['lightsteelblueop'] = pg.image.load('./assets/CBacks/BlueOp.png')
+            self.assets['yellowgreenmul'] = pg.image.load('./assets/CBacks/GreenMul.png')
+            self.assets['yellowgreenop'] = pg.image.load('./assets/CBacks/GreenMul.png')
+            self.assets['tomatomul'] = pg.image.load('./assets/CBacks/RedMul.png')
+            self.assets['tomatoop'] = pg.image.load('./assets/CBacks/RedOp.png')
+            self.assets['yellowmul'] = pg.image.load('./assets/CBacks/YellowMul.png')
+            self.assets['yellowop'] = pg.image.load('./assets/CBacks/YellowOp.png')
             self.assets['background-erasmus'] = pg.image.load('./assets/background.png')
             #cardfronts
             self.assets['bfront'] = pg.image.load('./assets/CFronts/Blue.png')

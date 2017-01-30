@@ -7,12 +7,16 @@ class createPlayer(object):
         self.score = 0
         self.position = position
         self.direction = None
-        self.category = 0
+        self.category = None
         self.x = -1
         self.y = 11
         self.rect = (self.x, self.y)
         self.moved = True
         self.roll = roll
+        self.steps = None
+        self.question_type = None
+        self.current_question = None
+        self.answer_questions_id = ()
 
     def relocate(self, c, x, y):
         self.c = c

@@ -21,7 +21,8 @@ class Scene(stateManagment.BaseScene):
             text='Continue',
             font=self.vars['fonts']['medium']
         )
-    def next_scene(self):
+        
+    def next_scene(self, id):
         self.done = True
 
     def get_event(self, event):

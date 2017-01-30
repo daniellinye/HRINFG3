@@ -4,7 +4,7 @@ import pygame as pg
 
 class Scene(stateManagment.BaseScene):
     def __init__(self, screen, helpers):
-        super(InsertNamesScene, self).__init__()
+        super(Scene, self).__init__()
         self.screen = screen
         self.done = False
         self.next_state = 'ROLL_DICE.BUTTON'
@@ -35,18 +35,18 @@ class Scene(stateManagment.BaseScene):
             clear_on_enter=True,
             inactive_on_enter=False
         )
-    def next_player(self):
+    def next_player(self, id):
         self.input.execute()
 
     def setPlayerName(self, id, pname):
         self.player_count += 1
         game_state = self.persist['game_state']
         game_state['players'].append(player.createPlayer(pname))
-        if game_state['playerCount'] == len(game_state['players']):
+        if game_state['player_count'] == len(game_state['players']):
             self.done = True
             return
 
-        self.header_text.updateText('Player {0}, please enter your name'.format(self.player_count))
+        self.header_text.update_text('Player {0}, please enter your name'.format(self.player_count))
         # self.done = True
 
     def startup(self, persistent):

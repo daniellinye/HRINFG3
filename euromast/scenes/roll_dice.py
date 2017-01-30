@@ -11,47 +11,54 @@ class Scene(stateManagment.BaseScene):
         self.vars = helpers['vars']
         self.assets =  helpers['assets']
         self.screen_color = pg.Color('white')
+        self.rolled_number = None
         Button = formControl.Button
         game = self.vars['pygame']
-        self.centerOfScreen = (game['width'] / 2)
-        self.vertical_center_of_screen = (game['height'] / 2)
+        center_of_screen = game['center_of_screen']
+        vertical_center_of_screen = game['vertical_center_of_screen']
 
-        self.thrownText = formControl.Text((self.centerOfScreen - 100, self.vertical_center_of_screen - 100),
+        self.thrown_text = formControl.Text(
+            (center_of_screen, vertical_center_of_screen + 100),
             '',
             self.vars['fonts']['medium'],
             pg.Color('red')
         )
-        self.continueBtn = formControl.Button((self.centerOfScreen - 150, self.vertical_center_of_screen - 50, 300, 100),
+
+        self.continue_btn = formControl.Button(
+            (center_of_screen - 150, vertical_center_of_screen + 200, 300, 100),
             pg.Color('green'),
             self.next_player,
             text='Continue',
-            font=self.vars['fonts']['medium'])
+            font=self.vars['fonts']['medium']
+        )
 
-    def next_player(self):
-        current_player_index = self.persist['game_state']['currentPlayerIndex']
+        self.dice = formControl.Image((self.vars['pygame']['width'] - 512, self.vars['pygame']['height'] * .4))
 
-        self.persist['game_state']['players'][current_player_index].roll = self.thrownNumber
+    def next_player(self, id):
+        current_player_index = self.persist['game_state']['current_player_index']
 
-        self.persist['game_state']['currentPlayerIndex'] += 1
+        self.persist['game_state']['players'][current_player_index].roll = self.rolled_number
 
-        playerIndex = self.persist['game_state']['currentPlayerIndex']
+        self.persist['game_state']['current_player_index'] += 1
 
-        if playerIndex != len(self.persist['game_state']['players']) and playerIndex < len(self.persist['game_state']['players']):
+        player_index = self.persist['game_state']['current_player_index']
+
+        if player_index != len(self.persist['game_state']['players']) and player_index < len(self.persist['game_state']['players']):
             self.next_state = 'ROLL_DICE.BUTTON'
             self.done = True
             return
-        self.persist['game_state']['currentPlayerIndex'] = 0
+        self.persist['game_state']['current_player_index'] = 0
         self.next_state = 'SHOW_TURN_ORDER'
         self.done = True
 
     def startup(self, persistent):
         self.persist = persistent
-        self.thrownNumber = randint(1,6)
+        self.rolled_number = randint(1,6)
 
     def get_event(self, event):
         if event.type == pg.QUIT:
             self.quit = True
-        self.continueBtn.check_event(event)
+        self.continue_btn.check_event(event)
 
     def update(self, dt):
         pass
@@ -60,11 +67,11 @@ class Scene(stateManagment.BaseScene):
         # background
         surface.fill((255, 255, 255))
         # dice image
-        img = self.assets['wdlist']['dice{0}'.format(self.thrownNumber)]
+        img = self.assets['wdlist']['dice{0}'.format(self.rolled_number)]
 
-        formControl.Image((self.vars['pygame']['width'] - 512, self.vars['pygame']['height'] * .4), img).draw(surface)
+        self.dice.draw(surface, img)
 
-        self.thrownText.draw(surface)
-        self.thrownText.updateText("You rolled a {}!".format(self.thrownNumber))
+        self.thrown_text.draw(surface)
+        self.thrown_text.update_text("You rolled a {}!".format(self.rolled_number))
         #add roll to player
-        self.continueBtn.update(surface);
+        self.continue_btn.update(surface);

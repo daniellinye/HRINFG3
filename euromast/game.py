@@ -1,9 +1,18 @@
+from os.path import join, dirname
+from dotenv import load_dotenv
+dotenv_path = join(dirname(__file__), '../.env')
+load_dotenv(dotenv_path)
+import time
 import sys
 import pygame as pg
+
 from scenes import menu, select_players, insert_player_name, roll_dice, \
     choose_category, choose_direction, roll_dice_button, turn_order, \
-    roll_double_dice
+    roll_double_dice, choose_question, answer_question
 from components import init
+
+from model import model
+
 
 class Game(object):
     """
@@ -38,6 +47,8 @@ class Game(object):
         """Switch to the next game state."""
         current_state = self.state_name
         next_state = self.state.next_state
+        if self.state.wait:
+            time.sleep(self.state.wait)
         self.state.done = False
         self.state_name = next_state
         persistent = self.state.persist
@@ -93,6 +104,8 @@ if __name__ == "__main__":
                 "CHOOSE_CATEGORY": choose_category.Scene(screen, helpers),
                 "CHOOSE_DIRECTION": choose_direction.Scene(screen, helpers),
                 "ROLL_DOUBLE_DICE": roll_double_dice.Scene(screen, helpers),
+                "CHOOSE_QUESTION": choose_question.Scene(screen, helpers),
+                "ANSWER_QUESTION": answer_question.Scene(screen, helpers),
                 "__sartScene__": "MENU"
              }
 

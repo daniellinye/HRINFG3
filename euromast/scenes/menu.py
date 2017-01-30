@@ -4,82 +4,93 @@ import pygame as pg
 
 class Scene(stateManagment.BaseScene):
     def __init__(self, surface, helpers):
-        super(MenuScene, self).__init__()
+        super(Scene, self).__init__()
         self.surface = surface
         self.vars = helpers['vars']
         self.assets =  helpers['assets']
         self.next_state = ""
         self.persist['game_state'] = {
-            "playerCount": 0,
+            "player_count": 0,
             "players": [],
-            "startFromIndex": 0,
-            "currentPlayerIndex": 0,
+            "start_from_index": 0,
+            "current_player_index": 0,
             "reuse_scene": None,
-            "skip_to_scene": None
+            "skip_to_scene": None,
         }
         Button = formControl.Button
-        gameWidth = self.vars['pygame']['width']
-        gameHeight = self.vars['pygame']['height']
-        buttonWidths = 200
-        buttonFont = self.vars['fonts']['large']
-        buttonHoverColor = pg.Color('black')
-        centerOfScreen = (gameWidth / 2) - (buttonWidths / 2)
-        self.background = formControl.Background(self.assets['background-erasmus'], [0,0])
-        self.startButton = Button((centerOfScreen, gameHeight * .3, buttonWidths, 50),
+        game = self.vars['pygame']
+        width = game['width']
+        height = game['height']
+        button_width = 200
+        button_font = self.vars['fonts']['large']
+        button_hover_color = pg.Color('black')
+        center_buttons = (width / 2) - (button_width / 2)
+        self.background = formControl.Image((0,0), self.assets['background-erasmus'])
+
+        self.start_btn = Button(
+            (center_buttons, height * .3, button_width, 50),
             (255,0,0),
-            partial(self.goToScene, 'SELECT_PLAYER'),
+            partial(self.go_to_scene, 'SELECT_PLAYER'),
             text='Start',
-            hover_color=buttonHoverColor,
-            font=buttonFont)
-        self.instructionsButton = Button((centerOfScreen, gameHeight * .4, buttonWidths,50),
+            hover_color=button_hover_color,
+            font=button_font
+        )
+
+        self.instruction_btn = Button(
+            (center_buttons, height * .4, button_width,50),
             (255, 0, 0),
-            partial(self.goToScene, 'INSTRUCTIONS'),
+            partial(self.go_to_scene, 'INSTRUCTIONS'),
             text="Instructions",
-            hover_color=buttonHoverColor,
-            font=buttonFont)
-        self.highscoresButton = Button((centerOfScreen, gameHeight * .5, buttonWidths,50),
+            hover_color=button_hover_color,
+            font=button_font
+        )
+
+        self.highscore_btn = Button(
+            (center_buttons, height * .5, button_width,50),
             (255, 0, 0),
-            partial(self.goToScene, 'HIGHSCORES'),
+            partial(self.go_to_scene, 'HIGHSCORES'),
             text="Highscores",
-            hover_color=buttonHoverColor,
-            font=buttonFont)
-        self.settingsButton = Button((centerOfScreen, gameHeight * .6, buttonWidths,50),
+            hover_color=button_hover_color,
+            font=button_font
+        )
+        self.settings_btn = Button(
+            (center_buttons, height * .6, button_width,50),
             (255, 0, 0),
-            partial(self.goToScene, 'SETTINGS'),
+            partial(self.go_to_scene, 'SETTINGS'),
             text="Settings",
-            hover_color=buttonHoverColor,
-            font=buttonFont)
-        self.exitButton = Button((centerOfScreen, gameHeight * .7, buttonWidths,50),
+            hover_color=button_hover_color,
+            font=button_font
+        )
+        self.exit_btn = Button(
+            (center_buttons, height * .7, button_width, 50),
             (255, 0, 0),
             self.exit,
             text="EXIT",
-            hover_color=buttonHoverColor,
-            font=buttonFont)
+            hover_color=button_hover_color,
+            font=button_font
+        )
 
     def exit(self):
         self.quit = True
 
-    def goToScene(self, sceneName):
+    def go_to_scene(self, sceneName, id):
         self.next_state = sceneName
-        self.done = True
-
-    def goNext(self, screenName):
         self.done = True
 
     def get_event(self, event):
         if event.type == pg.QUIT:
             self.quit = True
-        self.startButton.check_event(event)
-        self.highscoresButton.check_event(event)
-        self.instructionsButton.check_event(event)
-        self.settingsButton.check_event(event)
-        self.exitButton.check_event(event)
+        self.start_btn.check_event(event)
+        self.highscore_btn.check_event(event)
+        self.instruction_btn.check_event(event)
+        self.settings_btn.check_event(event)
+        self.exit_btn.check_event(event)
 
     def draw(self, surface):
         surface.fill(pg.Color("white"))
         surface.blit(self.background.image, self.background.rect)
-        self.startButton.update(surface)
-        self.instructionsButton.update(surface)
-        self.highscoresButton.update(surface)
-        self.settingsButton.update(surface)
-        self.exitButton.update(surface)
+        self.start_btn.update(surface)
+        self.instruction_btn.update(surface)
+        self.highscore_btn.update(surface)
+        self.settings_btn.update(surface)
+        self.exit_btn.update(surface)
