@@ -41,6 +41,7 @@ class Menu:
                 elif toDraw.logic0() is False:
                     running = False
             #-----------------------------
+            #create player instances and roll turn order
             elif 1 <= state < 2:
                 returned_players = toDraw.draw1()
                 if state == 1 and returned_players:
@@ -82,6 +83,7 @@ class Menu:
                     else:
                         counter = 1
                         state = 1.4
+                #turns
                 elif 1.4 <= state < 1.5:
                     if counter <= player_amount:
                         if state == 1.4:
@@ -107,17 +109,22 @@ class Menu:
                             if isCorrectAnswer:
                                 game.grid.addplayer(order[counter - 1])
                                 if game.grid.draw(game.screen, game.width, game.height):
-                                    time.sleep(5)
                                     state = 0
                                 else:
-                                    pygame.display.flip()
-                                    time.sleep(5)
-
                                     counter += 1
-                                    state = 1.4
+                                    state = 1.45
                             elif False:
                                 counter += 1
                                 state = 1.4
+                        #draws players on euromast
+                        if state == 1.45:
+                            game.grid.draw(game.screen, game.width, game.height)
+                            nextpage = DrawButton(game.screen, game.red, game.black, "Next", 200, 50, game.width -400,
+                                       game.height -100)
+                            if nextpage.collision():
+                                counter += 1
+                                state = 1.4
+
                     else:
                         counter = 1
 

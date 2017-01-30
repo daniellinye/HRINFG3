@@ -17,6 +17,8 @@ class Game:
             if player_btn.collision():
                 return i
 
+    #TODO add line instance
+    #changes the current player
     def customize_players(self, current_player):
         self.game.screen.blit(self.background.image, self.background.rect)
         DrawText(self.game.screen, "Player {}, please enter a name:".format(current_player),
@@ -38,6 +40,8 @@ class Game:
         if quit.collision():
             return False
 
+    #TODO add line in comment on menu
+    #chooses category
     def choose_category(self, player, categories):
         self.player = player
         self.categories = categories
@@ -75,12 +79,15 @@ class Game:
                 categories.append("history")
                 return categories
 
+    #chooses direction on line 88 in menu
     def choose_direction(self, player):
         self.game.screen.fill((255, 255, 255))
         directions = [["Left", 150, 150, (0, 0, 255)], ["Right", 750, 150, (0, 255, 0)], ["Up", 150, 550, (255, 0, 0)],
                       ["Down", 750, 550, (255, 255, 0)]]
         DrawText(self.game.screen, "{} choose a direction".format(player.name), (0, 0, 0), self.game.width * 0.5,
                  self.game.height * 0.5)
+        #make so that the player can move on screen
+        player.moved = False
 
         for i in directions:
                 direction_choice = DrawButton(self.game.screen, i[3], (0, 0, 0), i[0], 300, 300, i[1], i[2])

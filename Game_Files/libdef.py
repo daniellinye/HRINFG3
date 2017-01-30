@@ -135,7 +135,10 @@ class Player:
         self.rect = (self.x, self.y)
         self.moved = True
         self.steps = 0
+        self.direction = None
 
+    def directionset(self, direction):
+        self.direction = direction
 
     def relocate(self, c, x, y):
         self.c = c
@@ -155,24 +158,21 @@ class Player:
 
     def update(self):
         if self.moves > 0:
-            set = False
             keys = pygame.key.get_pressed()
-            if keys[pygame.K_LEFT] and 0 > self.x >= 8:
-                self.x -= 1
-                set = True
-            elif keys[pygame.K_RIGHT] and 0 >= self.x > 8:
-                self.x += 1
-                set = True
-            if keys[pygame.K_UP] and 0 > self.y >= 8:
-                self.y -= 1
-                set = True
-            elif keys[pygame.K_DOWN] and 0 >= self.y > 8:
-                self.y += 1
-                set = True
+            if self.moved == False:
+                if self.direction[0] == "Left":
+                    self.x -= 1
+                    self.moved = True
+                elif self.direction[0] == "Right":
+                    self.x += 1
+                    self.moved = True
+                if self.direction[0] == "Up":
+                    self.y -= 1
+                    self.moved = True
+                elif self.direction[0] == "Down":
+                    self.y += 1
+                    self.moved = True
 
-            if set == True:
-                moves =- 1
-                time.sleep(0.3)
 
 
 class Point:
@@ -234,7 +234,7 @@ class Grid:
                             print("Terminate Game")
                             return True
                         else:
-                            if player.highlight == 1 and player.x == x and player.y == y and player.category == c:
+                            if player.x == x and player.y == y and player.category == c:
                                 Point(x, y ,c, 1).drawself(screen, width, height, self.grid_height)
                                 templist.append(Point(x, y ,c, 1))
                             else:
@@ -242,7 +242,6 @@ class Grid:
                                 templist.append(Point(x, y ,c, 0))
                 templist.append(Point(x, y ,c, 1))
             self.points.append(templist)
-
 
 
 
