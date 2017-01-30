@@ -17,7 +17,7 @@ class Scene(stateManagment.BaseScene):
         center_of_screen = game['center_of_screen']
         self.header_text = formControl.Text(
             (center_of_screen, 100),
-            'Select amount of Players',
+            '',
             self.vars['fonts']['large'],
             pg.Color('white')
         )
@@ -25,21 +25,18 @@ class Scene(stateManagment.BaseScene):
             (center_of_screen - 100, 200, 200, 50),
             (255,0,0),
             partial(self.register_player, 2),
-            text="2 Players",
             font=self.vars['fonts']['medium']
         )
         self.three_players_btn = Button(
             (center_of_screen - 100, 300, 200, 50),
             (255,0,0),
             partial(self.register_player, 3),
-            text="3 Players",
             font=self.vars['fonts']['medium']
         )
         self.four_players_btn = Button(
             (center_of_screen - 100, 400, 200, 50),
             (255,0,0),
             partial(self.register_player, 4),
-            text="4 Players",
             font=self.vars['fonts']['medium']
         )
 
@@ -49,7 +46,13 @@ class Scene(stateManagment.BaseScene):
 
     def startup(self, persistent):
         self.persist = persistent
+        self.i18n = self.persist['game_state']['i18n']
 
+    def update(self, dt):
+        self.header_text.update_text(self.i18n.translate('select amount of players'))
+        self.two_players_btn.update_text(self.i18n.translate('2 players'))
+        self.three_players_btn.update_text(self.i18n.translate('3 players'))
+        self.four_players_btn.update_text(self.i18n.translate('4 players'))
     def get_event(self, event):
         if event.type == pg.QUIT:
             self.quit = True
@@ -57,8 +60,7 @@ class Scene(stateManagment.BaseScene):
         self.three_players_btn.check_event(event)
         self.four_players_btn.check_event(event)
 
-    def update(self, dt):
-        pass
+
 
     def draw(self, surface):
         surface.blit(self.background.image, self.background.rect)

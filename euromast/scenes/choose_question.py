@@ -33,7 +33,7 @@ class Scene(stateManagment.BaseScene):
         category_color = self.player.category['color']
         op_or_mul = self.opOrMul[self.player.question_type]
 
-        questions = Model().get_questions(self.player.category['id'], 'multiple_choice')
+        questions = Model().get_questions(self.player.category['id'], self.player.question_type)
 
         rowX = self.xPosFirstRow
         rowY = self.yPosFirstRow

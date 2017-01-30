@@ -5,10 +5,10 @@ load_dotenv(dotenv_path)
 import time
 import sys
 import pygame as pg
-
+from i18n import i18n
 from scenes import menu, select_players, insert_player_name, roll_dice, \
     choose_category, choose_direction, roll_dice_button, turn_order, \
-    roll_double_dice, choose_question, answer_question
+    roll_double_dice, choose_question, answer_question, settings
 from components import init
 
 from model import model
@@ -37,6 +37,18 @@ class Game(object):
         self.states = states
         self.state_name = states['__sartScene__']
         self.state = self.states[self.state_name]
+        self.startup_persist = {
+            'game_state': {
+                "i18n": i18n.Localize(),
+                "player_count": 0,
+                "players": [],
+                "start_from_index": 0,
+                "current_player_index": 0,
+                "reuse_scene": None,
+                "skip_to_scene": None
+            }
+        }
+        self.state.startup(self.startup_persist)
 
     def event_loop(self):
         """Events are passed for handling to the current state."""
@@ -47,11 +59,9 @@ class Game(object):
         """Switch to the next game state."""
         current_state = self.state_name
         next_state = self.state.next_state
-        if self.state.wait:
-            time.sleep(self.state.wait)
         self.state.done = False
         self.state_name = next_state
-        persistent = self.state.persist
+        persistent = self.state.persist if self.state.persist != 0 else self.startup_persist
         self.state = self.states[self.state_name]
         self.state.startup(persistent)
 
@@ -96,6 +106,7 @@ if __name__ == "__main__":
     }
     states = {
                 "MENU": menu.Scene(screen, helpers),
+                "SETTINGS": settings.Scene(screen, helpers),
                 "SELECT_PLAYER": select_players.Scene(screen, helpers),
                 "INSERT_PLAYERS_NAMES": insert_player_name.Scene(screen, helpers),
                 "ROLL_DICE.BUTTON": roll_dice_button.Scene(screen, helpers),

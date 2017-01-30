@@ -1,4 +1,5 @@
 import pygame as pg
+from i18n import i18n
 
 class BaseScene(object):
     """
@@ -7,6 +8,7 @@ class BaseScene(object):
     def __init__(self):
         self.done = False
         self.quit = False
+        self.i18n = i18n.Localize()
         self.next_state = None
         self.wait = None
         self.screen_rect = pg.display.get_surface().get_rect()

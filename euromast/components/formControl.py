@@ -114,7 +114,9 @@ class Button(object):
                 color = self.clicked_font_color
                 self.clicked_text = self.font.render(self.text,True,color)
             self.text = self.font.render(self.text,True,self.font_color)
-
+    def update_color(self, color):
+        self.color = color
+        
     def update_text(self, text):
         self.text = text
         self.render_text()

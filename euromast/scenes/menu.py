@@ -1,4 +1,5 @@
 from components import stateManagment, formControl
+from i18n import i18n
 from functools import partial
 import pygame as pg
 
@@ -9,14 +10,6 @@ class Scene(stateManagment.BaseScene):
         self.vars = helpers['vars']
         self.assets =  helpers['assets']
         self.next_state = ""
-        self.persist['game_state'] = {
-            "player_count": 0,
-            "players": [],
-            "start_from_index": 0,
-            "current_player_index": 0,
-            "reuse_scene": None,
-            "skip_to_scene": None,
-        }
         Button = formControl.Button
         game = self.vars['pygame']
         width = game['width']
@@ -31,7 +24,6 @@ class Scene(stateManagment.BaseScene):
             (center_buttons, height * .3, button_width, 50),
             (255,0,0),
             partial(self.go_to_scene, 'SELECT_PLAYER'),
-            text='Start',
             hover_color=button_hover_color,
             font=button_font
         )
@@ -40,7 +32,6 @@ class Scene(stateManagment.BaseScene):
             (center_buttons, height * .4, button_width,50),
             (255, 0, 0),
             partial(self.go_to_scene, 'INSTRUCTIONS'),
-            text="Instructions",
             hover_color=button_hover_color,
             font=button_font
         )
@@ -49,7 +40,6 @@ class Scene(stateManagment.BaseScene):
             (center_buttons, height * .5, button_width,50),
             (255, 0, 0),
             partial(self.go_to_scene, 'HIGHSCORES'),
-            text="Highscores",
             hover_color=button_hover_color,
             font=button_font
         )
@@ -57,7 +47,6 @@ class Scene(stateManagment.BaseScene):
             (center_buttons, height * .6, button_width,50),
             (255, 0, 0),
             partial(self.go_to_scene, 'SETTINGS'),
-            text="Settings",
             hover_color=button_hover_color,
             font=button_font
         )
@@ -65,13 +54,23 @@ class Scene(stateManagment.BaseScene):
             (center_buttons, height * .7, button_width, 50),
             (255, 0, 0),
             self.exit,
-            text="EXIT",
             hover_color=button_hover_color,
             font=button_font
         )
 
-    def exit(self):
+    def exit(self, id):
         self.quit = True
+
+    def startup(self, persistent):
+        self.persist = persistent
+        self.i18n = self.persist['game_state']['i18n']
+
+    def update(self, dt):
+        self.start_btn.update_text(self.i18n.translate('start'))
+        self.instruction_btn.update_text(self.i18n.translate('instructions'))
+        self.highscore_btn.update_text(self.i18n.translate('highscores'))
+        self.settings_btn.update_text(self.i18n.translate('settings'))
+        self.exit_btn.update_text(self.i18n.translate('exit'))
 
     def go_to_scene(self, sceneName, id):
         self.next_state = sceneName
