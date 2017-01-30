@@ -18,6 +18,11 @@ class DrawQuestion:
 
 
     def drawScreen(self):
+        # Play and stop sounds
+        game.sounds["question_right"].stop()
+        game.sounds["question_wrong"].stop()
+        game.sounds["question_theme"].play()
+
         name = self.question
 
         cardColor = game.colors.get(self.cardColor)
@@ -39,14 +44,17 @@ class DrawQuestion:
                 buttonColor = game.green
             button = libdef.DrawButton(game.screen, cardColor, buttonColor, buttonText, 200, 100, self.middleOfScreen, startPosTop)
             if button.collision(cardColor):
+                game.sounds["question_theme"].stop()
                 return self.checkCorrect(answer)
             c = c + 1
 
     def checkCorrect(self, answer):
         self.answeredId = answer.get('id')
         if answer.get('isCorrect'):
+            game.sounds["question_right"].play()
             return True
         else:
+            game.sounds["question_wrong"].play()
             return False
 
 # force quit event

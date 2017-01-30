@@ -22,6 +22,7 @@ class DrawButton:
         self.position_x = position_x
         self.position_y = position_y
         self.clicked = False
+        self.sound = LoadSound("./assets/sounds/click.wav")
 
         self.font = pygame.font.SysFont("Times", 40)
 
@@ -44,6 +45,7 @@ class DrawButton:
 
             # If pressed on a button change state
             if pygame.mouse.get_pressed()[0]:
+                self.sound.play()
                 time.sleep(0.3)
                 return True
 
@@ -308,3 +310,23 @@ class getPressed:
                 self.boolswitch = False
                 self.done = True
                 self.clock = time.time()
+
+
+class LoadSound:
+    def __init__(self, file, volume=1.0, loop=0):
+        self.file = file
+        self.volume = volume
+        self.loop = loop
+        self.music = pygame.mixer.Sound(self.file)
+        self.is_playing = False
+
+    def play(self):
+        if self.is_playing is False:
+            self.music.set_volume(self.volume)
+            self.music.play(self.loop)
+            self.is_playing = True
+
+    def stop(self):
+        self.music.stop()
+        self.is_playing = False
+

@@ -113,7 +113,7 @@ class Menu:
                                 else:
                                     counter += 1
                                     state = 1.45
-                            elif False:
+                            elif isCorrectAnswer is False:
                                 counter += 1
                                 state = 1.4
                         #draws players on euromast
@@ -143,6 +143,9 @@ class DrawMenu:
 
     #main menu == 0
     def draw0(self):
+        # Play background music
+        game.sounds["menu_theme"].play()
+
         # background
         game.screen.fill((0, 0, 0))
         self.background = Background('./assets/background.png', [0, 0])

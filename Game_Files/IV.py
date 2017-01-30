@@ -20,6 +20,10 @@ class IV:
     def __init__(self):
         # init pygame
         pygame.init()
+
+        # init sound
+        pygame.mixer.init()
+
         # set values to be imported into another file
 
         # system values
@@ -29,6 +33,16 @@ class IV:
         self.page = 0
         self.ruleslist = Rules().ruleslist
 
+        # initial sounds
+        self.sounds = {
+            "menu_theme": LoadSound("./assets/sounds/menu_theme.wav", 0.7, -1),
+            "main_theme": LoadSound("./assets/sounds/main_theme.wav", 0.4, -1),
+            "dice_roll": LoadSound("./assets/sounds/dice_roll.wav"),
+            "choose_question": LoadSound("./assets/sounds/choose_question.wav", 1.0, -1),
+            "question_theme": LoadSound("./assets/sounds/question_theme.wav", 1.0, -1),
+            "question_wrong": LoadSound("./assets/sounds/question_wrong.wav"),
+            "question_right": LoadSound("./assets/sounds/question_right.wav")
+        }
 
         self.font = pygame.font.SysFont("Arial", 40)
         self.rulesfont = pygame.font.SysFont("Arial", 18)
