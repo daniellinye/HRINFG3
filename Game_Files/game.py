@@ -83,7 +83,7 @@ class Game:
     def choose_direction(self, player):
         self.game.screen.fill((255, 255, 255))
         self.game.sounds["main_theme"].play()
-        
+
         directions = [["Left", 150, 150, (0, 0, 255)], ["Right", 750, 150, (0, 255, 0)], ["Up", 150, 550, (255, 0, 0)],
                       ["Down", 750, 550, (255, 255, 0)]]
         DrawText(self.game.screen, "{} choose a direction".format(player.name), (0, 0, 0), self.game.width * 0.5,
