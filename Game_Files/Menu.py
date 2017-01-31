@@ -107,10 +107,14 @@ class Menu:
                             isCorrectAnswer = Question.DrawQuestion(game.dummyQuestions[0], game.dummyQuestions[0].get('answers')).drawScreen()
 
                             if isCorrectAnswer:
-                                game.grid.addplayer(order[counter - 1])
-                                if game.grid.draw(game.screen, game.width, game.height):
+
+                                if order[counter - 1].update(game.screen, game.width, game.height):
                                     state = 0
                                 else:
+                                    game.grid.addplayer(order[counter - 1])
+                                    order[counter - 1].canmove()
+                                    order[counter - 1].update(game.screen, game.width, game.height)
+                                    print("x")
                                     counter += 1
                                     state = 1.45
                             elif isCorrectAnswer is False:
@@ -119,6 +123,7 @@ class Menu:
                         #draws players on euromast
                         if state == 1.45:
                             game.grid.draw(game.screen, game.width, game.height)
+                            order[counter - 1].update(game.screen, game.width, game.height)
                             nextpage = DrawButton(game.screen, game.red, game.black, "Next", 200, 50, game.width -400,
                                        game.height -100)
                             if nextpage.collision():
