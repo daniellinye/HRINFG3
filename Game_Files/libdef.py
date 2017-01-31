@@ -125,14 +125,14 @@ class DrawCard(BaseImage):
                 return True
 
 class Player:
-    def __init__(self, player_id, name, score, position = (-1,11), roll = 0):
+    def __init__(self, player_id, name, score, position = (0,11), roll = 0):
         self.id = player_id
         self.name = name
         self.score = score
         self.position = position
         self.roll = roll
         self.category = 0
-        self.x = -1
+        self.x = 0
         self.y = 11
         self.rect = (self.x, self.y)
         self.moved = True
@@ -157,25 +157,37 @@ class Player:
     def add_type(self, type):
         self.type = type
 
+    def canmove(self):
+        self.moved = False
 
-    def update(self):
-        if self.moves > 0:
-            keys = pygame.key.get_pressed()
-            if self.moved == False:
-                if self.direction[0] == "Left":
-                    self.x -= 1
-                    self.moved = True
-                elif self.direction[0] == "Right":
-                    self.x += 1
-                    self.moved = True
-                if self.direction[0] == "Up":
-                    self.y -= 1
-                    self.moved = True
-                elif self.direction[0] == "Down":
-                    self.y += 1
-                    self.moved = True
+    def update(self, screen, width, height, grid_height=10):
+        print(self.direction)
+        if self.moved == False:
+            if self.direction == "Left" or self.direction[0] == "Left":
+                self.x -= 1
+                self.moved = True
+            elif self.direction == "Right" or self.direction[0] == "Right":
+                self.x += 1
+                self.moved = True
+            elif self.direction == "Up" or self.direction[0] == "Up":
+                self.y -= 1
+                self.moved = True
+            elif self.direction == "Down" or self.direction[0] == "Down":
+                self.y += 1
+                self.moved = True
 
+        print(self.x)
+        print(self.y)
+        pygame.draw.rect(screen, (255, 255,255),
+                         [width / 20 + width / 8 * self.x,
+                          height / grid_height * self.y + height / 50, 8,
+                          8], 2)
 
+        if self.y < 0:
+            drawTextInRect(screen, "Player {} Wins!".format(self.name), (0, 0, 0), (width / 2, height / 2),
+                           pygame.font.SysFont("Arial", 40))
+            print("Terminate Game")
+            return True
 
 class Point:
     def __init__(self, x, y, category, highlight):
@@ -191,9 +203,9 @@ class Point:
         else:
             self.highlight = 0
 
-    def drawself(self, screen, width, height, grid_height):
+    def drawself(self, screen, width, height, grid_height=10):
         if self.x >= 0 and self.y >= 0:
-            pygame.draw.rect(screen, (0,0,0), [width/20 + width/4*self.category + width/8*self.x, height/grid_height *self.y + height/50, 8*(1+self.highlight), 8*(1+self.highlight)], 2)
+            pygame.draw.rect(screen, (0,0,(0+self.highlight)*255), [width/20 + width/4*self.category + width/8*self.x, height/grid_height *self.y + height/50, 8*(1+self.highlight), 8*(1+self.highlight)], 2)
         else:
             print("Player is not in game yet")
 
@@ -230,18 +242,8 @@ class Grid:
             templist = []
             for x in range(0, self.grid_width):
                 for y in range(0, self.grid_height):
-                    for player in self.players:
-                        if player.y < 0:
-                            drawTextInRect(screen, "Player {} Wins!".format(player.name), (0, 0, 0), (width / 2, height / 2), pygame.font.SysFont("Arial", 40))
-                            print("Terminate Game")
-                            return True
-                        else:
-                            if player.x == x and player.y == y and player.category == c:
-                                Point(x, y ,c, 1).drawself(screen, width, height, self.grid_height)
-                                templist.append(Point(x, y ,c, 1))
-                            else:
-                                Point(x, y ,c, 0).drawself(screen, width, height, self.grid_height)
-                                templist.append(Point(x, y ,c, 0))
+                    Point(x, y ,c, 0).drawself(screen, width, height, self.grid_height)
+                    templist.append(Point(x, y ,c, 0))
                 templist.append(Point(x, y ,c, 1))
             self.points.append(templist)
 
