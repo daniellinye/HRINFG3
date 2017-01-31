@@ -20,7 +20,8 @@ class Scene(stateManagment.BaseScene):
             (center_of_screen - 150, vertical_center_of_screen - 50, 300, 100),
             pg.Color('green'),
             self.go_next_state,
-            font=self.vars['fonts']['medium']
+            font=self.vars['fonts']['medium'],
+            hover_color=pg.Color("black")
         )
 
     def go_next_state(self, id):

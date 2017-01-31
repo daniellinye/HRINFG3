@@ -19,7 +19,8 @@ class Scene(stateManagment.BaseScene):
             pg.Color('green'),
             self.next_scene,
             text='Continue',
-            font=self.vars['fonts']['medium']
+            font=self.vars['fonts']['medium'],
+            hover_color=pg.Color("black")
         )
         
     def next_scene(self, id):

@@ -26,7 +26,7 @@ class Scene(stateManagment.BaseScene):
             (255,0,0),
             partial(self.register_player, 2),
             font=self.vars['fonts']['medium'],
-            hover_color=pg.Color("black")
+            hover_color = pg.Color("black")
         )
         self.three_players_btn = Button(
             (center_of_screen - 100, 300, 200, 50),
