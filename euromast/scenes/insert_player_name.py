@@ -27,6 +27,7 @@ class Scene(stateManagment.BaseScene):
             pg.Color('green'),
             self.next_player,
             font=self.vars['fonts']['medium'],
+            hover_color=pg.Color("black"),
             text="Next"
         )
         self.input = formControl.TextBox(
@@ -39,9 +40,13 @@ class Scene(stateManagment.BaseScene):
         self.input.execute()
 
     def setPlayerName(self, id, pname):
+        if not pname:
+            pname = "Player {0}".format(self.player_count)
+
         self.player_count += 1
         game_state = self.persist['game_state']
         game_state['players'].append(player.createPlayer(pname))
+
         if game_state['player_count'] == len(game_state['players']):
             self.done = True
             return

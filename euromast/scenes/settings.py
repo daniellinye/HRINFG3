@@ -40,7 +40,8 @@ class Scene(stateManagment.BaseScene):
             (center_of_screen/2-100, 400, 200, 50),
             pg.Color('green'),
             self.go_back,
-            font=self.vars['fonts']['medium']
+            font=self.vars['fonts']['medium'],
+            hover_color = pg.Color("black")
         )
 
         self.english_lang_btn = formControl.Button(
