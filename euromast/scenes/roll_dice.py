@@ -29,7 +29,8 @@ class Scene(stateManagment.BaseScene):
             pg.Color('green'),
             self.next_player,
             text='Continue',
-            font=self.vars['fonts']['medium']
+            font=self.vars['fonts']['medium'],
+            hover_color=pg.Color("black")
         )
 
         self.dice = formControl.Image((self.vars['pygame']['width'] - 512, self.vars['pygame']['height'] * .4))

@@ -25,19 +25,22 @@ class Scene(stateManagment.BaseScene):
             (center_of_screen - 100, 200, 200, 50),
             (255,0,0),
             partial(self.register_player, 2),
-            font=self.vars['fonts']['medium']
+            font=self.vars['fonts']['medium'],
+            hover_color=pg.Color("black")
         )
         self.three_players_btn = Button(
             (center_of_screen - 100, 300, 200, 50),
             (255,0,0),
             partial(self.register_player, 3),
-            font=self.vars['fonts']['medium']
+            font=self.vars['fonts']['medium'],
+            hover_color=pg.Color("black")
         )
         self.four_players_btn = Button(
             (center_of_screen - 100, 400, 200, 50),
             (255,0,0),
             partial(self.register_player, 4),
-            font=self.vars['fonts']['medium']
+            font=self.vars['fonts']['medium'],
+            hover_color=pg.Color("black")
         )
 
     def register_player(self, amount, id):
