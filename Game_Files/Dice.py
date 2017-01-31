@@ -14,6 +14,12 @@ class DrawDiceScreen:
 
 
     def drawScreen(self, player):
+        # stop menu music
+        self.game.sounds["menu_theme"].stop()
+
+        # start main music
+        self.game.sounds["main_theme"].play()
+
         # background
         self.game.screen.fill((255, 255, 255))
         self.player = player
@@ -33,6 +39,10 @@ class DrawDiceScreen:
     def drawScreen1(self):
         # background
         self.game.screen.fill((255, 255, 255))
+
+        # play sound
+        self.game.sounds["dice_roll"].play()
+
         # dice image
         img = './assets/white_dice/{}.png'.format(self.number)
         self.image = libdef.DrawImage(self.game.screen, img, self.game.width-512, self.game.height*0.2)
@@ -45,6 +55,8 @@ class DrawDiceScreen:
 
         # flip updated screen
         if self.continu.collision():
+            # stop sound
+            self.game.sounds["dice_roll"].stop()
             return 500
 
 
@@ -52,6 +64,7 @@ class DrawDiceScreen:
         self.players = players
         # background
         self.game.screen.fill((255, 255, 255))
+
         sort = sorted(self.players, key = lambda player: player.roll, reverse = True)
         self.text2 = libdef.DrawText(self.game.screen, "The playing order will be:", (0,0,0), self.game.width*0.5, self.game.height*0.2)
         x = 0.3
@@ -71,6 +84,10 @@ class DrawDiceScreen:
         self.player = player
         # background
         self.game.screen.fill((255, 255, 255))
+
+        # play sound
+        self.game.sounds["dice_roll"].play()
+
         # dice image
         img = './assets/white_dice/{}.png'.format(self.number)
         img2 = './assets/red_dice/{}.png'.format(self.number2)
@@ -81,11 +98,16 @@ class DrawDiceScreen:
         # text next to dice
         self.text2 = libdef.DrawText(self.game.screen, "What type of question", (0, 0, 0), 180, self.game.height*0.2)
         self.text3 = libdef.DrawText(self.game.screen, "How may steps", (0, 0, 0), 824, self.game.height * 0.2)
+
         # continue button
         self.continu3 = libdef.DrawButton(self.game.screen, self.game.green, self.game.white, "Are you ready?", 250, 50, (self.game.width * 0.5),(self.game.height * 0.7))
 
         # flip updated screen
         if self.continu3.collision():
+            # stop sounds
+            self.game.sounds["main_theme"].stop()
+            self.game.sounds["dice_roll"].stop()
+
             if self.number == 1 or self.number == 3 or self.number == 5:
                 player.type = "open"
             else:

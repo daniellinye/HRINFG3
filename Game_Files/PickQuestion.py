@@ -25,6 +25,7 @@ class DrawPickQuestion:
 
     def drawScreen(self):
         game.screen.fill((255, 255, 255))
+        game.sounds["choose_question"].play()
         rowX = self.xPosFirstRow
         rowY = self.yPosFirstRow
         cardsInRow = 0;
@@ -37,6 +38,7 @@ class DrawPickQuestion:
             img = './assets/CBacks/{0}{1}.png'.format(self.color.get('name'), self.opOrMul.get(question.get('type')))
             card = libdef.DrawCard(game.screen,img, rowX, rowY, 12)
             if card.collision():
+                game.sounds["choose_question"].stop()
                 return {'questionId': question.get('id'), 'question': question}
 
             rowX += self.incrRowPosBy
