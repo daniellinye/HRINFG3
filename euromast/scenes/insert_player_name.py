@@ -27,6 +27,7 @@ class Scene(stateManagment.BaseScene):
             pg.Color('green'),
             self.next_player,
             font=self.vars['fonts']['medium'],
+            hover_color=pg.Color("black"),
             text="Next"
         )
         self.input = formControl.TextBox(
