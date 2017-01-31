@@ -76,6 +76,8 @@ class Scene(stateManagment.BaseScene):
 
     def draw(self, surface):
         surface.fill((255, 255, 255))
+        # dice sound
+        self.vars["sounds"]["dice_roll"].play()
         # dice image
         red_dice = self.assets['rdlist'][self.red_dice_number]
         white_dice = self.assets['wdlist'][self.white_dice_number]

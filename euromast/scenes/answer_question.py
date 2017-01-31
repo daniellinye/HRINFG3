@@ -23,12 +23,21 @@ class Scene(stateManagment.BaseScene):
         for answer in self.player.current_question['answers']:
             for answer_btn in self.answer_btns:
                 if answer_btn.button_id == answer['id'] and answer['is_correct']:
+                    self.vars["sounds"]["question_right"].play()
                     correct_btn = answer_btn
-        correct_btn.update_font_color(pg.Color('black'))
-        self.done = True
+                else:
+                    self.vars["sounds"]["question_wrong"].play()
+        #correct_btn.update_font_color(pg.Color('black'))
+        #self.done = True
 
 
     def startup(self, persistent):
+        # stop sounds so we can use them again and play another sound
+        self.vars["sounds"]["question_wrong"].stop()
+        self.vars["sounds"]["question_right"].stop()
+        self.vars["sounds"]["choose_question"].stop()
+        self.vars["sounds"]["question_theme"].play()
+
         self.persist = persistent
         game_state = self.persist['game_state']
 
@@ -48,7 +57,8 @@ class Scene(stateManagment.BaseScene):
                     text=button_text,
                     button_id=answer['id'],
                     font=self.vars['fonts']['medium'],
-                    outline_color= self.card_color
+                    outline_color= self.card_color,
+                    click_sound=None
                 )
             )
             c += 1

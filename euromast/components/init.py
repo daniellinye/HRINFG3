@@ -1,4 +1,6 @@
 import pygame as pg
+from components import sound
+
 
 class LoadVariables(object):
     def __init__(self):
@@ -26,6 +28,15 @@ class LoadVariables(object):
                 {'id': 3,  'name': 'Correct answer', 'isCorrect': True}
             ]
         }]
+        self.vars["sounds"] = {
+            "menu_theme": sound.LoadSound("./assets/sounds/menu_theme.wav", 0.7, -1),
+            "main_theme": sound.LoadSound("./assets/sounds/main_theme.wav", 0.4, -1),
+            "dice_roll": sound.LoadSound("./assets/sounds/dice_roll.wav"),
+            "choose_question": sound.LoadSound("./assets/sounds/choose_question.wav", 1.0, -1),
+            "question_theme": sound.LoadSound("./assets/sounds/question_theme.wav", 1.0, -1),
+            "question_wrong": sound.LoadSound("./assets/sounds/question_wrong.wav"),
+            "question_right": sound.LoadSound("./assets/sounds/question_right.wav")
+        }
 
 class LoadAssets(object):
     def __init__(self):

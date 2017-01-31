@@ -48,6 +48,7 @@ class Scene(stateManagment.BaseScene):
         game_state['players'].append(player.createPlayer(pname))
 
         if game_state['player_count'] == len(game_state['players']):
+            self.vars["sounds"]["menu_theme"].stop()
             self.done = True
             return
 
