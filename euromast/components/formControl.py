@@ -92,7 +92,7 @@ class Button(object):
                     "font_color" : pg.Color("white"),
                     "hover_font_color" : None,
                     "clicked_font_color" : None,
-                    "click_sound" : None,
+                    "click_sound" : pg.mixer.Sound("./assets/sounds/click.wav"),
                     "hover_sound" : None}
         for kwarg in kwargs:
             if kwarg in settings:
@@ -139,6 +139,8 @@ class Button(object):
     def on_click(self,event):
         if self.rect.collidepoint(event.pos):
             self.clicked = True
+            if self.click_sound:
+                self.click_sound.play()
             if not self.call_on_release:
                 self.callback(self.button_id)
 

@@ -1,4 +1,6 @@
 import uuid
+import pygame
+from components import stateManagment, formControl
 
 class createPlayer(object):
     def __init__(self, name, roll=0, position = (-1,11)):
@@ -41,3 +43,37 @@ class createPlayer(object):
 
     def add_type(self, type):
         self.type = type
+
+    def canmove(self):
+        self.moved = False
+
+    def update(self):
+        print(self.direction)
+        if self.moved == False:
+            if self.direction == "Left" or self.direction[0] == "Left":
+                self.x -= 1
+                self.moved = True
+            elif self.direction == "Right" or self.direction[0] == "Right":
+                self.x += 1
+                self.moved = True
+            elif self.direction == "Up" or self.direction[0] == "Up":
+                self.y -= 1
+                self.moved = True
+            elif self.direction == "Down" or self.direction[0] == "Down":
+                self.y += 1
+                self.moved = True
+
+        print(self.x)
+        print(self.y)
+
+
+    def draw(self, screen, width, height, grid_height=10):
+        pygame.draw.rect(screen, (255, 255,255),
+                         [width / 20 + width / 8 * self.x,
+                          height / grid_height * self.y + height / 50, 8,
+                          8], 2)
+
+        if self.y < 0:
+            TextInRect(screen, "Player {} Wins!".format(self.name), (0, 0, 0), (width / 2, height / 2),
+                           pygame.font.SysFont("Arial", 40))
+            return True

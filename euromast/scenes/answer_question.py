@@ -27,6 +27,7 @@ class Scene(stateManagment.BaseScene):
             font=self.vars['fonts']['medium']
         )
 
+
     def nextPlayer(self, id):
         self.done = True
 
@@ -53,18 +54,24 @@ class Scene(stateManagment.BaseScene):
             self.correct = False
 
     def startup(self, persistent):
+        # stop sounds so we can use them again and play another sound
+        self.vars["sounds"]["question_wrong"].stop()
+        self.vars["sounds"]["question_right"].stop()
+        self.vars["sounds"]["choose_question"].stop()
+        self.vars["sounds"]["question_theme"].play()
+
         self.persist = persistent
         game_state = self.persist['game_state']
         self.player = game_state['players'][game_state['current_player_index']]
         self.card_color = pg.Color(self.player.category['color'])
+
         self.question_type = self.player.question_type
         if self.question_type == 'open':
             self.text_box = formControl.TextBox(
                 (self.game['center_of_screen'] - 150, self.game['vertical_center_of_screen'], 300, 40),
                 command=self.check_answer_open,
-                font=self.vars['fonts']['medium']
+                font=self.vars['fonts']['medium'])
 
-            )
         if self.question_type != 'open':
             start_pos_top = 200;
             abc = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
