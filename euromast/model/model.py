@@ -58,3 +58,16 @@ class Model(Database):
 
         # print(result[0])
         return result
+
+    def get_highscores(self):
+        conn = self.getConn()
+        conn.execute("""
+        SELECT * FROM highscore ORDER BY score DESC LIMIT 10;
+        """)
+        rows = conn.fetchall()
+        result = []
+        for record in rows:
+            result.append(dict(record))
+        self.commit()
+        self.closeConn()
+        return result

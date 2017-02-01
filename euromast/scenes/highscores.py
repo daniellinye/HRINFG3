@@ -1,6 +1,8 @@
 from components import stateManagment, formControl
 from functools import partial
+from model.model import Model
 import pygame as pg
+
 
 class Scene(stateManagment.BaseScene):
     def __init__(self, screen, helpers):
@@ -20,17 +22,16 @@ class Scene(stateManagment.BaseScene):
             pg.Color('white')
         )
 
-        i = 1
-        for i in range(1,11):
+        self.players = Model().get_highscores()
+        for i in range(1,len(self.players)+1):
             self.list.append(
                 formControl.Text(
                 (center_of_screen, 80 + 60*i),
-                str(i) + '. ...........',
-                self.vars['fonts']['large'],
+                str(i) + '. ' + self.players[i-1]['name'] + '   ' + str(self.players[i-1]['score']),
+                self.vars['fonts']['small'],
                 pg.Color('white')
                 )
             )
-            i += 1
 
         self.go_back_btn = formControl.Button(
             (center_of_screen / 2 - 100, 650, 200, 50),
@@ -60,6 +61,5 @@ class Scene(stateManagment.BaseScene):
             self.header_text.draw(surface)
             self.go_back_btn.update(surface)
 
-            n = 0
-            for n in range(0, 10):
-                self.list[n].draw(surface)
+            for n in self.list:
+                n.draw(surface)

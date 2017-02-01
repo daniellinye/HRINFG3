@@ -31,6 +31,7 @@ class Scene(stateManagment.BaseScene):
         self.done = True
 
     def startup(self, persistent):
+        self.vars["sounds"]["main_theme"].play()
         self.persist = persistent
         game_state = self.persist['game_state']
         self.current_player = game_state['players'][game_state['current_player_index']]

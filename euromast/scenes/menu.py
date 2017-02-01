@@ -8,7 +8,7 @@ class Scene(stateManagment.BaseScene):
         super(Scene, self).__init__()
         self.surface = surface
         self.vars = helpers['vars']
-        self.assets =  helpers['assets']
+        self.assets = helpers['assets']
         self.next_state = ""
         Button = formControl.Button
         game = self.vars['pygame']
@@ -19,6 +19,7 @@ class Scene(stateManagment.BaseScene):
         button_hover_color = pg.Color('black')
         center_buttons = (width / 2) - (button_width / 2)
         self.background = formControl.Image((0,0), self.assets['background-erasmus'])
+        self.vars["sounds"]["menu_theme"].play()
 
         self.start_btn = Button(
             (center_buttons, height * .3, button_width, 50),
