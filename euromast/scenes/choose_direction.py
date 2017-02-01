@@ -8,7 +8,6 @@ class Scene(stateManagment.BaseScene):
         self.vars = helpers['vars']
         self.next_state = 'ROLL_DICE.BUTTON'
         self.assets = helpers['assets']
-        self.directions = []
         self.player = None
         self.game = game = self.vars['pygame']
         self.turn_text = formControl.Text(
@@ -52,17 +51,8 @@ class Scene(stateManagment.BaseScene):
         )
 
     def nextPlayer(self, direction, id):
-        self.directions.append(direction)
         self.player.set_direction(direction)
-        self.persist['game_state']['current_player_index'] += 1
-        game_state = self.persist['game_state']
-        len_players = len(game_state['players'])
-        current_index = game_state['current_player_index']
-        if current_index != len_players and current_index < len_players:
-            self.player = self.persist['game_state']['players'][current_index]
-            return
 
-        self.persist['game_state']['current_player_index'] = 0
         self.persist['game_state']['reuse_scene'] = self.next_state
         self.persist['game_state']['skip_to_scene'] = 'ROLL_DOUBLE_DICE'
 
@@ -86,21 +76,16 @@ class Scene(stateManagment.BaseScene):
         self.turn_text.update_text('{0} choose a direction'.format(self.player.name))
 
     def draw(self, surface):
-        directions = self.directions
         # background
         surface.fill((255, 255, 255))
-        if "left"  not in directions:
-            self.left_direction_btn.update(surface)
 
-        if "right"  not in directions:
-            self.right_direction_btn.update(surface)
+        self.left_direction_btn.update(surface)
 
-        if "down"  not in directions:
-            self.down_direction_btn.update(surface)
+        self.right_direction_btn.update(surface)
 
-        if "up" not in directions:
-            self.up_direction_btn.update(surface)
+        self.down_direction_btn.update(surface)
+
+        self.up_direction_btn.update(surface)
 
 
         self.turn_text.draw(surface)
-

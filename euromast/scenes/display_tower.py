@@ -10,61 +10,59 @@ class Scene(stateManagment.BaseScene):
         self.vars = helpers['vars']
         self.assets = helpers['assets']
         self.game = game = self.vars['pygame']
-        self.next_state = 'TURN_ORDER'
-        self.tower = Grid()
+        self.next_state = 'CHOOSE_DIRECTION'
+        self.tower_upper = Grid(1, 5)
+        self.tower_lower = Grid()
+        self.players = None
+        self.button = formControl.Button(
+            [0, self.game['height']/5, 200, 50],
+            (0, 0, 0),
+            self.next_turn(),
+            text="Stuff"
+        )
+
+
+
 
 
     def next_scene(self, id):
+        self.persist['game_state']['current_player_index'] += 1
+
+    def next_turn(self):
         self.done = True
+        self.next_state
+
 
     def get_event(self, event):
+        self.button.check_event(event)
         if event.type == pg.QUIT:
             self.quit = True
-        self.pick_category_btn.check_event(event)
+
 
     def startup(self, persistent):
         self.persist = persistent
-        players = self.persist['game_state']['players']
-        game = self.vars['pygame']
-        for p in players:
-            self.tower.addplayer(p)
+        self.players = self.persist['game_state']['players']
+        game_state = self.persist['game_state']
+        pindex = game_state['current_player_index']
+        player = game_state['players'][pindex]
+        player.canmove()
+        player.update()
 
 
-
+    #formControl.Button([x,y,w,h],[color],function(where thebuttongoes to), text=something)
     def update(self, dt):
         pass
 
     def draw(self, surface):
-        surface.fill((0, 0, 0))
-        self.tower.draw(self.game['screen'], self.game['width'], self.game['height'])
-        for p in self.tower.players:
-            p.draw(self.game['screen'], self.game['width'], self.game['height'])
-        self.pick_category_btn.update(surface)
-
-        for order_text in self.player_order:
-            order_text.draw(surface)
+        surface.fill((0,0,0))
+        self.tower_upper.draw(surface, self.game['width'], self.game['height']/5, 0)
+        self.tower_lower.draw(surface, self.game['width'], self.game['height']/2.5, self.game['height']/4 + 50)
+        for p in self.players:
+            p.draw(surface, self.game['width'], self.game['height'])
+        self.button.update(surface)
 
 
 
-class Point:
-    def __init__(self, x, y, category, highlight):
-        self.x = x
-        self.y = y
-        self.category = category
-        self.highlight = highlight
-
-
-    def highlight(self):
-        if self.highlight == 0:
-            self.highlight = 1
-        else:
-            self.highlight = 0
-
-    def drawself(self, screen, width, height, grid_height=10):
-        if self.x >= 0 and self.y >= 0:
-            pg.draw.rect(screen, (0,0,(0+self.highlight)*255), [width/20 + width/4*self.category + width/8*self.x, height/grid_height *self.y + height/50, 8*(1+self.highlight), 8*(1+self.highlight)], 2)
-        else:
-            print("Player is not in game yet")
 
 
 
@@ -85,22 +83,52 @@ class Grid:
 
 #draw the grid and update whilst checking if someone wins
 #if someone wins, def returns True
-    def draw(self, screen, width, height):
+    def draw(self, screen, width, height, repos):
 
         #draw backgroundcolors
         i = 1
         for counter in range(0,4):
-            pygame.draw.rect(screen, self.colorlist[counter], [i, 0, width / 4, height], 0)
+            pg.draw.rect(screen, self.colorlist[counter], [i, repos, width / 4, height+repos], 0)
             i += width / 4
 
-
-        #TODO fix player highlight and movement
+        #TODO figure out formula player
         for c in range(0,4):
             templist = []
             for x in range(0, self.grid_width):
                 for y in range(0, self.grid_height):
-                    Point(x, y ,c, 0).drawself(screen, width, height, self.grid_height)
-                    templist.append(Point(x, y ,c, 0))
+                    if not self.players == []:
+                        for player in self.players:
+                            if (player.x%x == 0 and player.y == y and c == player.x/2) or (not player.x%x == 0 and player.y == y and c == player.x/2):
+                                Point(x, y, c, 1).drawself(screen, width, height + repos, self.grid_height, repos)
+                            else:
+                                Point(x, y ,c, 0).drawself(screen, width, height+repos, self.grid_height, repos)
+                                templist.append(Point(x, y ,c, 0))
+                    else:
+                        Point(x, y, c, 0).drawself(screen, width, height + repos, self.grid_height, repos)
+                        templist.append(Point(x, y, c, 0))
+
                 templist.append(Point(x, y ,c, 1))
             self.points.append(templist)
+class Point:
+    def __init__(self, x, y, category, highlight):
+        self.x = x
+        self.y = y
+        self.category = category
+        self.highlight = highlight
 
+
+    def highlight(self):
+        if self.highlight == 0:
+            self.highlight = 1
+        else:
+            self.highlight = 0
+
+    def drawself(self, screen, width, height, grid_height=10, repos=0):
+        if self.x >= 0 and self.y >= 0:
+            pg.draw.rect(screen, ((self.highlight*255),(self.highlight*255),(self.highlight*255)),
+                         [width/20 + width/4*self.category + width/8*self.x,
+                          height/grid_height *self.y + height/50 + repos,
+                          8*(1+self.highlight),
+                          8*(1+self.highlight)], 2)
+        else:
+            print("Player is not in game yet")

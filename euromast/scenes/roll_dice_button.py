@@ -11,6 +11,7 @@ class Scene(stateManagment.BaseScene):
         self.assets =  helpers['assets']
         self.current_player = None
         self.screen_color = pg.Color('white')
+        self.i18n = None
         Button = formControl.Button
         game = self.vars['pygame']
         center_of_screen = game['center_of_screen']
@@ -34,8 +35,9 @@ class Scene(stateManagment.BaseScene):
         self.vars["sounds"]["main_theme"].play()
         self.persist = persistent
         game_state = self.persist['game_state']
+        self.i18n = game_state['i18n']
         self.current_player = game_state['players'][game_state['current_player_index']]
-        self.throw_dice_btn.update_text('{0} roll the dice'.format(self.current_player.get_name()))
+        # self.throw_dice_btn.update_text('{0} roll the dice'.format(self.current_player.get_name()))
 
     def get_event(self, event):
         if event.type == pg.QUIT:
@@ -48,3 +50,4 @@ class Scene(stateManagment.BaseScene):
     def draw(self, surface):
         surface.fill(self.screen_color)
         self.throw_dice_btn.update(surface);
+        self.throw_dice_btn.update_text(self.i18n.translate('roll the dice').format(player=self.current_player.get_name()))

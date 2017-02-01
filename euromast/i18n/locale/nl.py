@@ -1,10 +1,13 @@
 lang = {
     "start": 'Start',
+    "resume": "hervat",
+    "go to menu": "naar menu",
     "settings": 'Instellingen',
     "instructions": 'Instructies',
     "highscores": 'Highscore',
     "exit": "Verlaten",
     "language": "Taal",
+    "continue": "ga door",
     "go back": "ga terug",
     "rules": "Regels",
     "select amount of players": "Selecteer het aantal spelers",
@@ -46,4 +49,17 @@ lang = {
                       "Het spel heeft maar één winnaar.\n \n" \
                       " Wanneer je het laatste gaatje passeert:\n " \
                       "- Plaats je poppetje bovenop de Euromast en plaats de vlag in de hand van je poppetje.\n",
+    "player": "speler",
+    "roll the dice double": "Je hebt een {dice1} en een {dice2} gegooid",
+    "rolled for steps red dice": "roode dobbelsteen: je hebt voor {steps} stappen gegooid",
+    "rolled for question white dice": "witte dobbelsteen: je hebt voor {question_type} vragen gegooid",
+    "roll the dice": "{player} gooi dobbelsteen",
+    "choose a category": "{player} kies een categorie",
+    "choose a direction": "{player} kies een richting",
+    "enter your name": "{player} vul je naam in",
+    "your rolled": "je hebt een {number} gegooid",
+    "the playing order will be": "De speel orde is",
+    "sound": "Geluid",
+    "music": "Muziek",
+    "effects": "Geluiden"
 }

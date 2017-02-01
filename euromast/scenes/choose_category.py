@@ -37,6 +37,7 @@ class Scene(stateManagment.BaseScene):
 
     def startup(self, persistent):
         self.persist = persistent
+        self.i18n = self.persist['game_state']['i18n']
         game_state = self.persist['game_state']
         self.categories = Model().get_categories()
 
@@ -62,7 +63,7 @@ class Scene(stateManagment.BaseScene):
 
 
     def update(self, dt):
-        self.turn_text.update_text('{0} choose a category'.format(self.player.name))
+        self.turn_text.update_text(self.i18n.translate('choose a category').format(player=self.player.name))
 
     def draw(self, surface):
         # background

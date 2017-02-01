@@ -41,7 +41,10 @@ class Scene(stateManagment.BaseScene):
 
     def setPlayerName(self, id, pname):
         if not pname:
-            pname = "Player {0}".format(self.player_count)
+            pname = "{0} {1}".format(
+                self.i18n.translate("player"),
+                self.player_count
+            )
 
         self.player_count += 1
         game_state = self.persist['game_state']
@@ -57,6 +60,7 @@ class Scene(stateManagment.BaseScene):
 
     def startup(self, persistent):
         self.persist = persistent
+        self.i18n = self.persist['game_state']['i18n']
 
     def get_event(self, event):
         if event.type == pg.QUIT:

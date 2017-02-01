@@ -85,7 +85,7 @@ class Button(object):
                     "outline_color": pg.Color('black'),
                     "button_id": uuid.uuid4(),
                     "original_text": None,
-                    "font" : pg.font.Font(None,16),
+                    "font" : pg.font.SysFont("Arial",16),
                     "call_on_release" : True,
                     "hover_color" : None,
                     "clicked_color" : None,
@@ -203,7 +203,7 @@ class TextBox(object):
                     "outline_color" : pg.Color("black"),
                     "outline_width" : 2,
                     "active_color" : pg.Color("blue"),
-                    "font" : pg.font.Font(None, self.rect.height+4),
+                    "font" : pg.font.SysFont("Arial", self.rect.height+4),
                     "clear_on_enter" : False,
                     "inactive_on_enter" : True}
         for kwarg in kwargs:

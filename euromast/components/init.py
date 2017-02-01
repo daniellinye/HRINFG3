@@ -19,13 +19,13 @@ class LoadVariables(object):
         }
         
         self.vars["sounds"] = {
-            "menu_theme": sound.LoadSound("./assets/sounds/menu_theme.wav", 0.7, -1),
-            "main_theme": sound.LoadSound("./assets/sounds/main_theme.wav", 0.4, -1),
-            "dice_roll": sound.LoadSound("./assets/sounds/dice_roll.wav"),
-            "choose_question": sound.LoadSound("./assets/sounds/choose_question.wav", 1.0, -1),
-            "question_theme": sound.LoadSound("./assets/sounds/question_theme.wav", 1.0, -1),
-            "question_wrong": sound.LoadSound("./assets/sounds/question_wrong.wav"),
-            "question_right": sound.LoadSound("./assets/sounds/question_right.wav")
+            "menu_theme": sound.LoadSound("./assets/sounds/menu_theme.wav", 'theme', 0.7, -1),
+            "main_theme": sound.LoadSound("./assets/sounds/main_theme.wav", 'theme', 0.4, -1),
+            "dice_roll": sound.LoadSound("./assets/sounds/dice_roll.wav", 'effect'),
+            "choose_question": sound.LoadSound("./assets/sounds/choose_question.wav", 'theme', 1.0, -1),
+            "question_theme": sound.LoadSound("./assets/sounds/question_theme.wav", 'theme', 1.0, -1),
+            "question_wrong": sound.LoadSound("./assets/sounds/question_wrong.wav", 'effect'),
+            "question_right": sound.LoadSound("./assets/sounds/question_right.wav", 'effect')
         }
 
 class LoadAssets(object):
