@@ -12,6 +12,7 @@ class Scene(stateManagment.BaseScene):
         self.assets =  helpers['assets']
         self.screen_color = pg.Color('white')
         self.rolled_number = None
+        self.i18n = None
         Button = formControl.Button
         game = self.vars['pygame']
         center_of_screen = game['center_of_screen']
@@ -57,6 +58,7 @@ class Scene(stateManagment.BaseScene):
 
     def startup(self, persistent):
         self.persist = persistent
+        self.i18n = self.persist['game_state']['i18n']
         self.rolled_number = randint(1,6)
 
     def get_event(self, event):
@@ -80,6 +82,7 @@ class Scene(stateManagment.BaseScene):
         self.dice.draw(surface, img)
 
         self.thrown_text.draw(surface)
-        self.thrown_text.update_text("You rolled a {}!".format(self.rolled_number))
+        self.thrown_text.update_text(self.i18n.translate("your rolled").format(number=self.rolled_number))
         #add roll to player
         self.continue_btn.update(surface);
+        self.continue_btn.update_text(self.i18n.translate('continue'))

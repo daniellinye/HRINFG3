@@ -10,7 +10,7 @@ class Scene(stateManagment.BaseScene):
         self.next_state = 'CHOOSE_CATEGORY'
         self.player_order = []
         self.playing_order_text = formControl.Text((game['center_of_screen'] , 100),
-            'The playing order will be:',
+            '',
             self.vars['fonts']['medium'],
             pg.Color('black')
         )
@@ -22,7 +22,7 @@ class Scene(stateManagment.BaseScene):
             font=self.vars['fonts']['medium'],
             hover_color=pg.Color("black")
         )
-        
+
     def next_scene(self, id):
         self.done = True
 
@@ -33,6 +33,7 @@ class Scene(stateManagment.BaseScene):
 
     def startup(self, persistent):
         self.persist = persistent
+        self.i18n = self.persist['game_state']['i18n']
         players = self.persist['game_state']['players']
         game = self.vars['pygame']
         sort = sorted(players, key = lambda player: player.roll, reverse = True)
@@ -52,6 +53,7 @@ class Scene(stateManagment.BaseScene):
         surface.fill((255, 255, 255))
         self.playing_order_text.draw(surface)
         self.pick_category_btn.update(surface)
-
+        self.playing_order_text.update_text(self.i18n.translate('the playing order will be'))
+        self.pick_category_btn.update_text(self.i18n.translate('continue'))
         for order_text in self.player_order:
             order_text.draw(surface)

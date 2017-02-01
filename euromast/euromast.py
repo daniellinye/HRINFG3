@@ -8,7 +8,8 @@ import pygame as pg
 from i18n import i18n
 from scenes import menu, select_players, insert_player_name, roll_dice, \
     choose_category, choose_direction, roll_dice_button, turn_order, \
-    roll_double_dice, choose_question, answer_question, settings, highscores, rules, display_tower
+    roll_double_dice, choose_question, answer_question, settings, highscores, \
+    rules, display_tower, pause_menu
 from components import init
 
 from model import model
@@ -108,6 +109,7 @@ if __name__ == "__main__":
     states = {
                 "MENU": menu.Scene(screen, helpers),
                 "SETTINGS": settings.Scene(screen, helpers),
+                "PAUSED": pause_menu.Scene(screen, helpers),
                 "HIGHSCORES": highscores.Scene(screen,helpers),
                 "SELECT_PLAYER": select_players.Scene(screen, helpers),
                 "INSERT_PLAYERS_NAMES": insert_player_name.Scene(screen, helpers),

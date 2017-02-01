@@ -13,6 +13,8 @@ class BaseScene(object):
         self.wait = None
         self.screen_rect = pg.display.get_surface().get_rect()
         self.persist = {}
+        self.player = None
+        self.players = None
         self.font = pg.font.Font(None, 24)
 
     def startup(self, persistent):

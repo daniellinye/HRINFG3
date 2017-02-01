@@ -3,9 +3,12 @@ from i18n import i18n
 from functools import partial
 import pygame as pg
 
+SCENE_NAME = "MENU"
+
 class Scene(stateManagment.BaseScene):
     def __init__(self, surface, helpers):
         super(Scene, self).__init__()
+        self.current_state = SCENE_NAME
         self.surface = surface
         self.vars = helpers['vars']
         self.assets = helpers['assets']
@@ -78,8 +81,12 @@ class Scene(stateManagment.BaseScene):
         self.done = True
 
     def get_event(self, event):
+        print(event.type)
         if event.type == pg.QUIT:
             self.quit = True
+        elif event.type == pg.KEYDOWN and event.key == pg.K_SPACE:
+            self.next_state = "PAUSED"
+            self.done = True
         self.start_btn.check_event(event)
         self.highscore_btn.check_event(event)
         self.instruction_btn.check_event(event)

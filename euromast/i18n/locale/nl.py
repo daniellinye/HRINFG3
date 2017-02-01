@@ -1,13 +1,26 @@
 lang = {
     "start": 'Start',
+    "resume": "hervat",
+    "go to menu": "naar menu",
     "settings": 'Instellingen',
     "instructions": 'Instructies',
     "highscores": 'Highscore',
     "exit": "Verlaten",
     "language": "Taal",
+    "continue": "ga door",
     "go back": "ga terug",
     "select amount of players": "Selecteer het aantal spelers",
     "2 players": "2 spelers",
     "3 players": "3 spelers",
-    "4 players": "4 spelers"
+    "4 players": "4 spelers",
+    "player": "speler",
+    "roll the dice double": "Je hebt een {dice1} en een {dice2} gegooid",
+    "rolled for steps red dice": "roode dobbelsteen: je hebt voor {steps} stappen gegooid",
+    "rolled for question white dice": "witte dobbelsteen: je hebt voor {question_type} vragen gegooid",
+    "roll the dice": "{player} gooi dobbelsteen",
+    "choose a category": "{player} kies een categorie",
+    "choose a direction": "{player} kies een richting",
+    "enter your name": "{player} vul je naam in",
+    "your rolled": "je hebt een {number} gegooid",
+    "the playing order will be": "De speel orde is"
 }

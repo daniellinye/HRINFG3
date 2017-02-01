@@ -1,13 +1,26 @@
 lang = {
     "start": 'Start',
+    "resume": "resume",
+    "go to menu": "go to menu",
     "settings": 'Settings',
     "instructions": 'Instructions',
     "highscores": 'Highscore',
     "exit": "Exit",
     "language": "Language",
+    "continue": "continue",
     "go back": "go back",
     "select amount of players": "Select amount of players",
     "2 players": "2 players",
     "3 players": "3 players",
-    "4 players": "4 players"
+    "4 players": "4 players",
+    "player": "player",
+    "roll the dice": "{player} roll the dice",
+    "roll the dice double": "you rolled a {dice1} and a {dice2}",
+    "rolled for steps red dice": "red dice: you rolled for {steps} steps",
+    "rolled for question white dice": "white dice: you rolled {question_type} questions",
+    "choose a category": "{player} choose a category",
+    "choose a direction": "{player} choose a category",
+    "enter your name": "{player} please enter your name",
+    "your rolled": "you rolled a {number}",
+    "the playing order will be": "the playing order will be"
 }
