@@ -14,6 +14,13 @@ class Scene(stateManagment.BaseScene):
         self.tower_upper = Grid(1, 5)
         self.tower_lower = Grid()
         self.players = None
+        self.button = formControl.Button(
+            [0, self.game['height']/5, 200, 50],
+            (0, 0, 0),
+            self.next_turn(),
+            text="Stuff"
+        )
+
 
 
 
@@ -27,6 +34,7 @@ class Scene(stateManagment.BaseScene):
 
 
     def get_event(self, event):
+        self.button.check_event(event)
         if event.type == pg.QUIT:
             self.quit = True
 
@@ -51,6 +59,7 @@ class Scene(stateManagment.BaseScene):
         self.tower_lower.draw(surface, self.game['width'], self.game['height']/2.5, self.game['height']/4 + 50)
         for p in self.players:
             p.draw(surface, self.game['width'], self.game['height'])
+        self.button.update(surface)
 
 
 
