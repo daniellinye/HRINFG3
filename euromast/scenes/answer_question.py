@@ -19,6 +19,8 @@ class Scene(stateManagment.BaseScene):
         self.card_color = None
         self.game = game = self.vars['pygame']
         self.text_box = None
+        self.counter_font = self.vars['fonts']['small']
+        self.timer = 10
         self.next_button = formControl.Button(
             (game['center_of_screen'] - 100, (game['vertical_center_of_screen'] *2)-100, 200, 40),
             pg.Color('green'),
@@ -36,6 +38,7 @@ class Scene(stateManagment.BaseScene):
         self.answer_btns = []
         self.card_color = None
         self.player = None
+        self.timer = 10
         self.text_box = None
         self.question_type = None
         self.done = True
@@ -43,18 +46,27 @@ class Scene(stateManagment.BaseScene):
     def check_answer_open(self, textId, answer):
         self.check_answer(answer, textId)
 
+    def show_correct(self):
+        for answer in self.player.current_question['answers']:
+            for answer_btn in self.answer_btns:
+                if answer_btn.button_id == answer['id'] and answer['is_correct']:
+                    answer_btn.update_font_color(pg.Color('black'))
+                elif answer_btn.button_id == answer['id'] and not answer['is_correct']:
+                    answer_btn.update_font_color(pg.Color('red'))
+
+    def too_late(self):
+        self.correct = False
+        if self.question_type != 'open':
+            self.show_correct()
+        self.sounds.play("question_wrong")
+
     def check_answer(self, answer, bid):
         if self.player.question_type !='open':
             correct_btn = None
             self.correct = False
             if self.correct_answer_id == bid:
                 self.correct = True
-            for answer in self.player.current_question['answers']:
-                for answer_btn in self.answer_btns:
-                    if answer_btn.button_id == answer['id'] and answer['is_correct']:
-                        answer_btn.update_font_color(pg.Color('black'))
-                    elif answer_btn.button_id == answer['id']:
-                        answer_btn.update_font_color(pg.Color('red'))
+            self.show_correct()
 
         elif self.player.question_type =='open':
             ans = self.player.current_question['answers'][0]['name'].lower()
@@ -62,7 +74,6 @@ class Scene(stateManagment.BaseScene):
             if ans == answer.lower():
                 self.correct = True
 
-        print(self.correct)
         if self.correct:
             self.sounds.play("question_right")
         else:
@@ -112,6 +123,11 @@ class Scene(stateManagment.BaseScene):
     def get_event(self, event):
         if event.type == pg.QUIT:
             self.quit = True
+        if event.type == pg.USEREVENT:
+            if self.timer != 0 and self.correct == None:
+                self.timer -= 1
+            elif self.timer == 0 and self.correct == None:
+                self.too_late()
         if self.text_box:
             self.text_box.get_event(event)
 
@@ -121,6 +137,7 @@ class Scene(stateManagment.BaseScene):
         self.next_button.check_event(event)
 
     def update(self, dt):
+
         if self.text_box:
             self.text_box.update()
         if self.question_type == 'open' and self.correct == False:
@@ -130,8 +147,9 @@ class Scene(stateManagment.BaseScene):
 
     def draw(self, surface):
         # background
-        surface.fill(self.card_color)
 
+        surface.fill(self.card_color)
+        surface.blit(self.counter_font.render(str(self.timer), True, (0, 0, 0)), (32, 48))
         if self.text_box and self.question_type == 'open':
             self.text_box.draw(surface)
         if self.correct or self.correct == False:

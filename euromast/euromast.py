@@ -14,7 +14,6 @@ from components import init, sound_manager
 
 from model import model
 
-
 class Game(object):
     """
     A single instance of this class is responsible for
@@ -31,6 +30,7 @@ class Game(object):
         states: a dict mapping state-names to GameState objects
         start_state: name of the first active game state
         """
+        pg.time.set_timer(pg.USEREVENT, 1000)
         self.done = False
         self.screen = screen
         self.clock = pg.time.Clock()
