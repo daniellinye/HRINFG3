@@ -95,11 +95,6 @@ class Grid:
     def drawgrid(self, screen, width, height):
 
         #draw backgroundcolors
-        i = 1
-        for counter in range(0,4):
-            pygame.draw.rect(screen, self.colorlist[counter], [i, 0, width / 4, height], 0)
-            i += self.width / 4
-
 
 
         for c in range(0,4):
@@ -159,9 +154,6 @@ class Sections:
 
     def draw(self, player):
         i = 0
-        for counter in range(0, 4):
-            pygame.draw.rect(self.screen, self.colorlist[counter], [i, 0, self.width / 4, self.height], 0)
-            i += self.width / 4
         self.updateplayer(player)
         for category in range(0, self.categories):
             for x in range(0, self.grid_width):
@@ -223,11 +215,12 @@ class Game:
 
             # draw logic
             self.screen.fill((0,0,0))
-            menu = Sections(self.screen, self.width, self.height, bob)
+            menu = Sections(self.screen, self.width, self.height/2, bob)
             bob.update(20)
 
             # must also flip backscreen
             pygame.display.flip()
+            print(5/2)
 
 
 

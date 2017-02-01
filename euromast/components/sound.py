@@ -1,9 +1,11 @@
 import pygame as pg
 
 
+
 class LoadSound:
-    def __init__(self, file, volume=1.0, loop=0):
+    def __init__(self, file, type, volume=1.0, loop=0):
         self.file = file
+        self.type = type
         self.volume = volume
         self.loop = loop
         self.music = pg.mixer.Sound(self.file)

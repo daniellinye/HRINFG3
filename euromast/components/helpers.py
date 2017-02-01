@@ -11,4 +11,5 @@ def check_default_events(self, event):
         self.quit = True
     elif event.type == pg.KEYDOWN and event.key == pg.K_SPACE:
         self.next_state = "PAUSED"
+        self.persist['']
         self.done = True

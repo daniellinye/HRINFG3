@@ -52,8 +52,42 @@ class Scene(stateManagment.BaseScene):
             font=self.vars['fonts']['medium']
         )
 
+        self.sound_setting_text = formControl.Text(
+            (center_of_screen * 1.5, 150),
+            '',
+            self.vars['fonts']['medium'],
+            pg.Color('white')
+        )
+
+        self.music_sound_btn = formControl.Button(
+            (center_of_screen * 1.5 - 100, 180, 200, 50),
+            pg.Color('green'),
+            self.toggle_music,
+            font=self.vars['fonts']['medium']
+        )
+
+        self.effects_sound_btn = formControl.Button(
+            (center_of_screen * 1.5 - 100, 250, 200, 50),
+            pg.Color('green'),
+            self.toggle_effects,
+            font=self.vars['fonts']['medium']
+        )
+
     def change_lang(self, lang, id):
         self.persist['game_state']['i18n'] = self.i18n.load(lang)
+
+    def toggle_music(self, id):
+        if self.persist['game_state']['music'] == True:
+            self.persist['game_state']['music'] = False
+        else:
+            self.persist['game_state']['music'] = True
+
+
+    def toggle_effects(self, id):
+        if self.persist['game_state']['effects'] == True:
+            self.persist['game_state']['effects'] = False
+        else:
+            self.persist['game_state']['effects'] = True
 
     def go_back(self, id):
         self.done = True
@@ -67,10 +101,21 @@ class Scene(stateManagment.BaseScene):
         self.go_back_btn.update_text(self.i18n.translate('go back'))
         self.english_lang_btn.color = pg.Color('red')
         self.dutch_lang_btn.color = pg.Color('red')
+        self.sound_setting_text.update_text(self.i18n.translate('sound'))
+        self.music_sound_btn.update_text(self.i18n.translate('music'))
+        self.effects_sound_btn.update_text(self.i18n.translate('effects'))
         if self.i18n.current_lang == 'en':
             self.english_lang_btn.update_color(pg.Color('green'))
         elif self.i18n.current_lang == 'nl':
             self.dutch_lang_btn.update_color(pg.Color('green'))
+        if self.persist['game_state']['music'] == False:
+            self.music_sound_btn.color = pg.Color('red')
+        if self.persist['game_state']['music'] == True:
+            self.music_sound_btn.color = pg.Color('green')
+        if self.persist['game_state']['effects'] == False:
+            self.effects_sound_btn.color = pg.Color('red')
+        if self.persist['game_state']['effects'] == True:
+            self.effects_sound_btn.color = pg.Color('green')
 
     def get_event(self, event):
         if event.type == pg.QUIT:
@@ -78,6 +123,9 @@ class Scene(stateManagment.BaseScene):
         self.dutch_lang_btn.check_event(event)
         self.english_lang_btn.check_event(event)
         self.go_back_btn.check_event(event)
+        self.effects_sound_btn.check_event(event)
+        self.music_sound_btn.check_event(event)
+
 
 
 
@@ -88,3 +136,6 @@ class Scene(stateManagment.BaseScene):
         self.dutch_lang_btn.update(surface)
         self.english_lang_btn.update(surface)
         self.go_back_btn.update(surface)
+        self.sound_setting_text.draw(surface)
+        self.music_sound_btn.update(surface)
+        self.effects_sound_btn.update(surface)

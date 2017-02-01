@@ -22,5 +22,9 @@ lang = {
     "choose a direction": "{player} choose a category",
     "enter your name": "{player} please enter your name",
     "your rolled": "you rolled a {number}",
-    "the playing order will be": "the playing order will be"
+    "the playing order will be": "the playing order will be",
+    "sound": "Sound",
+    "music": "Music",
+    "effects": "Sounds"
+
 }

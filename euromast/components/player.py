@@ -2,6 +2,7 @@ import uuid
 import pygame
 from components import stateManagment, formControl
 
+
 class createPlayer(object):
     def __init__(self, name, roll=0, position = (-1,11)):
         self.id = uuid.uuid4()
@@ -9,8 +10,8 @@ class createPlayer(object):
         self.score = 0
         self.position = position
         self.direction = None
-        self.category = None
-        self.x = -1
+        self.category = 0
+        self.x = 0
         self.y = 11
         self.rect = (self.x, self.y)
         self.moved = True
@@ -45,21 +46,22 @@ class createPlayer(object):
         self.type = type
 
     def canmove(self):
+        print("Can Move")
         self.moved = False
 
     def update(self):
-        print(self.direction)
         if self.moved == False:
-            if self.direction == "Left" or self.direction[0] == "Left":
+            print(self.direction)
+            if self.direction == "left" or self.direction[0] == "left":
                 self.x -= 1
                 self.moved = True
-            elif self.direction == "Right" or self.direction[0] == "Right":
+            elif self.direction == "right" or self.direction[0] == "right":
                 self.x += 1
                 self.moved = True
-            elif self.direction == "Up" or self.direction[0] == "Up":
+            elif self.direction == "up" or self.direction[0] == "up":
                 self.y -= 1
                 self.moved = True
-            elif self.direction == "Down" or self.direction[0] == "Down":
+            elif self.direction == "down" or self.direction[0] == "down":
                 self.y += 1
                 self.moved = True
 
@@ -68,12 +70,34 @@ class createPlayer(object):
 
 
     def draw(self, screen, width, height, grid_height=10):
-        pygame.draw.rect(screen, (255, 255,255),
-                         [width / 20 + width / 8 * self.x,
-                          height / grid_height * self.y + height / 50, 8,
-                          8], 2)
+        if self.x%2 == 0:
+            drawPoint = Point(2, self.y, self.x/4, 1)
+            drawPoint.highlight
+            drawPoint.drawself(screen, width, height, grid_height)
+        else:
+            drawPoint = Point(1, self.y, self.x/4, 1)
 
         if self.y < 0:
-            TextInRect(screen, "Player {} Wins!".format(self.name), (0, 0, 0), (width / 2, height / 2),
+            TextInRect(screen, "Player {} Wins!".format(self.name), (255,255,255), (width / 2, height / 2),
                            pygame.font.SysFont("Arial", 40))
             return True
+
+class Point:
+    def __init__(self, x, y, category, highlight):
+        self.x = x
+        self.y = y
+        self.category = category
+        self.highlight = highlight
+
+
+    def highlight(self):
+        if self.highlight == 0:
+            self.highlight = 1
+        else:
+            self.highlight = 0
+
+    def drawself(self, screen, width, height, grid_height=10):
+        if self.x >= 0 and self.y >= 0:
+            pygame.draw.rect(screen, ((self.highlight*255),(self.highlight*255),(self.highlight*255)), [width/20 + width/4*self.category + width/8*self.x, height/grid_height *self.y + height/50, 8*(1+self.highlight), 8*(1+self.highlight)], 2)
+        else:
+            print("Player is not in game yet")

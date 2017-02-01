@@ -22,5 +22,8 @@ lang = {
     "choose a direction": "{player} kies een richting",
     "enter your name": "{player} vul je naam in",
     "your rolled": "je hebt een {number} gegooid",
-    "the playing order will be": "De speel orde is"
+    "the playing order will be": "De speel orde is",
+    "sound": "Geluid",
+    "music": "Muziek",
+    "effects": "Geluiden"
 }

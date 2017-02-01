@@ -16,6 +16,8 @@ class BaseScene(object):
         self.player = None
         self.players = None
         self.font = pg.font.Font(None, 24)
+        self.font = pg.font.SysFont("Arial", 24)
+
 
     def startup(self, persistent):
         """
