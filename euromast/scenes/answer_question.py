@@ -49,10 +49,8 @@ class Scene(stateManagment.BaseScene):
             ans = self.player.current_question['answers'][0]['name'].lower()
             print(answer)
             if ans == answer.lower():
-                self.vars["sounds"]["question_right"].play()
                 self.correct = True
             else:
-                self.vars["sounds"]["question_wrong"].play()
                 self.correct = False
 
         if self.correct:
