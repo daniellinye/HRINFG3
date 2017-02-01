@@ -45,13 +45,22 @@ class Scene(stateManagment.BaseScene):
                     elif answer_btn.button_id == answer['id']:
                         answer_btn.update_font_color(pg.Color('red'))
                         self.correct = False
-            return
-        ans = self.player.current_question['answers'][0]['name'].lower()
-        print(answer)
-        if ans == answer.lower():
-            self.correct = True
+        elif self.player.question_type =='open':
+            ans = self.player.current_question['answers'][0]['name'].lower()
+            print(answer)
+            if ans == answer.lower():
+                self.vars["sounds"]["question_right"].play()
+                self.correct = True
+            else:
+                self.vars["sounds"]["question_wrong"].play()
+                self.correct = False
+
+        if self.correct:
+            self.vars["sounds"]["question_right"].play()
         else:
-            self.correct = False
+            self.vars["sounds"]["question_wrong"].play()
+
+        return
 
     def startup(self, persistent):
         # stop sounds so we can use them again and play another sound
