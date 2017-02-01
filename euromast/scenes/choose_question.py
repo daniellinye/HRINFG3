@@ -25,6 +25,11 @@ class Scene(stateManagment.BaseScene):
         self.maxCardsPerRow = int(floor((game['width'] - self.xPosFirstRow) / self.xPosFirstRow))
 
     def startup(self, persistent):
+        # stop sounds so we can use them again and play another sound
+        self.vars["sounds"]["dice_roll"].stop()
+        self.vars["sounds"]["main_theme"].stop()
+        self.vars["sounds"]["choose_question"].play()
+
         self.persist = persistent
         game_state = self.persist['game_state']
         self.player = game_state['players'][game_state['current_player_index']]

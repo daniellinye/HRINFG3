@@ -36,6 +36,9 @@ class Scene(stateManagment.BaseScene):
         self.dice = formControl.Image((self.vars['pygame']['width'] - 512, self.vars['pygame']['height'] * .4))
 
     def next_player(self, id):
+        # stop sounds so we can use them again
+        self.vars["sounds"]["dice_roll"].stop()
+
         current_player_index = self.persist['game_state']['current_player_index']
 
         self.persist['game_state']['players'][current_player_index].roll = self.rolled_number
@@ -67,6 +70,10 @@ class Scene(stateManagment.BaseScene):
     def draw(self, surface):
         # background
         surface.fill((255, 255, 255))
+
+        # dice sound
+        self.vars["sounds"]["dice_roll"].play()
+
         # dice image
         img = self.assets['wdlist']['dice{0}'.format(self.rolled_number)]
 
