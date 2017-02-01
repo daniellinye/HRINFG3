@@ -104,6 +104,7 @@ if __name__ == "__main__":
         "assets": assets,
         "vars": variables
     }
+    #TODO add rules
     states = {
                 "MENU": menu.Scene(screen, helpers),
                 "SETTINGS": settings.Scene(screen, helpers),
