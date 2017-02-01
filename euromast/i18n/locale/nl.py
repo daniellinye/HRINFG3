@@ -9,5 +9,8 @@ lang = {
     "select amount of players": "Selecteer het aantal spelers",
     "2 players": "2 spelers",
     "3 players": "3 spelers",
-    "4 players": "4 spelers"
+    "4 players": "4 spelers",
+    "sound": "Geluid",
+    "music": "Muziek",
+    "effects": "Geluiden"
 }

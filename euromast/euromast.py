@@ -45,7 +45,9 @@ class Game(object):
                 "start_from_index": 0,
                 "current_player_index": 0,
                 "reuse_scene": None,
-                "skip_to_scene": None
+                "skip_to_scene": None,
+                "music": True,
+                "effects": True
             }
         }
         self.state.startup(self.startup_persist)
