@@ -10,7 +10,6 @@ class Scene(stateManagment.BaseScene):
         self.vars = helpers['vars']
         self.next_state = 'SHOW_TOWER'
         self.assets = helpers['assets']
-        self.player = None
         self.game = game = self.vars['pygame']
         self.player = None
         self.correct = None
@@ -29,6 +28,12 @@ class Scene(stateManagment.BaseScene):
 
 
     def nextPlayer(self, id):
+        # reset values
+        self.correct = None
+        self.card_color = None
+        self.player = None
+        self.text_box = None
+        self.question_type = None
         self.done = True
 
     def check_answer_open(self, textId, answer):

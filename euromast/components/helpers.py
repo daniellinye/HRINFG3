@@ -1,4 +1,7 @@
 import pygame as pg
+import threading
+from functools import wraps
+
 def set_startup(self, persistent):
         game_state = persistent['game_state']
         self.i18n = game_state['i18n']
@@ -13,3 +16,16 @@ def check_default_events(self, event):
         self.next_state = "PAUSED"
         self.persist['']
         self.done = True
+
+
+def delay(delay=0.):
+    """
+    Decorator delaying the execution of a function for a while.
+    """
+    def wrap(f):
+        @wraps(f)
+        def delayed(*args, **kwargs):
+            timer = threading.Timer(delay, f, args=args, kwargs=kwargs)
+            timer.start()
+        return delayed
+    return wrap
