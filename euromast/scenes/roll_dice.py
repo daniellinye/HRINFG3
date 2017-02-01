@@ -4,12 +4,13 @@ import pygame as pg
 
 class Scene(stateManagment.BaseScene):
     def __init__(self, screen, helpers):
-        super(Scene, self).__init__()
+        super(Scene, self).__init__(helpers)
         self.screen = screen
         self.done = False
         self.next_state = 'SHOW_TURN_ORDER'
         self.vars = helpers['vars']
         self.assets =  helpers['assets']
+        self.sounds = helpers['sounds']
         self.screen_color = pg.Color('white')
         self.rolled_number = None
         self.i18n = None
@@ -31,6 +32,7 @@ class Scene(stateManagment.BaseScene):
             self.next_player,
             text='Continue',
             font=self.vars['fonts']['medium'],
+            click_sound=self.sounds.effects['click_sound'],
             hover_color = pg.Color("black")
         )
 
@@ -38,7 +40,7 @@ class Scene(stateManagment.BaseScene):
 
     def next_player(self, id):
         # stop sounds so we can use them again
-        self.vars["sounds"]["dice_roll"].stop()
+        self.sounds.stop("dice_roll")
 
         current_player_index = self.persist['game_state']['current_player_index']
 
@@ -60,6 +62,7 @@ class Scene(stateManagment.BaseScene):
         self.persist = persistent
         self.i18n = self.persist['game_state']['i18n']
         self.rolled_number = randint(1,6)
+        self.sounds.play('dice_roll')
 
     def get_event(self, event):
         if event.type == pg.QUIT:
@@ -74,7 +77,7 @@ class Scene(stateManagment.BaseScene):
         surface.fill((255, 255, 255))
 
         # dice sound
-        self.vars["sounds"]["dice_roll"].play()
+
 
         # dice image
         img = self.assets['wdlist']['dice{0}'.format(self.rolled_number)]

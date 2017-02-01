@@ -5,7 +5,7 @@ import pygame as pg
 
 class Scene(stateManagment.BaseScene):
     def __init__(self, screen, helpers):
-        super(Scene, self).__init__()
+        super(Scene, self).__init__(helpers)
         self.vars = helpers['vars']
         self.next_state = 'CHOOSE_DIRECTION'
         self.assets = helpers['assets']
@@ -47,6 +47,7 @@ class Scene(stateManagment.BaseScene):
                 (x * 300, 20, 200, 200),
                 pg.Color(category['color']),
                 partial(self.nextPlayer, category),
+                click_sound=self.sounds.effects['click_sound'],
                 text=category['name'],
                 font=self.vars['fonts']['large']
             ))

@@ -4,7 +4,7 @@ import pygame as pg
 
 class Scene(stateManagment.BaseScene):
     def __init__(self, screen, helpers):
-        super(Scene, self).__init__()
+        super(Scene, self).__init__(helpers)
         self.vars = helpers['vars']
         self.assets =  helpers['assets']
         self.background = formControl.Image((0,0), self.assets['background-erasmus'])
@@ -26,6 +26,7 @@ class Scene(stateManagment.BaseScene):
             (255,0,0),
             partial(self.register_player, 2),
             font=self.vars['fonts']['medium'],
+            click_sound=self.sounds.effects['click_sound'],
             hover_color = pg.Color("black")
         )
         self.three_players_btn = Button(
@@ -33,6 +34,7 @@ class Scene(stateManagment.BaseScene):
             (255,0,0),
             partial(self.register_player, 3),
             font=self.vars['fonts']['medium'],
+            click_sound=self.sounds.effects['click_sound'],
             hover_color=pg.Color("black")
         )
         self.four_players_btn = Button(
@@ -40,6 +42,7 @@ class Scene(stateManagment.BaseScene):
             (255,0,0),
             partial(self.register_player, 4),
             font=self.vars['fonts']['medium'],
+            click_sound=self.sounds.effects['click_sound'],
             hover_color=pg.Color("black")
         )
 

@@ -9,7 +9,7 @@ class Scene(stateManagment.BaseScene):
     Parent class for individual game states to inherit from.
     """
     def __init__(self, screen , helpers):
-        super(Scene, self).__init__()
+        super(Scene, self).__init__(helpers)
         self.done = False
         self.vars = helpers['vars']
         self.assets = helpers['assets']
@@ -26,9 +26,8 @@ class Scene(stateManagment.BaseScene):
 
     def startup(self, persistent):
         # stop sounds so we can use them again and play another sound
-        self.vars["sounds"]["dice_roll"].stop()
-        self.vars["sounds"]["main_theme"].stop()
-        self.vars["sounds"]["choose_question"].play()
+        self.sounds.stop(['dice_roll', 'main_theme'])
+        self.sounds.play('choose_question')
 
         self.persist = persistent
         game_state = self.persist['game_state']

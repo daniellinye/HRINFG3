@@ -92,7 +92,7 @@ class Button(object):
                     "font_color" : pg.Color("white"),
                     "hover_font_color" : None,
                     "clicked_font_color" : None,
-                    "click_sound" : pg.mixer.Sound("./assets/sounds/click.wav"),
+                    "click_sound" : None, #pg.mixer.Sound("./assets/sounds/click.wav"),
                     "hover_sound" : None}
         for kwarg in kwargs:
             if kwarg in settings:
@@ -116,7 +116,7 @@ class Button(object):
             self.text = self.font.render(self.text,True,self.font_color)
     def update_color(self, color):
         self.color = color
-        
+
     def update_text(self, text):
         self.text = text
         self.render_text()

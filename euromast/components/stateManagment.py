@@ -5,9 +5,13 @@ class BaseScene(object):
     """
     Parent class for individual game states to inherit from.
     """
-    def __init__(self):
+    def __init__(self, helpers=None):
         self.done = False
         self.quit = False
+        self.sounds = helpers['sounds'] if helpers else None
+        self.assets = helpers['assets'] if helpers else None
+        self.vars = helpers['vars'] if helpers else None
+        self.game = helpers['vars']['pygame'] if helpers else None
         self.i18n = i18n.Localize()
         self.next_state = None
         self.wait = None

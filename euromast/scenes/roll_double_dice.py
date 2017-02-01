@@ -3,7 +3,7 @@ from random import randint
 import pygame as pg
 class Scene(stateManagment.BaseScene):
     def __init__(self, screen, helpers):
-        super(Scene, self).__init__()
+        super(Scene, self).__init__(helpers)
         self.vars = helpers['vars']
         self.assets = helpers['assets']
         game = self.vars['pygame']
@@ -35,6 +35,7 @@ class Scene(stateManagment.BaseScene):
             self.next_scene,
             text='Continue',
             font=self.vars['fonts']['medium'],
+            click_sound=self.sounds.effects['click_sound'],
             hover_color=pg.Color("black")
         )
     def next_scene(self, id):
@@ -66,7 +67,9 @@ class Scene(stateManagment.BaseScene):
 
         self.white_dice_text.update_text('White dice: you rolled for {0} questions'.format(question_type))
         self.red_dice_text.update_text('Red dice: you rolled for {0} steps'.format(red_dice_number))
-
+        # dice sound
+        self.sounds.play("dice_roll")
+        
     def get_event(self, event):
         if event.type == pg.QUIT:
             self.quit = True
@@ -76,8 +79,7 @@ class Scene(stateManagment.BaseScene):
 
     def draw(self, surface):
         surface.fill((255, 255, 255))
-        # dice sound
-        self.vars["sounds"]["dice_roll"].play()
+
         # dice image
         red_dice = self.assets['rdlist'][self.red_dice_number]
         white_dice = self.assets['wdlist'][self.white_dice_number]

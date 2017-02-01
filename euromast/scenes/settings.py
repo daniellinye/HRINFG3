@@ -7,11 +7,12 @@ class Scene(stateManagment.BaseScene):
     Parent class for individual game states to inherit from.
     """
     def __init__(self, screen, helpers):
-        super(Scene, self).__init__()
+        super(Scene, self).__init__(helpers)
         self.vars = helpers['vars']
         self.assets =  helpers['assets']
         self.next_state = 'MENU' #should be prev state
         self.game = game = self.vars['pygame']
+        self.sounds = helpers['sounds']
         i18n = self.i18n
         center_of_screen = game['center_of_screen']
         self.header_text = formControl.Text(
@@ -33,6 +34,7 @@ class Scene(stateManagment.BaseScene):
             pg.Color('red'),
             partial(self.change_lang, 'nl'),
             text="Nederlands",
+            click_sound=self.sounds.effects['click_sound'],
             font=self.vars['fonts']['medium']
         )
 
@@ -40,6 +42,7 @@ class Scene(stateManagment.BaseScene):
             (center_of_screen/2-100, 400, 200, 50),
             pg.Color('green'),
             self.go_back,
+            click_sound=self.sounds.effects['click_sound'],
             font=self.vars['fonts']['medium'],
             hover_color = pg.Color("black")
         )
@@ -48,6 +51,7 @@ class Scene(stateManagment.BaseScene):
             (center_of_screen/2 - 100, 250, 200, 50),
             pg.Color('red'),
             partial(self.change_lang, 'en'),
+            click_sound=self.sounds.effects['click_sound'],
             text="English",
             font=self.vars['fonts']['medium']
         )
@@ -63,6 +67,7 @@ class Scene(stateManagment.BaseScene):
             (center_of_screen * 1.5 - 100, 180, 200, 50),
             pg.Color('green'),
             self.toggle_music,
+            click_sound=self.sounds.effects['click_sound'],
             font=self.vars['fonts']['medium']
         )
 
@@ -70,6 +75,7 @@ class Scene(stateManagment.BaseScene):
             (center_of_screen * 1.5 - 100, 250, 200, 50),
             pg.Color('green'),
             self.toggle_effects,
+            click_sound=self.sounds.effects['click_sound'],
             font=self.vars['fonts']['medium']
         )
 
@@ -78,15 +84,18 @@ class Scene(stateManagment.BaseScene):
 
     def toggle_music(self, id):
         if self.persist['game_state']['music'] == True:
+            self.sounds.stop_music()
             self.persist['game_state']['music'] = False
         else:
+            self.sounds.play_music()
             self.persist['game_state']['music'] = True
-
 
     def toggle_effects(self, id):
         if self.persist['game_state']['effects'] == True:
             self.persist['game_state']['effects'] = False
+            self.sounds.stop_effects()
         else:
+            self.sounds.play_effects()
             self.persist['game_state']['effects'] = True
 
     def go_back(self, id):

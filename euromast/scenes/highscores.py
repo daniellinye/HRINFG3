@@ -6,7 +6,7 @@ import pygame as pg
 
 class Scene(stateManagment.BaseScene):
     def __init__(self, screen, helpers):
-        super(Scene, self).__init__()
+        super(Scene, self).__init__(helpers)
         self.vars = helpers['vars']
         self.assets = helpers['assets']
         self.next_state = 'MENU'  # should be prev state
@@ -38,6 +38,7 @@ class Scene(stateManagment.BaseScene):
             pg.Color('green'),
             self.go_back,
             font=self.vars['fonts']['medium'],
+            click_sound=self.sounds.effects['click_sound'],
             hover_color=pg.Color("black")
         )
 

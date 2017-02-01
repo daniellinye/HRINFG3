@@ -4,7 +4,7 @@ import pygame as pg
 
 class Scene(stateManagment.BaseScene):
     def __init__(self, screen, helpers):
-        super(Scene, self).__init__()
+        super(Scene, self).__init__(helpers)
         self.vars = helpers['vars']
         self.next_state = 'ROLL_DICE.BUTTON'
         self.assets = helpers['assets']
@@ -21,6 +21,7 @@ class Scene(stateManagment.BaseScene):
             (20, 20, 300, 300),
             (0,0,255),
             partial(self.nextPlayer, 'left'),
+            click_sound=self.sounds.effects['click_sound'],
             text="left",
             font=self.vars['fonts']['large']
         )
@@ -29,6 +30,7 @@ class Scene(stateManagment.BaseScene):
             (20, game['height']-310, 300, 300),
             (255,0,0),
             partial(self.nextPlayer, 'up'),
+            click_sound=self.sounds.effects['click_sound'],
             text="up",
             font=self.vars['fonts']['large']
         )
@@ -37,6 +39,7 @@ class Scene(stateManagment.BaseScene):
             (game['width'] - 320, 20, 300, 300),
             (0,255,0),
             partial(self.nextPlayer, 'right'),
+            click_sound=self.sounds.effects['click_sound'],
             text="right",
             font=self.vars['fonts']['large']
         )
@@ -46,6 +49,7 @@ class Scene(stateManagment.BaseScene):
             (game['width'] - 320, game['height']-310, 300, 300),
             (255,255,0),
             partial(self.nextPlayer, 'down'),
+            click_sound=self.sounds.effects['click_sound'],
             text='down',
             font=self.vars['fonts']['large']
         )

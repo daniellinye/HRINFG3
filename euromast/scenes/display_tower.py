@@ -6,7 +6,7 @@ import pygame as pg
 
 class Scene(stateManagment.BaseScene):
     def __init__(self, scene, helpers):
-        super(Scene, self).__init__()
+        super(Scene, self).__init__(helpers)
         self.vars = helpers['vars']
         self.assets = helpers['assets']
         self.game = game = self.vars['pygame']

@@ -3,7 +3,7 @@ import pygame as pg
 
 class Scene(stateManagment.BaseScene):
     def __init__(self, scene, helpers):
-        super(Scene, self).__init__()
+        super(Scene, self).__init__(helpers)
         self.vars = helpers['vars']
         self.assets = helpers['assets']
         self.game = game = self.vars['pygame']
@@ -20,6 +20,7 @@ class Scene(stateManagment.BaseScene):
             self.next_scene,
             text='Continue',
             font=self.vars['fonts']['medium'],
+            click_sound=self.sounds.effects['click_sound'],
             hover_color=pg.Color("black")
         )
 

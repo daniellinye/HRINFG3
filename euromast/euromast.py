@@ -10,7 +10,7 @@ from scenes import menu, select_players, insert_player_name, roll_dice, \
     choose_category, choose_direction, roll_dice_button, turn_order, \
     roll_double_dice, choose_question, answer_question, settings, highscores, \
     display_tower, pause_menu, instructions
-from components import init
+from components import init, sound_manager
 
 from model import model
 
@@ -100,12 +100,12 @@ if __name__ == "__main__":
     pg.init()
     assets = init.LoadAssets().assets
     variables = init.LoadVariables().vars
-
+    sounds = sound_manager.Manager(variables['sounds'])
     screen = pg.display.set_mode((variables['pygame']['width'], variables['pygame']['height']))
-
     helpers = {
         "assets": assets,
-        "vars": variables
+        "vars": variables,
+        "sounds": sounds
     }
     #TODO add rules
     states = {

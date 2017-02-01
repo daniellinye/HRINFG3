@@ -1,17 +1,17 @@
 from components import stateManagment, formControl, helpers
-from scenes import rules
 from functools import partial
 import pygame as pg
 
 class Scene(stateManagment.BaseScene):
     def __init__(self, surface, helpers):
-        super(Scene, self).__init__()
+        super(Scene, self).__init__(helpers)
         self.vars = helpers['vars']
         self.assets = helpers['assets']
         self.game = game = helpers['vars']['pygame']
         self.next_state = 'MENU'
         self.buttons = ['resume', 'instructions', 'settings', 'go to menu'];
         self.btns = {}
+        self.background = formControl.Image((0,0), self.assets['background-erasmus'])
         button_width = 200
         button_font = self.vars['fonts']['large']
         button_hover_color = pg.Color('black')
@@ -25,6 +25,7 @@ class Scene(stateManagment.BaseScene):
                 partial(self.go_to_scene, butname),
                 hover_color=button_hover_color,
                 text=self.i18n.translate(butname),
+                click_sound=self.sounds.effects['click_sound'],
                 font=button_font
             )
             y += .1
@@ -50,5 +51,6 @@ class Scene(stateManagment.BaseScene):
 
     def draw(self, surface):
         surface.fill(pg.Color('white'))
+        surface.blit(self.background.image, self.background.rect)
         for key, button in self.btns.items():
             button.update(surface)

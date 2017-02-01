@@ -1,5 +1,5 @@
 import pygame as pg
-from components import sound
+from components.sound_manager import LoadSound
 
 
 class LoadVariables(object):
@@ -17,15 +17,20 @@ class LoadVariables(object):
             'center_of_screen': 1024 / 2,
             'vertical_center_of_screen': 720 / 2
         }
-        
+
         self.vars["sounds"] = {
-            "menu_theme": sound.LoadSound("./assets/sounds/menu_theme.wav", 'theme', 0.7, -1),
-            "main_theme": sound.LoadSound("./assets/sounds/main_theme.wav", 'theme', 0.4, -1),
-            "dice_roll": sound.LoadSound("./assets/sounds/dice_roll.wav", 'effect'),
-            "choose_question": sound.LoadSound("./assets/sounds/choose_question.wav", 'theme', 1.0, -1),
-            "question_theme": sound.LoadSound("./assets/sounds/question_theme.wav", 'theme', 1.0, -1),
-            "question_wrong": sound.LoadSound("./assets/sounds/question_wrong.wav", 'effect'),
-            "question_right": sound.LoadSound("./assets/sounds/question_right.wav", 'effect')
+            "ambiances": {
+                "choose_question": LoadSound("./assets/sounds/choose_question.wav", 'theme', 1.0, -1),
+                "question_theme": LoadSound("./assets/sounds/question_theme.wav", 'theme', 1.0, -1),
+                "menu_theme": LoadSound("./assets/sounds/menu_theme.wav", 'theme', 0.7, -1),
+                "main_theme": LoadSound("./assets/sounds/main_theme.wav", 'theme', 0.4, -1)
+            },
+            "effects": {
+                "click_sound": LoadSound('./assets/sounds/click.wav', 'effect'),
+                "dice_roll": LoadSound("./assets/sounds/dice_roll.wav", 'effect'),
+                "question_wrong": LoadSound("./assets/sounds/question_wrong.wav", 'effect'),
+                "question_right": LoadSound("./assets/sounds/question_right.wav", 'effect')
+            }
         }
 
 class LoadAssets(object):

@@ -3,13 +3,14 @@ import pygame as pg
 
 class Scene(stateManagment.BaseScene):
     def __init__(self, screen, helpers):
-        super(Scene, self).__init__()
+        super(Scene, self).__init__(helpers)
         self.screen = screen
         self.done = False
         self.next_state = 'ROLL_DICE.ROLLED'
         self.vars = helpers['vars']
         self.assets =  helpers['assets']
         self.current_player = None
+        self.sounds = helpers['sounds']
         self.screen_color = pg.Color('white')
         self.i18n = None
         Button = formControl.Button
@@ -22,6 +23,7 @@ class Scene(stateManagment.BaseScene):
             pg.Color('green'),
             self.go_next_state,
             font=self.vars['fonts']['medium'],
+            click_sound=self.sounds.effects['click_sound'],
             hover_color=pg.Color("black")
         )
 
@@ -32,7 +34,6 @@ class Scene(stateManagment.BaseScene):
         self.done = True
 
     def startup(self, persistent):
-        self.vars["sounds"]["main_theme"].play()
         self.persist = persistent
         game_state = self.persist['game_state']
         self.i18n = game_state['i18n']
@@ -45,7 +46,7 @@ class Scene(stateManagment.BaseScene):
         self.throw_dice_btn.check_event(event)
 
     def update(self, dt):
-        pass
+        self.sounds.play("main_theme")
 
     def draw(self, surface):
         surface.fill(self.screen_color)

@@ -7,11 +7,12 @@ SCENE_NAME = "MENU"
 
 class Scene(stateManagment.BaseScene):
     def __init__(self, surface, helpers):
-        super(Scene, self).__init__()
+        super(Scene, self).__init__(helpers)
         self.current_state = SCENE_NAME
         self.surface = surface
         self.vars = helpers['vars']
         self.assets = helpers['assets']
+        self.sounds = helpers['sounds']
         self.next_state = ""
         Button = formControl.Button
         game = self.vars['pygame']
@@ -22,13 +23,13 @@ class Scene(stateManagment.BaseScene):
         button_hover_color = pg.Color('black')
         center_buttons = (width / 2) - (button_width / 2)
         self.background = formControl.Image((0,0), self.assets['background-erasmus'])
-        self.vars["sounds"]["menu_theme"].play()
-
+        self.sounds.play('menu_theme')
         self.start_btn = Button(
             (center_buttons, height * .3, button_width, 50),
             (255,0,0),
             partial(self.go_to_scene, 'SELECT_PLAYER'),
             hover_color=button_hover_color,
+            click_sound=self.sounds.effects['click_sound'],
             font=button_font
         )
 
@@ -37,6 +38,7 @@ class Scene(stateManagment.BaseScene):
             (255, 0, 0),
             partial(self.go_to_scene, 'INSTRUCTIONS'),
             hover_color=button_hover_color,
+            click_sound=self.sounds.effects['click_sound'],
             font=button_font
         )
 
@@ -45,6 +47,7 @@ class Scene(stateManagment.BaseScene):
             (255, 0, 0),
             partial(self.go_to_scene, 'HIGHSCORES'),
             hover_color=button_hover_color,
+            click_sound=self.sounds.effects['click_sound'],
             font=button_font
         )
         self.settings_btn = Button(
@@ -52,6 +55,7 @@ class Scene(stateManagment.BaseScene):
             (255, 0, 0),
             partial(self.go_to_scene, 'SETTINGS'),
             hover_color=button_hover_color,
+            click_sound=self.sounds.effects['click_sound'],
             font=button_font
         )
         self.exit_btn = Button(
@@ -59,6 +63,7 @@ class Scene(stateManagment.BaseScene):
             (255, 0, 0),
             self.exit,
             hover_color=button_hover_color,
+            click_sound=self.sounds.effects['click_sound'],
             font=button_font
         )
 
@@ -81,7 +86,6 @@ class Scene(stateManagment.BaseScene):
         self.done = True
 
     def get_event(self, event):
-        print(event.type)
         if event.type == pg.QUIT:
             self.quit = True
         elif event.type == pg.KEYDOWN and event.key == pg.K_SPACE:
@@ -94,6 +98,7 @@ class Scene(stateManagment.BaseScene):
         self.exit_btn.check_event(event)
 
     def draw(self, surface):
+
         surface.fill(pg.Color("white"))
         surface.blit(self.background.image, self.background.rect)
         self.start_btn.update(surface)

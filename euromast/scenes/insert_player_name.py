@@ -4,11 +4,12 @@ import pygame as pg
 
 class Scene(stateManagment.BaseScene):
     def __init__(self, screen, helpers):
-        super(Scene, self).__init__()
+        super(Scene, self).__init__(helpers)
         self.screen = screen
         self.done = False
         self.next_state = 'ROLL_DICE.BUTTON'
         self.vars = helpers['vars']
+        self.sounds = helpers['sounds']
         self.assets =  helpers['assets']
         self.screen_color = pg.Color('white')
         self.player_count = 1
@@ -27,6 +28,7 @@ class Scene(stateManagment.BaseScene):
             pg.Color('green'),
             self.next_player,
             font=self.vars['fonts']['medium'],
+            click_sound=self.sounds.effects['click_sound'],
             hover_color=pg.Color("black"),
             text="Next"
         )
@@ -51,7 +53,7 @@ class Scene(stateManagment.BaseScene):
         game_state['players'].append(player.createPlayer(pname))
 
         if game_state['player_count'] == len(game_state['players']):
-            self.vars["sounds"]["menu_theme"].stop()
+            self.sounds.stop("menu_theme")
             self.done = True
             return
 

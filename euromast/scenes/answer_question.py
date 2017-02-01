@@ -6,13 +6,14 @@ import pygame as pg
 
 class Scene(stateManagment.BaseScene):
     def __init__(self, screen, helpers):
-        super(Scene, self).__init__()
+        super(Scene, self).__init__(helpers)
         self.vars = helpers['vars']
         self.next_state = 'SHOW_TOWER'
         self.assets = helpers['assets']
         self.game = game = self.vars['pygame']
         self.player = None
         self.correct = None
+        self.correct_answer_id = None
         self.answer_btns = []
         self.question_type = None
         self.card_color = None
@@ -23,13 +24,16 @@ class Scene(stateManagment.BaseScene):
             pg.Color('green'),
             self.nextPlayer,
             text='next',
+            click_sound=self.sounds.effects['click_sound'],
             font=self.vars['fonts']['medium']
         )
 
 
     def nextPlayer(self, id):
         # reset values
+        self.sounds.stop('question_theme')
         self.correct = None
+        self.answer_btns = []
         self.card_color = None
         self.player = None
         self.text_box = None
@@ -39,38 +43,36 @@ class Scene(stateManagment.BaseScene):
     def check_answer_open(self, textId, answer):
         self.check_answer(answer, textId)
 
-    def check_answer(self, answer, id):
+    def check_answer(self, answer, bid):
         if self.player.question_type !='open':
             correct_btn = None
+            self.correct = False
+            if self.correct_answer_id == bid:
+                self.correct = True
             for answer in self.player.current_question['answers']:
                 for answer_btn in self.answer_btns:
                     if answer_btn.button_id == answer['id'] and answer['is_correct']:
                         answer_btn.update_font_color(pg.Color('black'))
-                        self.correct = True
                     elif answer_btn.button_id == answer['id']:
                         answer_btn.update_font_color(pg.Color('red'))
-                        self.correct = False
+
         elif self.player.question_type =='open':
             ans = self.player.current_question['answers'][0]['name'].lower()
-            print(answer)
+            self.correct = False
             if ans == answer.lower():
                 self.correct = True
-            else:
-                self.correct = False
 
+        print(self.correct)
         if self.correct:
-            self.vars["sounds"]["question_right"].play()
+            self.sounds.play("question_right")
         else:
-            self.vars["sounds"]["question_wrong"].play()
+            self.sounds.play("question_wrong")
 
-        return
 
     def startup(self, persistent):
         # stop sounds so we can use them again and play another sound
-        self.vars["sounds"]["question_wrong"].stop()
-        self.vars["sounds"]["question_right"].stop()
-        self.vars["sounds"]["choose_question"].stop()
-        self.vars["sounds"]["question_theme"].play()
+        self.text_box = None
+        self.sounds.play("question_theme")
 
         self.persist = persistent
         game_state = self.persist['game_state']
@@ -91,6 +93,8 @@ class Scene(stateManagment.BaseScene):
             for answer in self.player.current_question['answers']:
                 start_pos_top += 100
                 button_text = '{0}. {1}'.format(abc[c], answer['name'])
+                if answer['is_correct']:
+                    self.correct_answer_id = answer['id']
                 self.answer_btns.append(
                     formControl.Button(
                         (self.game['center_of_screen'] - 100, start_pos_top, 200, 100),
@@ -98,6 +102,7 @@ class Scene(stateManagment.BaseScene):
                         partial(self.check_answer, answer),
                         text=button_text,
                         button_id=answer['id'],
+                        click_sound=self.sounds.effects['click_sound'],
                         font=self.vars['fonts']['medium'],
                         outline_color= self.card_color
                     )
@@ -127,7 +132,7 @@ class Scene(stateManagment.BaseScene):
         # background
         surface.fill(self.card_color)
 
-        if self.text_box:
+        if self.text_box and self.question_type == 'open':
             self.text_box.draw(surface)
         if self.correct or self.correct == False:
             self.next_button.update(surface)
