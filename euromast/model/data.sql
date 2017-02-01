@@ -222,7 +222,7 @@ INSERT INTO answer (name, question_id, is_correct) VALUES
   ('Pathé de Kuip', 39, FALSE),
   ('LantarenVenster', 39, TRUE),
   ('Mullerpier', 40, TRUE),
-  ('Pier 80, 40', FALSE),
+  ('Pier 80', 40, FALSE),
   ('Schouwburgplein', 40, FALSE),
   ('Rotterdamse Rijnhaven', 41, TRUE),
   ('Rotterdam Zombie Walk', 42, TRUE),
