@@ -11,24 +11,27 @@ class Scene(stateManagment.BaseScene):
         self.assets = helpers['assets']
         self.game = game = self.vars['pygame']
         self.next_state = 'TURN_ORDER'
-        self.tower = Grid()
+        self.tower_lower = Grid()
+        self.players = None
 
 
     def next_scene(self, id):
+        self.persist['game_state']['current_player_index'] += 1
         self.done = True
 
     def get_event(self, event):
         if event.type == pg.QUIT:
             self.quit = True
-        self.pick_category_btn.check_event(event)
+
 
     def startup(self, persistent):
         self.persist = persistent
-        players = self.persist['game_state']['players']
-        game = self.vars['pygame']
-        for p in players:
-            self.tower.addplayer(p)
-
+        self.players = self.persist['game_state']['players']
+        game_state = self.persist['game_state']
+        pindex = game_state['current_player_index']
+        player = game_state['players'][pindex]
+        player.update()
+        self.tower_lower.addplayer(player)
 
 
     def update(self, dt):
@@ -36,14 +39,9 @@ class Scene(stateManagment.BaseScene):
 
     def draw(self, surface):
         surface.fill((0, 0, 0))
-        self.tower.draw(self.game['screen'], self.game['width'], self.game['height'])
-        for p in self.tower.players:
-            p.draw(self.game['screen'], self.game['width'], self.game['height'])
-        self.pick_category_btn.update(surface)
-
-        for order_text in self.player_order:
-            order_text.draw(surface)
-
+        self.tower_lower.draw(surface, self.game['width'], self.game['height'])
+        for p in self.tower_lower.players:
+            p.draw(surface, self.game['width'], self.game['height'])
 
 
 class Point:
@@ -90,7 +88,7 @@ class Grid:
         #draw backgroundcolors
         i = 1
         for counter in range(0,4):
-            pygame.draw.rect(screen, self.colorlist[counter], [i, 0, width / 4, height], 0)
+            pg.draw.rect(screen, self.colorlist[counter], [i, 0, width / 4, height], 0)
             i += width / 4
 
 
@@ -103,4 +101,3 @@ class Grid:
                     templist.append(Point(x, y ,c, 0))
                 templist.append(Point(x, y ,c, 1))
             self.points.append(templist)
-
