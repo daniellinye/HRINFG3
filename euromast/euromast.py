@@ -8,7 +8,7 @@ import pygame as pg
 from i18n import i18n
 from scenes import menu, select_players, insert_player_name, roll_dice, \
     choose_category, choose_direction, roll_dice_button, turn_order, \
-    roll_double_dice, choose_question, answer_question, settings, highscores
+    roll_double_dice, choose_question, answer_question, settings, highscores, rules, display_tower
 from components import init
 
 from model import model
@@ -118,6 +118,7 @@ if __name__ == "__main__":
                 "ROLL_DOUBLE_DICE": roll_double_dice.Scene(screen, helpers),
                 "CHOOSE_QUESTION": choose_question.Scene(screen, helpers),
                 "ANSWER_QUESTION": answer_question.Scene(screen, helpers),
+                 "SHOW_TOWER": display_tower.Scene(screen, helpers),
                 "__sartScene__": "MENU"
              }
 
