@@ -424,5 +424,3 @@ INSERT INTO highscore (id, name, score) VALUES
     (9, 'Monne', 20),
     (10, 'Oscar', 10);
 
-
->>>>>>> origin/master
