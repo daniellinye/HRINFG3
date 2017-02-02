@@ -17,7 +17,7 @@ class Scene(stateManagment.BaseScene):
             (game['width'] - 200, 300 , 200, 50),
             pg.Color('pink'),
             self.next_scene,
-            text="Stuff"
+            text="End"
         )
 
         euromast0 = self.assets['euromast0']

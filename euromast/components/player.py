@@ -21,7 +21,7 @@ class createPlayer(object):
         self.tower = {
             "tower_id": None, #t1 t2 t3 t4
             "current_pos": "middle", # middle left right,
-            "current_steps": 16
+            "current_steps": 0
         }
         self.roll = roll
         self.steps = 0
