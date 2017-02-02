@@ -35,7 +35,7 @@ class Scene(stateManagment.BaseScene):
     def go_to_scene(self, scene, id):
         if scene == 'go to menu':
             self.next_state = 'MENU'
-            self.persist['game_state']['reset_state'] = True 
+            self.persist['game_state']['reset_state'] = True
             self.done= True
 
 

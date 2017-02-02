@@ -41,7 +41,7 @@ lang = {
                       "Als een speler op het gaatje komt waar al een andere speler in staat. Gooit de speler wie al in het gaatje stond een dobbelsteen.\n" \
                       " Het cijfer op de dobbelsteen na het gooien bepaalt het aantal stappen dat de speler omlaag moet.\n \n " \
                       "- Een niet-spelende speler leest de vraag hardop voor.  Probeer het antwoord op het kaartje niet te laten zien. Nadat een vraag is beantwoord, leg je de vraag weg.\n " \
-                      "- Wanneer een speler een fout antwoord geeft, de vraag niet begrijpt of geen antwoord binnen de 50 seconden geeft zal dit fout worden gerekend en gaat de beurt naar de volgende speler.\n " \
+                      "- Wanneer een speler een fout antwoord geeft, de vraag niet begrijpt of geen antwoord binnen de 50 seconden geeft zal dit fout worden gerekend en gaat de beurt\n naar de volgende speler.\n " \
                       "- Wanneer een speler de vraag correct beantwoord, zal hij/zij het poppetje verplaatsen met het aantal stappen in de gekozen richting.\n \n " \
                       "- Als de vragen van een categorie op zijn, verplaatst elke speler op de desbetreffende categorie zijn/haar poppetje naar de categorie rechts van hen.\n \n \n " \
                       "Hoe win je en wat doe je als je gewonnen hebt:\n " \
