@@ -53,7 +53,7 @@ class Scene(stateManagment.BaseScene):
                 pg.Color(category['color']),
                 partial(self.nextPlayer, category),
                 click_sound=self.sounds.effects['click_sound'],
-                text=category['name'],
+                text=self.i18n.translate(category['name']),
                 font=self.vars['fonts']['large']
             ))
             x += .8

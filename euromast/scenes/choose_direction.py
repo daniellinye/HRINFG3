@@ -24,7 +24,6 @@ class Scene(stateManagment.BaseScene):
             (142, 96, 175),
             partial(self.nextPlayer, 'left'),
             click_sound=self.sounds.effects['click_sound'],
-            text="left",
             font=self.vars['fonts']['large']
         )
 
@@ -33,7 +32,6 @@ class Scene(stateManagment.BaseScene):
             (142, 96, 175),
             partial(self.nextPlayer, 'up'),
             click_sound=self.sounds.effects['click_sound'],
-            text="up",
             font=self.vars['fonts']['large']
         )
 
@@ -42,7 +40,6 @@ class Scene(stateManagment.BaseScene):
             (142, 96, 175),
             partial(self.nextPlayer, 'right'),
             click_sound=self.sounds.effects['click_sound'],
-            text="right",
             font=self.vars['fonts']['large']
         )
 
@@ -52,7 +49,6 @@ class Scene(stateManagment.BaseScene):
             (142, 96, 175),
             partial(self.nextPlayer, 'down'),
             click_sound=self.sounds.effects['click_sound'],
-            text='down',
             font=self.vars['fonts']['large']
         )
 
@@ -71,6 +67,7 @@ class Scene(stateManagment.BaseScene):
         current_player_idx = self.persist['game_state']['current_player_index']
         self.player = self.persist['game_state']['players'][current_player_idx]
         self.persist['game_state']['reuse_scene'] = self.current_state
+        self.i18n = self.persist['game_state']['i18n']
 
     def get_event(self, event):
         helpers.check_paused_event(self, event)
@@ -79,9 +76,12 @@ class Scene(stateManagment.BaseScene):
         self.down_direction_btn.check_event(event)
         self.right_direction_btn.check_event(event)
 
-
     def update(self, dt):
-        self.turn_text.update_text('{0} choose a direction'.format(self.player.name))
+        self.turn_text.update_text(self.i18n.translate('choose_direction').format(self.player.name))
+        self.left_direction_btn.update_text(self.i18n.translate('left'))
+        self.right_direction_btn.update_text(self.i18n.translate('right'))
+        self.down_direction_btn.update_text(self.i18n.translate('down'))
+        self.up_direction_btn.update_text(self.i18n.translate('up'))
 
     def draw(self, surface):
         # background

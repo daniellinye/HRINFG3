@@ -60,5 +60,14 @@ lang = {
     "sound": "Sound",
     "music": "Music",
     "effects": "Sounds",
-    "next": "Next"
+    "next": "Next",
+    "left": "Left",
+    "right": "Right",
+    "up": "Upwards",
+    "down": "Downwards",
+    "choose_direction": "{0} choose a direction",
+    "entertainment": "Entertainment",
+    "historie": "History",
+    "sport": "Sports",
+    "geografie": "Geography"
 }

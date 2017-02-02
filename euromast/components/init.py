@@ -9,7 +9,7 @@ class LoadVariables(object):
             "small": pg.font.SysFont('Arial', 18),
             "medium": pg.font.SysFont('Arial', 25),
             "large": pg.font.SysFont('Arial', 35),
-            "extraLarge": pg.font.SysFont('Arial', 40)
+            "extraLarge": pg.font.SysFont('Arial', 80)
         }
         self.vars['pygame'] = {
             'width': 1024,

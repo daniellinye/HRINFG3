@@ -62,5 +62,14 @@ lang = {
     "sound": "Geluid",
     "music": "Muziek",
     "effects": "Geluiden",
-    "next": "Volgende"
+    "next": "Volgende",
+    "left": "Links",
+    "right": "Rechts",
+    "up": "Omhoog",
+    "down": "Omlaag",
+    "choose_direction": "{0} kies een richting",
+    "entertainment": "Entertainment",
+    "historie": "Historie",
+    "sport": "Sport",
+    "geografie": "Geografie"
 }
