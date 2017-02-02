@@ -1,4 +1,5 @@
 from components import stateManagment, formControl, helpers
+from model import model
 import pygame as pg
 
 SCENE_NAME = "END_SCREEN"
@@ -35,9 +36,11 @@ class Scene(stateManagment.BaseScene):
     def startup(self, persistent):
         self.next_state = 'MENU'
         self.persist = persistent
-
+        game_state = self.persist['game_state']
+        self.header_text.update_text('{}, You Win!'.format(game_state['winner'].name))
+        model.Model().
     def update(self, dt):
-        self.header_text.update_text(', You Win!')
+
         self.continue_btn.update_text(self.i18n.translate('continue'))
 
     def get_event(self, event):

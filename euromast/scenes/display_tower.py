@@ -12,8 +12,6 @@ class Scene(stateManagment.BaseScene):
         self.vars = helpers['vars']
         self.assets = helpers['assets']
         self.game = game = self.vars['pygame']
-        # self.tower_upper = Grid(1, 5)
-        # self.tower_lower = Grid()
         self.players = None
         self.button = formControl.Button(
             (game['width'] - 200, 300 , 200, 50),
@@ -21,7 +19,7 @@ class Scene(stateManagment.BaseScene):
             self.next_scene,
             text="Stuff"
         )
-        # self.p1 = pg.draw.rect(scene, pg.Color('black'), (100, game['height'] - 50, 50, 50))
+
         euromast0 = self.assets['euromast0']
         euromast1 = self.assets['euromast1']
         euromast2= self.assets['euromast2']
@@ -39,9 +37,18 @@ class Scene(stateManagment.BaseScene):
         self.towers = {'t1': {}, 't2': {}, 't3': {}, 't4':{}}
         self.begin = 85
         for t in self.t:
+            cat = None
+            if t == 't1':
+                cat = 'geografie'
+            elif t == 't2':
+                cat = "entertainment"
+            elif t == "t3":
+                cat = 'sport'
+            elif t == 't4':
+                cat = 'historie'
+
             self.towers[t] = {
-                "can_move_tower_left": True if t != 't1' else False,
-                "can_move_tower_right": True if t != 't4' else False,
+                "top_category": cat,
                 "left": {
                     "1": (self.begin, self.first_point_y, width, height),
                     "2": (self.begin, (self.first_point_y - 2) - self.v_between_points, width, height),
@@ -84,8 +91,6 @@ class Scene(stateManagment.BaseScene):
         self.tower3 = formControl.Image((700, 365), self.assets['euromast3'])
 
 
-
-
     def next_scene(self):
         self.persist['game_state']['current_player_index'] += 1
 
@@ -106,7 +111,6 @@ class Scene(stateManagment.BaseScene):
         self.button.check_event(event)
 
 
-
     def startup(self, persistent):
         self.next_state = 'CHOOSE_DIRECTION'
         self.persist = persistent
@@ -114,10 +118,12 @@ class Scene(stateManagment.BaseScene):
         game_state = self.persist['game_state']
         pindex = game_state['current_player_index']
         player = game_state['players'][pindex]
+        for player in self.players:
+            if player.tower['current_steps'] > 16:
+                self.persist['game_state']['winner'] = player
+                self.next_state = "END_SCREEN"
+                self.done = True
         self.colors = [pg.Color('darkslategray'), pg.Color('purple'), pg.Color('brown'), pg.Color('black')]
-
-
-
 
     def update(self, dt):
         pass
@@ -132,6 +138,11 @@ class Scene(stateManagment.BaseScene):
         x = 0
         for player in self.players:
             if player.tower['current_steps'] > 0:
+                if player.tower['current_steps'] > 10:
+                    player.tower['current_pos'] = 'middle'
                 tower = player.tower
-                pg.draw.rect(surface, self.colors[x], self.towers[tower['tower_id']][tower['current_pos']][str(tower['current_steps'])])
-            x += 1
+                print(tower['current_steps'])
+                print(self.towers[tower['tower_id']][tower['current_pos']])
+                if str(tower['current_steps']) in self.towers[tower['tower_id']][tower['current_pos']]:
+                    pg.draw.rect(surface, self.colors[x], self.towers[tower['tower_id']][tower['current_pos']][str(tower['current_steps'])])
+                    x += 1

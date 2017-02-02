@@ -38,7 +38,6 @@ class Scene(stateManagment.BaseScene):
         self.correct = None
         self.answer_btns = []
         self.card_color = None
-        print(self.player.steps)
         self.player = None
         self.timer = 10
         self.text_box = None
@@ -79,8 +78,16 @@ class Scene(stateManagment.BaseScene):
                 self.correct = True
 
         if self.correct:
-            self.player.tower['current_steps'] += self.player.steps
+            if self.player.direction == 'up':
+                self.player.tower['current_steps'] += self.player.steps
+                self.player.move_player_vertical()
+            if self.player.direction == 'down':
+                self.player.tower['current_steps'] -= self.player.steps
+                self.player.move_player_vertical()
+            if self.player.direction == 'left' or self.player.direction == 'right':
+                self.player.move_player_horizontal()
             self.player.steps = 0
+            self.player.score += 1
             self.sounds.play("question_right")
         else:
             self.player.steps = 0

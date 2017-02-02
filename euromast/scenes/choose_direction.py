@@ -58,7 +58,6 @@ class Scene(stateManagment.BaseScene):
 
     def nextPlayer(self, direction, id):
         self.player.set_direction(direction)
-
         self.persist['game_state']['reuse_scene'] = self.next_state
         self.persist['game_state']['skip_to_scene'] = 'ROLL_DOUBLE_DICE'
 

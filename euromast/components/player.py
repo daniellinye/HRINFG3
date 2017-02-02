@@ -1,6 +1,6 @@
 import uuid
 import pygame
-from components import stateManagment, formControl
+from components import stateManagment, formControl, t1, t2, t3, t4
 
 
 class createPlayer(object):
@@ -10,6 +10,7 @@ class createPlayer(object):
         self.score = 0
         self.position = position
         self.direction = None
+        self.category_name = None
         self.category = 0
         self.x = 0
         self.y = 11
@@ -18,8 +19,8 @@ class createPlayer(object):
         self.moved = True
         self.tower = {
             "tower_id": None, #t1 t2 t3 t4
-            "current_pos": "left", # middle left right,
-            "current_steps": 0
+            "current_pos": "middle", # middle left right,
+            "current_steps": 16
         }
         self.roll = roll
         self.steps = 0
@@ -41,6 +42,46 @@ class createPlayer(object):
         return self.name
     def set_direction(self, direction):
         self.direction = direction
+
+    def move_player_horizontal(self):
+        if self.tower['tower_id'] == 't1':
+            t1.set_direction(self)
+        elif self.tower['tower_id'] == 't2':
+            t2.set_direction(self)
+        elif self.tower['tower_id'] == 't3':
+            t3.set_direction(self)
+        elif self.tower['tower_id'] == 't4':
+            t4.set_direction(self)
+
+        if self.tower['tower_id']  == 't1':
+            self.category = {'id': 1, 'name': 'entertainment', 'color': 'tomato'}
+        elif self.tower['tower_id']  == 't2':
+            self.category = {'id': 2, 'name': 'sport', 'color': 'lightsteelblue'}
+        elif self.tower['tower_id'] == 't3':
+            self.category = {'id': 3, 'name': 'historie', 'color': 'yellow'}
+        elif self.tower['tower_id'] == 't4':
+            self.category = {'id': 4, 'name': 'geografie', 'color': 'yellowgreen'}
+
+        if self.tower['tower_id'] == 't1' and self.tower['current_pos'] == 'middle':
+            self.category = {'id': 4, 'name': 'geografie', 'color': 'yellowgreen'}
+        elif self.tower['tower_id'] == 't2' and self.tower['current_pos'] == 'middle':
+            self.category = {'id': 1, 'name': 'entertainment', 'color': 'tomato'}
+        elif self.tower['tower_id'] == 't3' and self.tower['current_pos'] == 'middle':
+            self.category = {'id': 2, 'name': 'sport', 'color': 'lightsteelblue'}
+        elif self.tower['tower_id'] == 't4' and self.tower['current_pos'] == 'middle':
+            self.category = {'id': 3, 'name': 'historie', 'color': 'yellow'}
+    def move_player_vertical(self):
+        if self.tower['current_steps'] > 10:
+            self.tower['current_pos'] = 'middle'
+
+        if self.tower['tower_id'] == 't1' and self.tower['current_steps'] > 10:
+            self.category = {'id': 4, 'name': 'geografie', 'color': 'yellowgreen'}
+        elif self.tower['tower_id'] == 't2' and self.tower['current_steps'] > 10:
+            self.category = {'id': 1, 'name': 'entertainment', 'color': 'tomato'}
+        elif self.tower['tower_id'] == 't3' and self.tower['current_steps'] > 10:
+            self.category = {'id': 2, 'name': 'sport', 'color': 'lightsteelblue'}
+        elif self.tower['tower_id'] == 't4' and self.tower['current_steps'] > 10:
+            self.category = {'id': 3, 'name': 'historie', 'color': 'yellow'}
 
     def set_category(self, category):
         self.category = category
