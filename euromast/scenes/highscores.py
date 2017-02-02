@@ -1,5 +1,4 @@
 from components import stateManagment, formControl, helpers
-from functools import partial
 from model.model import Model
 import pygame as pg
 
