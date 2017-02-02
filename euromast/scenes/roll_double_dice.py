@@ -69,7 +69,7 @@ class Scene(stateManagment.BaseScene):
             player.steps = 3
 
         self.white_dice_text.update_text('White dice: you rolled for {0} questions'.format(question_type))
-        self.red_dice_text.update_text('Red dice: you rolled for {0} steps'.format(red_dice_number))
+        self.red_dice_text.update_text('Red dice: you rolled for {0} steps'.format(player.steps))
         # dice sound
         self.sounds.play("dice_roll")
 

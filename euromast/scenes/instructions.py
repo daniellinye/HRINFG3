@@ -26,7 +26,7 @@ class Scene(stateManagment.BaseScene):
         for text in self.rules:
             self.list.append(
                 formControl.Text(
-                    (center_of_screen, 90 + 10*self.i),
+                    (center_of_screen, 90 + 10.5*self.i),
                     text,
                     self.vars['fonts']['small'],
                     pg.Color('white')
@@ -35,7 +35,7 @@ class Scene(stateManagment.BaseScene):
             self.i += 1
 
         self.go_back_btn = formControl.Button(
-            (center_of_screen / 2 - 100, 650, 200, 50),
+            (0, 650, 200, 50),
             pg.Color('green'),
             self.go_back,
             font=self.vars['fonts']['medium'],

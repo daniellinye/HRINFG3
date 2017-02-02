@@ -29,7 +29,8 @@ class LoadVariables(object):
                 "click_sound": LoadSound('./assets/sounds/click.wav', 'effect'),
                 "dice_roll": LoadSound("./assets/sounds/dice_roll.wav", 'effect'),
                 "question_wrong": LoadSound("./assets/sounds/question_wrong.wav", 'effect'),
-                "question_right": LoadSound("./assets/sounds/question_right.wav", 'effect')
+                "question_right": LoadSound("./assets/sounds/question_right.wav", 'effect'),
+                "too_slow": LoadSound("./assets/sounds/too_slow.wav", "effect", 0.4)
             }
         }
 
