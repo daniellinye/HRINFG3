@@ -12,17 +12,76 @@ class Scene(stateManagment.BaseScene):
         self.vars = helpers['vars']
         self.assets = helpers['assets']
         self.game = game = self.vars['pygame']
-        self.tower_upper = Grid(1, 5)
-        self.tower_lower = Grid()
+        # self.tower_upper = Grid(1, 5)
+        # self.tower_lower = Grid()
         self.players = None
         self.button = formControl.Button(
-            (300, 300 , 200, 50),
+            (game['width'] - 200, 300 , 200, 50),
             pg.Color('pink'),
             self.next_scene,
             text="Stuff"
         )
+        # self.p1 = pg.draw.rect(scene, pg.Color('black'), (100, game['height'] - 50, 50, 50))
+        euromast0 = self.assets['euromast0']
+        euromast1 = self.assets['euromast1']
+        euromast2= self.assets['euromast2']
+        euromast3 = self.assets['euromast3']
+        self.between_points = 20
+        self.v_between_points = 28
+        self.between_towers = 200
+        self.first_point_y = game['height'] -43
+        self.left_x = 115
+        width = 15
+        height = 15
+        self.begin_middle = 93
+        v_center_of_screen = game['vertical_center_of_screen']
+        self.t = ['t1','t2', 't3', 't4']
+        self.towers = {'t1': {}, 't2': {}, 't3': {}, 't4':{}}
+        self.begin = 85
+        for t in self.t:
+            self.towers[t] = {
+                "can_move_tower_left": True if t != 't1' else False,
+                "can_move_tower_right": True if t != 't4' else False,
+                "left": {
+                    "1": (self.begin, self.first_point_y, width, height),
+                    "2": (self.begin, (self.first_point_y - 2) - self.v_between_points, width, height),
+                    "3": (self.begin, (self.first_point_y - 4) - (self.v_between_points * 2), width, height),
+                    "4": (self.begin, (self.first_point_y - 6) - (self.v_between_points * 3), width, height),
+                    "5": (self.begin, (self.first_point_y - 8) - (self.v_between_points * 4), width, height),
+                    "6": (self.begin, (self.first_point_y - 10) - (self.v_between_points * 5), width, height),
+                    "7": (self.begin, (self.first_point_y - 12) - (self.v_between_points * 6), width, height),
+                    "8": (self.begin, (self.first_point_y - 14) - (self.v_between_points * 7), width, height),
+                    "9": (self.begin, (self.first_point_y - 16) - (self.v_between_points * 8), width, height),
+                    "10": (self.begin, (self.first_point_y - 18) - (self.v_between_points * 9), width, height),
+                },
+                "middle": {
+                    "11": (self.begin_middle, v_center_of_screen - 128, width, height),
+                    "12": (self.begin_middle, v_center_of_screen - 148, width, height),
+                    "13": (self.begin_middle, v_center_of_screen - 178, width, height),
+                    "14": (self.begin_middle, v_center_of_screen - 211, width, height),
+                    "15": (self.begin_middle, v_center_of_screen - 234, width, height),
+                    "16": (self.begin_middle, v_center_of_screen - 262, width, height),
+                },
+                "right": {
+                    "1": (self.begin + self.between_points, self.first_point_y, width, height),
+                    "2": (self.begin + self.between_points,  (self.first_point_y - 2) - self.v_between_points , width, height),
+                    "3": (self.begin + self.between_points,  (self.first_point_y - 4) - (self.v_between_points * 2), width, height),
+                    "4": (self.begin + self.between_points,  (self.first_point_y - 6) - (self.v_between_points * 3), width, height),
+                    "5": (self.begin + self.between_points,  (self.first_point_y - 8) - (self.v_between_points * 4), width, height),
+                    "6": (self.begin + self.between_points,  (self.first_point_y - 10)- (self.v_between_points * 5), width, height),
+                    "7": (self.begin + self.between_points,  (self.first_point_y - 12) - (self.v_between_points * 6), width, height),
+                    "8": (self.begin + self.between_points,  (self.first_point_y - 14) - (self.v_between_points * 7), width, height),
+                    "9": (self.begin + self.between_points,  (self.first_point_y - 16) - (self.v_between_points * 8), width, height),
+                    "10": (self.begin + self.between_points,  (self.first_point_y - 18) - (self.v_between_points * 9), width, height)
+                }
+            }
+            self.begin += self.between_towers
+            self.begin_middle += self.between_towers
 
-
+        self.tower0 = formControl.Image((100, 365), self.assets['euromast0'])
+        self.tower1 = formControl.Image((300, 365), self.assets['euromast1'])
+        self.tower2 = formControl.Image((500, 365), self.assets['euromast2'])
+        self.tower3 = formControl.Image((700, 365), self.assets['euromast3'])
 
 
 
@@ -52,112 +111,27 @@ class Scene(stateManagment.BaseScene):
         self.next_state = 'CHOOSE_DIRECTION'
         self.persist = persistent
         self.players = self.persist['game_state']['players']
-        print(self.persist)
         game_state = self.persist['game_state']
         pindex = game_state['current_player_index']
         player = game_state['players'][pindex]
-        player.canmove()
-        player.update()
-
-        if player.lower_done:
-            self.tower_upper.addplayer(player)
-            player.y = 4
-            player.upper_done = True
-            player.lower_done = False
-        elif not player.lower_done and player.upper_done:
-            self.tower_upper.addplayer(player)
-            if player.y < 0:
-                player.lower_done = True
-        elif player.lower_done and player.upper_done:
-            #TODO make victory screen
-            pass
-        else:
-            self.tower_lower.addplayer(player)
-            if player.y < 0:
-                player.lower_done = True
+        self.colors = [pg.Color('darkslategray'), pg.Color('purple'), pg.Color('brown'), pg.Color('black')]
 
 
 
 
-    #formControl.Button([x,y,w,h],[color],function(where thebuttongoes to), text=something)
     def update(self, dt):
         pass
 
     def draw(self, surface):
-        surface.fill((0,0,0))
-        self.tower_upper.draw(surface, self.game['width'], self.game['height']/5, 0)
-        self.tower_lower.draw(surface, self.game['width'], self.game['height']/2.5, self.game['height']/4 + 50)
-        for p in self.players:
-            p.draw(surface, self.game['width'], self.game['height'])
+        surface.fill(pg.Color('white'))
+        self.tower0.draw(surface)
+        self.tower1.draw(surface)
+        self.tower2.draw(surface)
+        self.tower3.draw(surface)
         self.button.update(surface)
-
-
-
-
-
-
-class Grid:
-    def __init__(self, grid_width=2, grid_height=10):
-        self.points =[]
-        self.players =[]
-
-        self.grid_width = grid_width
-        self.grid_height = grid_height
-
-        self.colorlist = ((255,0,0), (0,0,255), (255, 255, 0), (0,255, 0))
-
-
-    def addplayer(self, player):
-        if not self.players.__contains__(player):
-            self.players.append(player)
-
-#draw the grid and update whilst checking if someone wins
-#if someone wins, def returns True
-    def draw(self, screen, width, height, repos):
-
-        #draw backgroundcolors
-        i = 1
-        for counter in range(0,4):
-            pg.draw.rect(screen, self.colorlist[counter], [i, repos, width / 4, height+repos], 0)
-            i += width / 4
-
-        for c in range(0,4):
-            templist = []
-            for x in range(0, self.grid_width):
-                for y in range(0, self.grid_height):
-                    if not self.players == []:
-                        for player in self.players:
-                            if ((player.x%2 == 0 and x == 0) or (not player.x%2 == 0 and x == 1) and player.y == y and (c == (player.x)/2) or (c == player.x + 1/2 and not player.x%2 == 0)):
-                                Point(x, y, c, 1).drawself(screen, width, height + repos, self.grid_height, repos)
-                            else:
-                                Point(x, y ,c, 0).drawself(screen, width, height+repos, self.grid_height, repos)
-                                templist.append(Point(x, y ,c, 0))
-                    else:
-                        Point(x, y, c, 0).drawself(screen, width, height + repos, self.grid_height, repos)
-                        templist.append(Point(x, y, c, 0))
-
-                templist.append(Point(x, y ,c, 1))
-            self.points.append(templist)
-class Point:
-    def __init__(self, x, y, category, highlight):
-        self.x = x
-        self.y = y
-        self.category = category
-        self.highlight = highlight
-
-
-    def highlight(self):
-        if self.highlight == 0:
-            self.highlight = 1
-        else:
-            self.highlight = 0
-
-    def drawself(self, screen, width, height, grid_height=10, repos=0):
-        if self.x >= 0 and self.y >= 0:
-            pg.draw.rect(screen, ((self.highlight*255),(self.highlight*255),(self.highlight*255)),
-                         [width/20 + width/4*self.category + width/8*self.x,
-                          height/grid_height *self.y + height/50 + repos,
-                          8*(1+self.highlight),
-                          8*(1+self.highlight)], 2)
-        else:
-            print("Player is not in game yet")
+        x = 0
+        for player in self.players:
+            if player.tower['current_steps'] > 0:
+                tower = player.tower
+                pg.draw.rect(surface, self.colors[x], self.towers[tower['tower_id']][tower['current_pos']][str(tower['current_steps'])])
+            x += 1

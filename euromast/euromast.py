@@ -74,6 +74,7 @@ class Game(object):
     def draw(self):
         """Pass display surface to active state for drawing."""
         self.state.draw(self.screen)
+        
 
     def run(self):
         """
