@@ -18,7 +18,7 @@ class Scene(stateManagment.BaseScene):
         self.button = formControl.Button(
             [0, self.game['height']/5, 200, 50],
             (0, 0, 0),
-            self.next_turn(),
+            self.next_scene(),
             text="Stuff"
         )
 
@@ -26,12 +26,10 @@ class Scene(stateManagment.BaseScene):
 
 
 
-    def next_scene(self, id):
+    def next_scene(self):
         self.persist['game_state']['current_player_index'] += 1
-
-    def next_turn(self):
         self.done = True
-        self.next_state
+        self.next_state = "CHOOSE_DIRECTION"
 
 
     def get_event(self, event):
@@ -49,6 +47,25 @@ class Scene(stateManagment.BaseScene):
         player = game_state['players'][pindex]
         player.canmove()
         player.update()
+
+        if player.lower_done:
+            self.tower_upper.addplayer(player)
+            player.y = 4
+            player.upper_done = True
+            player.lower_done = False
+        elif not player.lower_done and player.upper_done:
+            self.tower_upper.addplayer(player)
+            if player.y < 0:
+                player.lower_done = True
+        elif player.lower_done and player.upper_done:
+            #TODO make victory screen
+            pass
+        else:
+            self.tower_lower.addplayer(player)
+            if player.y < 0:
+                player.lower_done = True
+
+
 
 
     #formControl.Button([x,y,w,h],[color],function(where thebuttongoes to), text=something)
@@ -93,14 +110,14 @@ class Grid:
             pg.draw.rect(screen, self.colorlist[counter], [i, repos, width / 4, height+repos], 0)
             i += width / 4
 
-        #TODO figure out formula player
         for c in range(0,4):
             templist = []
             for x in range(0, self.grid_width):
                 for y in range(0, self.grid_height):
                     if not self.players == []:
                         for player in self.players:
-                            if (player.x%x == 0 and player.y == y and c == player.x/2) or (not player.x%x == 0 and player.y == y and c == player.x/2):
+                            if ((player.x%x == 0 or player.x/2%x == 0) and player.y == y and c == player.x/2) or \
+                                    ((player.x%x == 0 or player.x/2%x == 0) and player.y == y and c == (player.x-1)/2):
                                 Point(x, y, c, 1).drawself(screen, width, height + repos, self.grid_height, repos)
                             else:
                                 Point(x, y ,c, 0).drawself(screen, width, height+repos, self.grid_height, repos)

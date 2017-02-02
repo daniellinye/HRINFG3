@@ -4,7 +4,7 @@ from components import stateManagment, formControl
 
 
 class createPlayer(object):
-    def __init__(self, name, roll=0, position = (-1,11)):
+    def __init__(self, name, roll=0, position = (0,11)):
         self.id = uuid.uuid4()
         self.name = name
         self.score = 0
@@ -20,6 +20,8 @@ class createPlayer(object):
         self.question_type = None
         self.current_question = None
         self.answer_questions_id = ()
+        self.lower_done = False
+        self.uppder_done = False
 
     def relocate(self, c, x, y):
         self.c = c
@@ -46,6 +48,8 @@ class createPlayer(object):
         self.type = type
 
     def canmove(self):
+
+
         print("Can Move")
         self.moved = False
 
@@ -64,7 +68,12 @@ class createPlayer(object):
             elif self.direction == "down" or self.direction[0] == "down":
                 self.y += 1
                 self.moved = True
-
+        if self.x < 0:
+            self.x = 7
+        elif self.x > 7:
+            self.x = 0
+        if self.y < 0:
+            self.lower_done = True
         print(self.x)
         print(self.y)
 
