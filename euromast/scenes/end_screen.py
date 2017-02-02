@@ -35,6 +35,8 @@ class Scene(stateManagment.BaseScene):
         self.done = True
 
     def startup(self, persistent):
+        self.sounds.stop("question_right")
+        self.sounds.play("end_game")
         self.next_state = 'MENU'
         self.persist = persistent
         game_state = self.persist['game_state']
