@@ -23,7 +23,8 @@ class LoadVariables(object):
                 "choose_question": LoadSound("./assets/sounds/choose_question.wav", 'theme', 1.0, -1),
                 "question_theme": LoadSound("./assets/sounds/question_theme.wav", 'theme', 1.0, -1),
                 "menu_theme": LoadSound("./assets/sounds/menu_theme.wav", 'theme', 0.7, -1),
-                "main_theme": LoadSound("./assets/sounds/main_theme.wav", 'theme', 0.4, -1)
+                "main_theme": LoadSound("./assets/sounds/main_theme.wav", 'theme', 0.4, -1),
+                "end_game": LoadSound("./assets/sounds/end_game.wav", 'theme', 0.8)
             },
             "effects": {
                 "click_sound": LoadSound('./assets/sounds/click.wav', 'effect'),
