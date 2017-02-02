@@ -48,6 +48,7 @@ class Scene(stateManagment.BaseScene):
         self.persist = persistent
         game_state = self.persist['game_state']
         player = game_state['players'][game_state['current_player_index']]
+        self.persist['game_state']['reuse_scene'] = self.current_state
         whide_dice_number = randint(1,6)
         red_dice_number = randint(1,6)
         self.white_dice_number = 'dice{0}'.format(whide_dice_number)

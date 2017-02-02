@@ -24,6 +24,14 @@ class Scene(stateManagment.BaseScene):
         center_buttons = (width / 2) - (button_width / 2)
         self.background = formControl.Image((0,0), self.assets['background-erasmus'])
         self.sounds.play('menu_theme')
+
+        self.header_text = formControl.Text(
+            (game['center_of_screen'], 140),
+            '',
+            self.vars['fonts']['extraLarge'],
+            pg.Color('black')
+        )
+
         self.start_btn = Button(
             (center_buttons, height * .3, button_width, 50),
             (255,0,0),
@@ -81,6 +89,7 @@ class Scene(stateManagment.BaseScene):
         print(self.persist)
 
     def update(self, dt):
+        self.header_text.update_text('Euromast')
         self.start_btn.update_text(self.i18n.translate('start'))
         self.instruction_btn.update_text(self.i18n.translate('instructions'))
         self.highscore_btn.update_text(self.i18n.translate('highscores'))
@@ -103,6 +112,7 @@ class Scene(stateManagment.BaseScene):
 
         surface.fill(pg.Color("white"))
         surface.blit(self.background.image, self.background.rect)
+        self.header_text.draw(surface)
         self.start_btn.update(surface)
         self.instruction_btn.update(surface)
         self.highscore_btn.update(surface)

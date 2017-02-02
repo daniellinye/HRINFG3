@@ -38,6 +38,7 @@ class Scene(stateManagment.BaseScene):
         self.persist = persistent
         self.i18n = self.persist['game_state']['i18n']
         players = self.persist['game_state']['players']
+        self.persist['game_state']['reuse_scene'] = self.current_state
         game = self.vars['pygame']
         sort = sorted(players, key = lambda player: player.roll, reverse = True)
         x = 0.2

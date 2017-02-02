@@ -68,6 +68,7 @@ class Scene(stateManagment.BaseScene):
         self.player_count = 1
         self.persist = persistent
         self.i18n = self.persist['game_state']['i18n']
+        self.persist['game_state']['reuse_scene'] = self.current_state
 
     def get_event(self, event):
         helpers.check_paused_event(self, event)

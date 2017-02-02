@@ -1,20 +1,20 @@
 lang = {
     "start": 'Start',
-    "resume": "resume",
-    "go to menu": "go to menu",
+    "resume": "Resume",
+    "go to menu": "Go to menu",
     "settings": 'Settings',
     "instructions": 'Instructions',
     "highscores": 'Highscore',
     "exit": "Exit",
     "language": "Language",
-    "continue": "continue",
-    "go back": "go back",
+    "continue": "Continue",
+    "go back": "Go back",
     "rules": "Rules",
     "select amount of players": "Select amount of players",
     "2 players": "2 players",
     "3 players": "3 players",
     "4 players": "4 players",
-    "guide": "Before the game: \n" \
+    "guide1": "Before the game: \n" \
                       "- There are 2-4 players (age 14+)     \n" \
                       "- There is a playing board (The Euromast)." \
                       "\n See instructions to know how to put the playing board together.\n \n " \
@@ -32,8 +32,8 @@ lang = {
                       "If two or more players throw the highest number, then they will throw the dice again until one of these players has the highest number.\n " \
                       " - The remaining players choose a category from the remaining categories (only one player per category at the start of the game)\n " \
                       " - The player who threw the highest number will start the game first. After the first player, the game continues clockwise with the next player.\n " \
-                      " - Players put their characters on the wooden part of the playing board in front of their chosen category.\n Don’t put your character in the first hole.\n \n " \
-                      " During the game:\n " \
+                      " - Players put their characters on the wooden part of the playing board in front of their chosen category.\n Don’t put your character in the first hole.\n \n ",
+    "guide2": " During the game:\n " \
                       "- Choose a direction first (left, right, up, down). After choosing a direction throw the dice to determine how many steps you take. \n (It is only possible to move the character in a horizontal or vertical direction.)\n " \
                       "-numbers 1 and 2 = 1 step in chosen direction\n " \
                       "-numbers 3 and 4 = 2 steps in chosen direction\n " \
@@ -59,5 +59,15 @@ lang = {
     "the playing order will be": "the playing order will be",
     "sound": "Sound",
     "music": "Music",
-    "effects": "Sounds"
+    "effects": "Sounds",
+    "next": "Next",
+    "left": "Left",
+    "right": "Right",
+    "up": "Upwards",
+    "down": "Downwards",
+    "choose_direction": "{0} choose a direction",
+    "entertainment": "Entertainment",
+    "historie": "History",
+    "sport": "Sports",
+    "geografie": "Geography"
 }
