@@ -413,14 +413,14 @@ INSERT INTO answer (name, question_id, is_correct) VALUES
   ('Rotterdam-Noord', 428, TRUE),
   ('610.000', 429, TRUE);
 
-INSERT INTO highscore (id, name, score) VALUES
-    (1, 'Monne', 100),
-    (2, 'Oscar', 90),
-    (3, 'Jasper', 80),
-    (4, 'Daniel', 70),
-    (5, 'Monne', 60),
-    (6, 'Oscar', 50),
-    (7, 'Jasper', 40),
-    (8, 'Daniel', 30),
-    (9, 'Monne', 20),
-    (10, 'Oscar', 10);
+INSERT INTO highscore (name, score) VALUES
+    ('Monne', 100),
+    ('Oscar', 90),
+    ('Jasper', 80),
+    ('Daniel', 70),
+    ('Monne', 60),
+    ('Oscar', 50),
+    ('Jasper', 40),
+    ('Daniel', 30),
+    ('Monne', 20),
+    ('Oscar', 10);
