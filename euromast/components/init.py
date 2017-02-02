@@ -50,6 +50,7 @@ class LoadAssets(object):
             self.assets['background-erasmus'] = pg.image.load('./assets/background.png')
             self.assets['background-highscore'] = pg.image.load('./assets/highscore_background.png')
             self.assets['background-dice'] = pg.image.load('./assets/dice_table.png')
+            self.assets['background-end'] = pg.image.load('./assets/end_screen.png')
             #cardfronts
             self.assets['bfront'] = pg.image.load('./assets/CFronts/Blue.png')
             self.assets['gfront'] = pg.image.load('./assets/CFronts/Green.png')
