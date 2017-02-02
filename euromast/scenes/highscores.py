@@ -13,7 +13,7 @@ class Scene(stateManagment.BaseScene):
         self.list = []
         self.background = formControl.Image((0, 0), self.assets['background-highscore'])
         i18n = self.i18n
-        center_of_screen = game['center_of_screen']
+        self.center_of_screen = center_of_screen = game['center_of_screen']
 
         self.header_text = formControl.Text(
             (center_of_screen, 80),
@@ -22,16 +22,7 @@ class Scene(stateManagment.BaseScene):
             pg.Color('black')
         )
 
-        self.players = Model().get_highscores()
-        for i in range(1,len(self.players)+1):
-            self.list.append(
-                formControl.Text(
-                (center_of_screen, 80 + 60*i),
-                str(i) + '. ' + self.players[i-1]['name'] + '   ' + str(self.players[i-1]['score']),
-                self.vars['fonts']['medium'],
-                pg.Color('black')
-                )
-            )
+        self.players = None
 
         self.go_back_btn = formControl.Button(
             (center_of_screen / 2 - 100, 650, 200, 50),
@@ -43,21 +34,35 @@ class Scene(stateManagment.BaseScene):
         )
 
     def go_back(self, id):
+        self.players = None
         self.done = True
 
+
     def startup(self, persistent):
-        self.next_state = 'MENU' 
+        self.next_state = 'MENU'
         self.persist = persistent
+
 
     def update(self, dt):
         self.header_text.update_text('Highscores')
         self.go_back_btn.update_text(self.i18n.translate('go back'))
+        self.players = Model().get_highscores()
+        for i in range(1,len(self.players)+1):
+            self.list.append(
+                formControl.Text(
+                (self.center_of_screen, 80 + 60*i),
+                str(i) + '. ' + self.players[i-1]['name'] + '   ' + str(self.players[i-1]['score']),
+                self.vars['fonts']['medium'],
+                pg.Color('black')
+                )
+            )
 
     def get_event(self, event):
         helpers.check_default_events(self, event)
         self.go_back_btn.check_event(event)
 
     def draw(self, surface):
+        surface.fill(pg.Color('white'))
         surface.blit(self.background.image, self.background.rect)
         self.header_text.draw(surface)
         self.go_back_btn.update(surface)

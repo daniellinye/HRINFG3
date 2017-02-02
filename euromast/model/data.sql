@@ -418,9 +418,5 @@ INSERT INTO highscore (name, score) VALUES
     ('Oscar', 90),
     ('Jasper', 80),
     ('Daniel', 70),
-    ('Monne', 60),
-    ('Oscar', 50),
-    ('Jasper', 40),
-    ('Daniel', 30),
     ('Monne', 20),
     ('Oscar', 10);

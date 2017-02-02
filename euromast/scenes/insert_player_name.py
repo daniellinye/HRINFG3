@@ -44,6 +44,7 @@ class Scene(stateManagment.BaseScene):
         self.input.execute()
 
     def setPlayerName(self, id, pname):
+        self.player_count = 1
         if not pname:
             pname = "{0} {1}".format(
                 self.i18n.translate("player"),
@@ -63,7 +64,6 @@ class Scene(stateManagment.BaseScene):
         # self.done = True
 
     def startup(self, persistent):
-        print(persistent)
         self.next_state = 'ROLL_DICE.BUTTON'
         self.player_count = 1
         self.persist = persistent

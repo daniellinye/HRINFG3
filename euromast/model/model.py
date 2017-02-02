@@ -80,12 +80,11 @@ class Model(Database):
     def add_highscore(self, name, score):
         self.name = name
         self.score = score
-        sqlstatement = """"
-        INSERT INTO highscore (name, score VALUES
-        ({}, {});
+        sqlstatement = """
+        INSERT INTO highscore (name, score) VALUES
+        ('{}', {});
         """.format(self.name, self.score)
         conn = self.getConn()
         conn.execute(sqlstatement)
         self.commit()
         self.closeConn()
-

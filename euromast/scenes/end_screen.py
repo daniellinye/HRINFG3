@@ -31,6 +31,7 @@ class Scene(stateManagment.BaseScene):
         )
 
     def go_back(self, id):
+        self.quit = True
         self.done = True
 
     def startup(self, persistent):
@@ -38,10 +39,11 @@ class Scene(stateManagment.BaseScene):
         self.persist = persistent
         game_state = self.persist['game_state']
         self.header_text.update_text('{}, You Win!'.format(game_state['winner'].name))
-        model.Model().
+        for player in game_state['players']:
+            model.Model().add_highscore(player.name, player.score)
     def update(self, dt):
 
-        self.continue_btn.update_text(self.i18n.translate('continue'))
+        self.continue_btn.update_text(self.i18n.translate('exit'))
 
     def get_event(self, event):
         helpers.check_default_events(self, event)
