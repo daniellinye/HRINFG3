@@ -14,6 +14,7 @@ class Scene(stateManagment.BaseScene):
         self.assets =  helpers['assets']
         self.screen_color = pg.Color('white')
         self.player_count = 1
+        self.background = formControl.Image((0, 0), self.assets['background-erasmus'])
         Button = formControl.Button
         game = self.vars['pygame']
         center_of_screen = game['center_of_screen']
@@ -76,7 +77,7 @@ class Scene(stateManagment.BaseScene):
         self.input.update()
 
     def draw(self, surface):
-        surface.fill(self.screen_color)
+        surface.blit(self.background.image, self.background.rect)
         self.input.draw(surface)
         self.header_text.draw(surface)
         self.next_button.update(surface);

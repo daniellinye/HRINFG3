@@ -12,6 +12,7 @@ class Scene(stateManagment.BaseScene):
         self.assets = helpers['assets']
         self.game = game = self.vars['pygame']
         self.list = []
+        self.background = formControl.Image((0, 0), self.assets['background-highscore'])
         i18n = self.i18n
         center_of_screen = game['center_of_screen']
 
@@ -19,7 +20,7 @@ class Scene(stateManagment.BaseScene):
             (center_of_screen, 80),
             '',
             self.vars['fonts']['large'],
-            pg.Color('white')
+            pg.Color('black')
         )
 
         self.players = Model().get_highscores()
@@ -28,8 +29,8 @@ class Scene(stateManagment.BaseScene):
                 formControl.Text(
                 (center_of_screen, 80 + 60*i),
                 str(i) + '. ' + self.players[i-1]['name'] + '   ' + str(self.players[i-1]['score']),
-                self.vars['fonts']['small'],
-                pg.Color('white')
+                self.vars['fonts']['medium'],
+                pg.Color('black')
                 )
             )
 
@@ -58,7 +59,7 @@ class Scene(stateManagment.BaseScene):
         self.go_back_btn.check_event(event)
 
     def draw(self, surface):
-        surface.fill((0, 0, 0))
+        surface.blit(self.background.image, self.background.rect)
         self.header_text.draw(surface)
         self.go_back_btn.update(surface)
 

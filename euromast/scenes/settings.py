@@ -14,6 +14,7 @@ class Scene(stateManagment.BaseScene):
         self.assets =  helpers['assets']
         self.game = game = self.vars['pygame']
         self.sounds = helpers['sounds']
+        self.background = formControl.Image((0, 0), self.assets['background-erasmus'])
         i18n = self.i18n
         center_of_screen = game['center_of_screen']
         self.header_text = formControl.Text(
@@ -138,7 +139,7 @@ class Scene(stateManagment.BaseScene):
 
 
     def draw(self, surface):
-        surface.fill((0,0,0))
+        surface.blit(self.background.image, self.background.rect)
         self.header_text.draw(surface)
         self.lang_setting_text.draw(surface)
         self.dutch_lang_btn.update(surface)
@@ -147,3 +148,4 @@ class Scene(stateManagment.BaseScene):
         self.sound_setting_text.draw(surface)
         self.music_sound_btn.update(surface)
         self.effects_sound_btn.update(surface)
+
