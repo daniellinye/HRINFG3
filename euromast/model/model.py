@@ -27,7 +27,7 @@ class Model(Database):
             sql += "AND id not in (%s) "
             q += (answered_ids,)
 
-        sql  += "LIMIT 1;"
+        sql  += "ORDER BY random() LIMIT 1;"
         conn.execute(sql, q)
 
         questionrows = conn.fetchall()
