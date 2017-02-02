@@ -27,7 +27,7 @@ class Scene(stateManagment.BaseScene):
 
 
     def next_scene(self):
-        self.persist['game_state']['current_player_index'] += 1
+
         self.done = True
         self.next_state = "CHOOSE_DIRECTION"
 
@@ -116,8 +116,8 @@ class Grid:
                 for y in range(0, self.grid_height):
                     if not self.players == []:
                         for player in self.players:
-                            if ((player.x%x == 0 or player.x/2%x == 0) and player.y == y and c == player.x/2) or \
-                                    ((player.x%x == 0 or player.x/2%x == 0) and player.y == y and c == (player.x-1)/2):
+                            if (((player.x+2)%(x+2) == 0 or player.x/2%(x+2) == 0) and player.y == y and c == (player.x+2)/2) or \
+                                    (((player.x+2)%(x+2) == 0 or player.x/2%(x+2) == 0) and player.y == y and c == (player.x-1)/2):
                                 Point(x, y, c, 1).drawself(screen, width, height + repos, self.grid_height, repos)
                             else:
                                 Point(x, y ,c, 0).drawself(screen, width, height+repos, self.grid_height, repos)
