@@ -117,8 +117,7 @@ class Grid:
                 for y in range(0, self.grid_height):
                     if not self.players == []:
                         for player in self.players:
-                            if (((player.x+2)%(x+2) == 0 or player.x/2%(x+2) == 0) and player.y == y and c == (player.x+2)/2) or \
-                                    (((player.x+2)%(x+2) == 0 or player.x/2%(x+2) == 0) and player.y == y and c == (player.x-1)/2):
+                            if ((player.x%2 == 0 and x == 0) or (not player.x%2 == 0 and x == 1) and player.y == y and (c == (player.x)/2) or (c == player.x + 1/2 and not player.x%2 == 0)):
                                 Point(x, y, c, 1).drawself(screen, width, height + repos, self.grid_height, repos)
                             else:
                                 Point(x, y ,c, 0).drawself(screen, width, height+repos, self.grid_height, repos)
