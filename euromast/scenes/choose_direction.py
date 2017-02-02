@@ -65,6 +65,7 @@ class Scene(stateManagment.BaseScene):
         self.done = True
 
     def startup(self, persistent):
+        self.sounds.play('main_theme')
         self.next_state = 'ROLL_DICE.BUTTON'
         self.persist = persistent
         current_player_idx = self.persist['game_state']['current_player_index']
