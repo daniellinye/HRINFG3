@@ -40,6 +40,7 @@ class Scene(stateManagment.BaseScene):
         game_state = self.persist['game_state']
         self.i18n = game_state['i18n']
         self.current_player = game_state['players'][game_state['current_player_index']]
+        self.persist['game_state']['reuse_scene'] = self.current_state
         # self.throw_dice_btn.update_text('{0} roll the dice'.format(self.current_player.get_name()))
 
     def get_event(self, event):

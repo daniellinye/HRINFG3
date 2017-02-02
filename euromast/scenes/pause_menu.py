@@ -35,8 +35,18 @@ class Scene(stateManagment.BaseScene):
     def go_to_scene(self, scene, id):
         if scene == 'go to menu':
             self.next_state = 'MENU'
-            self.persist['game_state']['reset_state'] = True 
-            self.done= True
+            self.persist['game_state']['reset_state'] = True
+        if scene == 'resume':
+            self.next_state = self.persist['game_state']['reuse_scene']
+        if scene == 'instructions' :
+            self.next_state = 'INSTRUCTIONS'
+            self.persist['game_state']['skip_to_scene'] = 'PAUSED'
+        if scene == 'settings' :
+            self.next_state = 'SETTINGS'
+            self.persist['game_state']['skip_to_scene'] = 'PAUSED'
+        self.done = True
+
+
 
 
     def update(self, dt):

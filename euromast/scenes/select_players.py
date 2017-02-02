@@ -46,6 +46,7 @@ class Scene(stateManagment.BaseScene):
             hover_color=pg.Color("black")
         )
 
+
     def register_player(self, amount, id):
         self.persist['game_state']['player_count'] = amount
         self.done = True
@@ -54,6 +55,7 @@ class Scene(stateManagment.BaseScene):
         self.next_state = 'INSERT_PLAYERS_NAMES'
         self.persist = persistent
         self.i18n = self.persist['game_state']['i18n']
+        self.persist['game_state']['reuse_scene'] = self.current_state
 
     def update(self, dt):
         self.header_text.update_text(self.i18n.translate('select amount of players'))

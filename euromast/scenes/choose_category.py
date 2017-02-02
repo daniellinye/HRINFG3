@@ -42,6 +42,7 @@ class Scene(stateManagment.BaseScene):
         self.next_state = 'CHOOSE_DIRECTION'
         self.persist = persistent
         self.i18n = self.persist['game_state']['i18n']
+        self.persist['game_state']['reuse_scene'] = self.current_state
         game_state = self.persist['game_state']
         self.categories = Model().get_categories()
 

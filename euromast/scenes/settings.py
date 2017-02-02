@@ -101,6 +101,8 @@ class Scene(stateManagment.BaseScene):
             self.persist['game_state']['effects'] = True
 
     def go_back(self, id):
+        if self.persist['game_state']['skip_to_scene'] == 'PAUSED':
+            self.next_state = 'PAUSED'
         self.done = True
 
     def startup(self, persistent):

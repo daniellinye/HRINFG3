@@ -36,6 +36,7 @@ class Scene(stateManagment.BaseScene):
         self.persist = persistent
         game_state = self.persist['game_state']
         self.player = game_state['players'][game_state['current_player_index']]
+        self.persist['game_state']['reuse_scene'] = self.current_state
         self.category = self.player.category
         self.question_type = self.player.question_type
         category_color = self.player.category['color']
