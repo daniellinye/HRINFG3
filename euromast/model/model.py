@@ -18,12 +18,17 @@ class Model(Database):
         self.closeConn()
         return result
 
-    def get_questions(self, categoryid, questiontype):
+    def get_question(self, categoryid, questiontype, answered_ids=None):
 
         conn = self.getConn()
-        conn.execute("""
-        SELECT * FROM question WHERE category_id = %s AND type = %s
-        """, (categoryid, questiontype,))
+        sql = "SELECT * FROM question WHERE category_id = %s AND type = %s "
+        q = (categoryid, questiontype,)
+        if answered_ids:
+            sql += "AND id not in (%s) "
+            q += (answered_ids,)
+
+        sql  += "ORDER BY random() LIMIT 1;"
+        conn.execute(sql, q)
 
         questionrows = conn.fetchall()
         questionresult = []

@@ -20,6 +20,7 @@ class Scene(stateManagment.BaseScene):
         self.xPosFirstRow = 180
         self.opOrMul = {'multiple_choice': 'mul', 'open': 'op'}
         self.category_color = None
+        self.question_img =None
         self.category_type = None
         self.yPosFirstRow = 150
         self.incrRowPosBy = 200
@@ -39,28 +40,18 @@ class Scene(stateManagment.BaseScene):
         category_color = self.player.category['color']
         op_or_mul = self.opOrMul[self.player.question_type]
 
-        questions = Model().get_questions(self.player.category['id'], self.player.question_type)
+        questions = Model().get_question(self.player.category['id'], self.player.question_type, self.player.answer_questions_id)
+        img = self.assets['{0}{1}'.format(category_color, op_or_mul)]
+        self.question_img = formControl.Image(
+            (self.game['center_of_screen'], self.game['vertical_center_of_screen']),
+            img,
+            self.random_question
+        ).scale(1, 1)
 
-        rowX = self.xPosFirstRow
-        rowY = self.yPosFirstRow
-        cardsInRow = 0;
-        for question in questions:
-            if cardsInRow == self.maxCardsPerRow:
-                cardsInRow = 0
-                rowY += self.incrRowPosBy
-                rowX = self.xPosFirstRow
-
-            img = self.assets['{0}{1}'.format(category_color, op_or_mul)]
-            self.questions.append(
-                formControl.Image(
-                    (rowX, rowY),
-                    img,
-                    partial(self.next_scene, question)
-                ).scale()
-            )
-
-            rowX += self.incrRowPosBy
-            cardsInRow = cardsInRow + 1
+    def random_question(self):
+        question = Model().get_question(self.player.category['id'], self.player.question_type, self.player.answer_questions_id)
+        self.player.current_question = question[0]
+        self.done = True
 
     def next_scene(self, question):
         self.player.current_question = question
@@ -68,13 +59,11 @@ class Scene(stateManagment.BaseScene):
 
     def get_event(self, event):
         helpers.check_paused_event(self, event)
-        for question in self.questions:
-            question.check_event(event)
+        self.question_img.check_event(event)
 
     def update(self, dt):
         pass
 
     def draw(self, surface):
         surface.fill((255, 255, 255))
-        for question in self.questions:
-            question.draw(surface)
+        self.question_img.draw(surface)
