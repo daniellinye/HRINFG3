@@ -26,7 +26,7 @@ class Scene(stateManagment.BaseScene):
             (game['center_of_screen'] - 100, (game['vertical_center_of_screen'] *2)-100, 200, 40),
             pg.Color('green'),
             self.nextPlayer,
-            text='next',
+            text="",
             click_sound=self.sounds.effects['click_sound'],
             font=self.vars['fonts']['medium']
         )
@@ -107,6 +107,7 @@ class Scene(stateManagment.BaseScene):
         game_state = self.persist['game_state']
         self.player = game_state['players'][game_state['current_player_index']]
         self.card_color = pg.Color(self.player.category['color'])
+        self.i18n = self.persist['game_state']['i18n']
 
         self.question_type = self.player.question_type
         if self.question_type == 'open':
@@ -156,6 +157,7 @@ class Scene(stateManagment.BaseScene):
         self.next_button.check_event(event)
 
     def update(self, dt):
+        self.next_button.update_text(self.i18n.translate('continue'))
 
         if self.text_box:
             self.text_box.update()
@@ -175,7 +177,7 @@ class Scene(stateManagment.BaseScene):
             self.next_button.update(surface)
         rect = pg.draw.rect(surface, self.card_color, (self.game['center_of_screen'] - 300, 30, 600, self.game['height'] *.25))
         formControl.TextInRect(surface, self.player.current_question['name'], pg.Color('black'), rect, self.vars['fonts']['large'], 1)
-        pg.draw.line(surface, pg.Color('black'), (0, self.game['height'] *.15), (self.game['width'], self.game['height'] *.15))
+        pg.draw.line(surface, pg.Color('black'), (0, self.game['height'] *.20), (self.game['width'], self.game['height'] *.20))
 
         for answer_btns in self.answer_btns:
             answer_btns.update(surface)

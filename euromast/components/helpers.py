@@ -33,7 +33,8 @@ def check_default_events(self, event):
 
 def check_paused_event(self, event):
     check_default_events(self, event)
-    if event.type == pg.KEYDOWN and event.key == pg.K_ESCAPE:
+    if event.type == pg.KEYDOWN and event.key == pg.K_ESCAPE \
+            and self.current_state != "CHOOSE_QUESTION" and self.current_state != "ANSWER_QUESTION":
         self.next_state = "PAUSED"
         self.done = True
 

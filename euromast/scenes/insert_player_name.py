@@ -21,7 +21,7 @@ class Scene(stateManagment.BaseScene):
 
         self.header_text = formControl.Text(
             (center_of_screen - 5, 100),
-            'Player {0}, please enter your name'.format(self.player_count),
+            self.i18n.translate('enter your name').format(self.player_count),
             self.vars['fonts']['large'],
             pg.Color('black')
         )
@@ -32,7 +32,7 @@ class Scene(stateManagment.BaseScene):
             font=self.vars['fonts']['medium'],
             click_sound=self.sounds.effects['click_sound'],
             hover_color=pg.Color("black"),
-            text="Next"
+            text=""
         )
         self.input = formControl.TextBox(
             (center_of_screen - 150,200,300,40),
@@ -59,7 +59,7 @@ class Scene(stateManagment.BaseScene):
             self.done = True
             return
 
-        self.header_text.update_text('Player {0}, please enter your name'.format(self.player_count))
+        self.header_text.update_text(self.i18n.translate('enter your name').format(self.player_count))
         # self.done = True
 
     def startup(self, persistent):
@@ -73,8 +73,11 @@ class Scene(stateManagment.BaseScene):
         helpers.check_paused_event(self, event)
         self.input.get_event(event)
         self.next_button.check_event(event)
+
     def update(self, dt):
         self.input.update()
+        self.header_text.update_text(self.i18n.translate('enter your name').format(self.player_count))
+        self.next_button.update_text(self.i18n.translate('continue').format(self.player_count))
 
     def draw(self, surface):
         surface.blit(self.background.image, self.background.rect)

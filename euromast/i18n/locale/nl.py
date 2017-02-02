@@ -57,7 +57,7 @@ lang = {
     "roll the dice": "{player} gooi dobbelsteen",
     "choose a category": "{player} kies een categorie",
     "choose a direction": "{player} kies een richting",
-    "enter your name": "{player} vul je naam in",
+    "enter your name": "Speler {}, vul je naam in",
     "your rolled": "Je hebt een {number} gegooid",
     "the playing order will be": "De speel volgorde is:",
     "sound": "Geluid",

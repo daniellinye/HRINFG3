@@ -117,6 +117,7 @@ class Scene(stateManagment.BaseScene):
         self.players = self.persist['game_state']['players']
         game_state = self.persist['game_state']
         self.persist['game_state']['reuse_scene'] = self.current_state
+        self.i18n = self.persist['game_state']['i18n']
         pindex = game_state['current_player_index']
         player = game_state['players'][pindex]
         for player in self.players:

@@ -54,7 +54,7 @@ lang = {
     "rolled for question white dice": "white dice: you rolled {question_type} questions",
     "choose a category": "{player} choose a category",
     "choose a direction": "{player} choose a category",
-    "enter your name": "{player} please enter your name",
+    "enter your name": "Player {}, please enter your name",
     "your rolled": "you rolled a {number}",
     "the playing order will be": "the playing order will be",
     "sound": "Sound",
