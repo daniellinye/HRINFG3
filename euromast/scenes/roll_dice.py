@@ -12,7 +12,7 @@ class Scene(stateManagment.BaseScene):
         self.vars = helpers['vars']
         self.assets =  helpers['assets']
         self.sounds = helpers['sounds']
-        self.screen_color = pg.Color('white')
+        self.background = formControl.Image((0, 0), self.assets['background-dice'])
         self.rolled_number = None
         self.i18n = None
         Button = formControl.Button
@@ -75,7 +75,7 @@ class Scene(stateManagment.BaseScene):
 
     def draw(self, surface):
         # background
-        surface.fill((255, 255, 255))
+        surface.blit(self.background.image, self.background.rect)
 
         # dice sound
 

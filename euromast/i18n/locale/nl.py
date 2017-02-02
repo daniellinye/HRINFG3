@@ -49,16 +49,16 @@ lang = {
                       "Het spel heeft maar één winnaar.\n \n" \
                       " Wanneer je het laatste gaatje passeert:\n " \
                       "- Plaats je poppetje bovenop de Euromast en plaats de vlag in de hand van je poppetje.\n",
-    "player": "speler",
+    "player": "Speler",
     "roll the dice double": "Je hebt een {dice1} en een {dice2} gegooid",
-    "rolled for steps red dice": "roode dobbelsteen: je hebt voor {steps} stappen gegooid",
-    "rolled for question white dice": "witte dobbelsteen: je hebt voor {question_type} vragen gegooid",
+    "rolled for steps red dice": "Rode dobbelsteen: je hebt voor {steps} stappen gegooid",
+    "rolled for question white dice": "Witte dobbelsteen: je hebt voor {question_type} vragen gegooid",
     "roll the dice": "{player} gooi dobbelsteen",
     "choose a category": "{player} kies een categorie",
     "choose a direction": "{player} kies een richting",
     "enter your name": "{player} vul je naam in",
-    "your rolled": "je hebt een {number} gegooid",
-    "the playing order will be": "De speel orde is",
+    "your rolled": "Je hebt een {number} gegooid",
+    "the playing order will be": "De speel volgorde is:",
     "sound": "Geluid",
     "music": "Muziek",
     "effects": "Geluiden"

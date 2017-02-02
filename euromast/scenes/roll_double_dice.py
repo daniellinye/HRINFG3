@@ -12,6 +12,7 @@ class Scene(stateManagment.BaseScene):
         game = self.vars['pygame']
         self.white_dice_number = 0
         self.red_dice_number = 0
+        self.background = formControl.Image((0, 0), self.assets['background-dice'])
         self.white_dice = formControl.Image((game['width'] - 612, game['height']*.2))
         self.red_dice = formControl.Image((game['width'] - 412, game['height']*.2))
         self.result_text = formControl.Text(
@@ -80,7 +81,7 @@ class Scene(stateManagment.BaseScene):
         pass
 
     def draw(self, surface):
-        surface.fill((255, 255, 255))
+        surface.blit(self.background.image, self.background.rect)
 
         # dice image
         red_dice = self.assets['rdlist'][self.red_dice_number]
