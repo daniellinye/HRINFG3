@@ -27,6 +27,7 @@ class Scene(stateManagment.BaseScene):
 
 
     def next_scene(self):
+#        self.persist['game_state']['current_player_index'] += 1
 
         self.done = True
         self.next_state = "CHOOSE_DIRECTION"
