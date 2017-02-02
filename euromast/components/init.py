@@ -29,7 +29,8 @@ class LoadVariables(object):
                 "click_sound": LoadSound('./assets/sounds/click.wav', 'effect'),
                 "dice_roll": LoadSound("./assets/sounds/dice_roll.wav", 'effect'),
                 "question_wrong": LoadSound("./assets/sounds/question_wrong.wav", 'effect'),
-                "question_right": LoadSound("./assets/sounds/question_right.wav", 'effect')
+                "question_right": LoadSound("./assets/sounds/question_right.wav", 'effect'),
+                "too_slow": LoadSound("./assets/sounds/too_slow.wav", "effect", 0.4)
             }
         }
 
@@ -48,6 +49,7 @@ class LoadAssets(object):
             self.assets['yellowop'] = pg.image.load('./assets/CBacks/YellowOp.png')
             self.assets['background-erasmus'] = pg.image.load('./assets/background.png')
             self.assets['background-highscore'] = pg.image.load('./assets/highscore_background.png')
+            self.assets['background-dice'] = pg.image.load('./assets/dice_table.png')
             #cardfronts
             self.assets['bfront'] = pg.image.load('./assets/CFronts/Blue.png')
             self.assets['gfront'] = pg.image.load('./assets/CFronts/Green.png')

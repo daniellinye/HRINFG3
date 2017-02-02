@@ -21,7 +21,7 @@ class createPlayer(object):
         self.current_question = None
         self.answer_questions_id = ()
         self.lower_done = False
-        self.uppder_done = False
+        self.upper_done = False
 
     def relocate(self, c, x, y):
         self.c = c

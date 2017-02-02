@@ -12,7 +12,7 @@ class Scene(stateManagment.BaseScene):
         self.assets =  helpers['assets']
         self.current_player = None
         self.sounds = helpers['sounds']
-        self.screen_color = pg.Color('white')
+        self.background = formControl.Image((0, 0), self.assets['background-dice'])
         self.i18n = None
         Button = formControl.Button
         game = self.vars['pygame']
@@ -50,6 +50,6 @@ class Scene(stateManagment.BaseScene):
         self.sounds.play("main_theme")
 
     def draw(self, surface):
-        surface.fill(self.screen_color)
+        surface.blit(self.background.image, self.background.rect)
         self.throw_dice_btn.update(surface);
         self.throw_dice_btn.update_text(self.i18n.translate('roll the dice').format(player=self.current_player.get_name()))
