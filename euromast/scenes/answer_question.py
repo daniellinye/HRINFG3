@@ -1,14 +1,15 @@
-from components import stateManagment, formControl
+from components import stateManagment, formControl, helpers
 from functools import partial
 from model.model import Model
 import time
 import pygame as pg
 
+SCENE_NAME = 'ANSWER_QUESTION'
 class Scene(stateManagment.BaseScene):
     def __init__(self, screen, helpers):
         super(Scene, self).__init__(helpers)
         self.vars = helpers['vars']
-        self.next_state = 'SHOW_TOWER'
+        self.current_state = SCENE_NAME
         self.assets = helpers['assets']
         self.game = game = self.vars['pygame']
         self.player = None
@@ -81,6 +82,7 @@ class Scene(stateManagment.BaseScene):
 
 
     def startup(self, persistent):
+        self.next_state = 'SHOW_TOWER'
         # stop sounds so we can use them again and play another sound
         self.text_box = None
         self.sounds.play("question_theme")
@@ -121,8 +123,8 @@ class Scene(stateManagment.BaseScene):
                 c += 1
 
     def get_event(self, event):
-        if event.type == pg.QUIT:
-            self.quit = True
+        helpers.check_paused_event(self, event)
+
         if event.type == pg.USEREVENT:
             if self.timer != 0 and self.correct == None:
                 self.timer -= 1

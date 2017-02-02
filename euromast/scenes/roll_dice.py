@@ -1,13 +1,14 @@
-from components import stateManagment, formControl
+from components import stateManagment, formControl, helpers
 from random import randint
 import pygame as pg
 
+SCENE_NAME = "ROLL_DICE.ROLLED"
 class Scene(stateManagment.BaseScene):
     def __init__(self, screen, helpers):
         super(Scene, self).__init__(helpers)
         self.screen = screen
         self.done = False
-        self.next_state = 'SHOW_TURN_ORDER'
+        self.current_state = SCENE_NAME
         self.vars = helpers['vars']
         self.assets =  helpers['assets']
         self.sounds = helpers['sounds']
@@ -59,14 +60,14 @@ class Scene(stateManagment.BaseScene):
         self.done = True
 
     def startup(self, persistent):
+        self.next_state = 'SHOW_TURN_ORDER'
         self.persist = persistent
         self.i18n = self.persist['game_state']['i18n']
         self.rolled_number = randint(1,6)
         self.sounds.play('dice_roll')
 
     def get_event(self, event):
-        if event.type == pg.QUIT:
-            self.quit = True
+        helpers.check_paused_event(self, event)
         self.continue_btn.check_event(event)
 
     def update(self, dt):

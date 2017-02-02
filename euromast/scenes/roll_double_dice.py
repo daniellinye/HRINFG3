@@ -1,13 +1,15 @@
-from components import stateManagment, player, formControl
+from components import stateManagment, player, formControl, helpers
 from random import randint
 import pygame as pg
+
+SCENE_NAME = "ROLL_DOUBLE_DICE"
 class Scene(stateManagment.BaseScene):
     def __init__(self, screen, helpers):
         super(Scene, self).__init__(helpers)
         self.vars = helpers['vars']
         self.assets = helpers['assets']
+        self.current_state = SCENE_NAME
         game = self.vars['pygame']
-        self.next_state = 'CHOOSE_QUESTION'
         self.white_dice_number = 0
         self.red_dice_number = 0
         self.white_dice = formControl.Image((game['width'] - 612, game['height']*.2))
@@ -41,6 +43,7 @@ class Scene(stateManagment.BaseScene):
     def next_scene(self, id):
         self.done = True
     def startup(self, persistent):
+        self.next_state = 'CHOOSE_QUESTION'
         self.persist = persistent
         game_state = self.persist['game_state']
         player = game_state['players'][game_state['current_player_index']]
@@ -69,10 +72,9 @@ class Scene(stateManagment.BaseScene):
         self.red_dice_text.update_text('Red dice: you rolled for {0} steps'.format(red_dice_number))
         # dice sound
         self.sounds.play("dice_roll")
-        
+
     def get_event(self, event):
-        if event.type == pg.QUIT:
-            self.quit = True
+        helpers.check_paused_event(self, event)
         self.continue_btn.check_event(event)
     def update(self, dt):
         pass

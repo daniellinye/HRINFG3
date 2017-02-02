@@ -1,4 +1,4 @@
-from components import stateManagment, formControl
+from components import stateManagment, formControl, helpers
 from i18n import i18n
 from functools import partial
 import pygame as pg
@@ -72,7 +72,13 @@ class Scene(stateManagment.BaseScene):
 
     def startup(self, persistent):
         self.persist = persistent
+        print(persistent['game_state']['reset_state'])
         self.i18n = self.persist['game_state']['i18n']
+        if self.persist['game_state']['reset_state']:
+            print('rest')
+            self.persist = helpers.get_state()
+            self.persist['game_state']['i18n'] = self.i18n
+        print(self.persist)
 
     def update(self, dt):
         self.start_btn.update_text(self.i18n.translate('start'))
@@ -86,11 +92,7 @@ class Scene(stateManagment.BaseScene):
         self.done = True
 
     def get_event(self, event):
-        if event.type == pg.QUIT:
-            self.quit = True
-        elif event.type == pg.KEYDOWN and event.key == pg.K_SPACE:
-            self.next_state = "PAUSED"
-            self.done = True
+        helpers.check_default_events(self, event)
         self.start_btn.check_event(event)
         self.highscore_btn.check_event(event)
         self.instruction_btn.check_event(event)

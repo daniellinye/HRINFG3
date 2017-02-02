@@ -1,7 +1,8 @@
-from components import stateManagment, formControl
+from components import stateManagment, formControl, helpers
 from functools import partial
 import pygame as pg
 
+SCENE_NAME = "SETTINGS"
 class Scene(stateManagment.BaseScene):
     """
     Parent class for individual game states to inherit from.
@@ -9,8 +10,8 @@ class Scene(stateManagment.BaseScene):
     def __init__(self, screen, helpers):
         super(Scene, self).__init__(helpers)
         self.vars = helpers['vars']
+        self.current_state = SCENE_NAME
         self.assets =  helpers['assets']
-        self.next_state = 'MENU' #should be prev state
         self.game = game = self.vars['pygame']
         self.sounds = helpers['sounds']
         i18n = self.i18n
@@ -102,6 +103,7 @@ class Scene(stateManagment.BaseScene):
         self.done = True
 
     def startup(self, persistent):
+        self.next_state = 'MENU' #should be prev state
         self.persist = persistent
 
     def update(self, dt):
@@ -127,15 +129,12 @@ class Scene(stateManagment.BaseScene):
             self.effects_sound_btn.color = pg.Color('green')
 
     def get_event(self, event):
-        if event.type == pg.QUIT:
-            self.quit = True
+        helpers.check_default_events(self, event)
         self.dutch_lang_btn.check_event(event)
         self.english_lang_btn.check_event(event)
         self.go_back_btn.check_event(event)
         self.effects_sound_btn.check_event(event)
         self.music_sound_btn.check_event(event)
-
-
 
 
     def draw(self, surface):

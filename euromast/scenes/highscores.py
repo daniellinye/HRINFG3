@@ -1,15 +1,15 @@
-from components import stateManagment, formControl
+from components import stateManagment, formControl, helpers
 from functools import partial
 from model.model import Model
 import pygame as pg
 
-
+SCENE_NAME = "HIGHSCORES"
 class Scene(stateManagment.BaseScene):
     def __init__(self, screen, helpers):
         super(Scene, self).__init__(helpers)
+        self.current_state = "HIGHSCORES"
         self.vars = helpers['vars']
         self.assets = helpers['assets']
-        self.next_state = 'MENU'  # should be prev state
         self.game = game = self.vars['pygame']
         self.list = []
         i18n = self.i18n
@@ -43,24 +43,24 @@ class Scene(stateManagment.BaseScene):
         )
 
     def go_back(self, id):
-            self.done = True
+        self.done = True
 
     def startup(self, persistent):
-            self.persist = persistent
+        self.next_state = 'MENU' 
+        self.persist = persistent
 
     def update(self, dt):
-            self.header_text.update_text('Highscores')
-            self.go_back_btn.update_text(self.i18n.translate('go back'))
+        self.header_text.update_text('Highscores')
+        self.go_back_btn.update_text(self.i18n.translate('go back'))
 
     def get_event(self, event):
-            if event.type == pg.QUIT:
-                self.quit = True
-            self.go_back_btn.check_event(event)
+        helpers.check_default_events(self, events)
+        self.go_back_btn.check_event(event)
 
     def draw(self, surface):
-            surface.fill((0, 0, 0))
-            self.header_text.draw(surface)
-            self.go_back_btn.update(surface)
+        surface.fill((0, 0, 0))
+        self.header_text.draw(surface)
+        self.go_back_btn.update(surface)
 
-            for n in self.list:
-                n.draw(surface)
+        for n in self.list:
+            n.draw(surface)

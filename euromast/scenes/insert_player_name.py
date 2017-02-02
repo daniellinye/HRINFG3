@@ -1,13 +1,14 @@
-from components import stateManagment, formControl, player
+from components import stateManagment, formControl, player, helpers
 from functools import partial
 import pygame as pg
 
+SCENE_NAME = "INSERT_PLAYERS_NAMES"
 class Scene(stateManagment.BaseScene):
     def __init__(self, screen, helpers):
         super(Scene, self).__init__(helpers)
         self.screen = screen
+        self.current_state = SCENE_NAME
         self.done = False
-        self.next_state = 'ROLL_DICE.BUTTON'
         self.vars = helpers['vars']
         self.sounds = helpers['sounds']
         self.assets =  helpers['assets']
@@ -61,12 +62,14 @@ class Scene(stateManagment.BaseScene):
         # self.done = True
 
     def startup(self, persistent):
+        print(persistent)
+        self.next_state = 'ROLL_DICE.BUTTON'
+        self.player_count = 1
         self.persist = persistent
         self.i18n = self.persist['game_state']['i18n']
 
     def get_event(self, event):
-        if event.type == pg.QUIT:
-            self.quit = True
+        helpers.check_paused_event(self, event)
         self.input.get_event(event)
         self.next_button.check_event(event)
     def update(self, dt):

@@ -2,13 +2,23 @@ import pygame as pg
 import threading
 from functools import wraps
 from components import formControl
-
-
-class dotdict(dict):
-     """dot.notation access to dictionary attributes"""
-     __getattr__ = dict.get
-     __setattr__ = dict.__setitem__
-     __delattr__ = dict.__delitem__
+from i18n import i18n
+import copy
+def get_state():
+    return copy.deepcopy({
+        'game_state': {
+            "i18n": None,
+            "player_count": 0,
+            "players": [],
+            "start_from_index": 0,
+            "current_player_index": 0,
+            "reuse_scene": None,
+            "skip_to_scene": None,
+            "music": True,
+            "effects": True,
+            "reset_state": False
+        }
+    })
 
 def set_startup(self, persistent):
     game_state = persistent['game_state']
@@ -20,9 +30,11 @@ def set_startup(self, persistent):
 def check_default_events(self, event):
     if event.type == pg.QUIT:
         self.quit = True
-    elif event.type == pg.KEYDOWN and event.key == pg.K_SPACE:
+
+def check_paused_event(self, event):
+    check_default_events(self, event)
+    if event.type == pg.KEYDOWN and event.key == pg.K_ESCAPE:
         self.next_state = "PAUSED"
-        self.persist['']
         self.done = True
 
 

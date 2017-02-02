@@ -1,15 +1,14 @@
-from components import stateManagment, formControl
+from components import stateManagment, formControl, helpers
 from functools import partial
 from model.model import Model
 import pygame as pg
 
-
+SCENE_NAME = "INSTRUCTIONS"
 class Scene(stateManagment.BaseScene):
     def __init__(self, screen, helpers):
         super(Scene, self).__init__(helpers)
         self.vars = helpers['vars']
         self.assets = helpers['assets']
-        self.next_state = 'MENU'  # should be prev state
         self.game = game = self.vars['pygame']
         self.list = []
         self.i = 1
@@ -45,31 +44,31 @@ class Scene(stateManagment.BaseScene):
         )
 
     def go_back(self, id):
-            self.done = True
+        self.done = True
 
     def startup(self, persistent):
-            self.persist = persistent
-            self.i18n = self.persist['game_state']['i18n']
+        self.next_state = 'MENU'  # should be prev state
+        self.persist = persistent
+        self.i18n = self.persist['game_state']['i18n']
 
     def update(self, dt):
-            self.header_text.update_text(self.i18n.translate('rules'))
-            self.go_back_btn.update_text(self.i18n.translate('go back'))
+        self.header_text.update_text(self.i18n.translate('rules'))
+        self.go_back_btn.update_text(self.i18n.translate('go back'))
 
-            guide = self.i18n.translate('guide').split("\n")
-            for item in self.list:
-                item.update_text("")
-            for (i, item) in enumerate(guide):
-                self.list[i].update_text(item)
+        guide = self.i18n.translate('guide').split("\n")
+        for item in self.list:
+            item.update_text("")
+        for (i, item) in enumerate(guide):
+            self.list[i].update_text(item)
 
     def get_event(self, event):
-            if event.type == pg.QUIT:
-                self.quit = True
-            self.go_back_btn.check_event(event)
+        helpers.check_default_events(self, event)
+        self.go_back_btn.check_event(event)
 
     def draw(self, surface):
-            surface.fill((0, 0, 0))
-            self.header_text.draw(surface)
-            self.go_back_btn.update(surface)
+        surface.fill((0, 0, 0))
+        self.header_text.draw(surface)
+        self.go_back_btn.update(surface)
 
-            for n in self.list:
-                n.draw(surface)
+        for n in self.list:
+            n.draw(surface)

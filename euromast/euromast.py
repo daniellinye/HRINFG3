@@ -10,7 +10,7 @@ from scenes import menu, select_players, insert_player_name, roll_dice, \
     choose_category, choose_direction, roll_dice_button, turn_order, \
     roll_double_dice, choose_question, answer_question, settings, highscores, \
     display_tower, pause_menu, instructions
-from components import init, sound_manager
+from components import init, sound_manager, helpers as hp
 
 from model import model
 
@@ -38,19 +38,9 @@ class Game(object):
         self.states = states
         self.state_name = states['__sartScene__']
         self.state = self.states[self.state_name]
-        self.startup_persist = {
-            'game_state': {
-                "i18n": i18n.Localize(),
-                "player_count": 0,
-                "players": [],
-                "start_from_index": 0,
-                "current_player_index": 0,
-                "reuse_scene": None,
-                "skip_to_scene": None,
-                "music": True,
-                "effects": True
-            }
-        }
+        self.startup_persist = hp.get_state()
+        self.startup_persist['game_state']['i18n'] = i18n.Localize()
+
         self.state.startup(self.startup_persist)
 
     def event_loop(self):
@@ -64,6 +54,7 @@ class Game(object):
         next_state = self.state.next_state
         self.state.done = False
         self.state_name = next_state
+
         persistent = self.state.persist if self.state.persist != 0 else self.startup_persist
         self.state = self.states[self.state_name]
         self.state.startup(persistent)

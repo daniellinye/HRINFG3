@@ -1,12 +1,13 @@
-from components import stateManagment, formControl
+from components import stateManagment, formControl, helpers
 import pygame as pg
 
+SCENE_NAME = "ROLL_DICE.BUTTON"
 class Scene(stateManagment.BaseScene):
     def __init__(self, screen, helpers):
         super(Scene, self).__init__(helpers)
         self.screen = screen
+        self.current_state = SCENE_NAME
         self.done = False
-        self.next_state = 'ROLL_DICE.ROLLED'
         self.vars = helpers['vars']
         self.assets =  helpers['assets']
         self.current_player = None
@@ -34,6 +35,7 @@ class Scene(stateManagment.BaseScene):
         self.done = True
 
     def startup(self, persistent):
+        self.next_state = 'ROLL_DICE.ROLLED'
         self.persist = persistent
         game_state = self.persist['game_state']
         self.i18n = game_state['i18n']
@@ -41,8 +43,7 @@ class Scene(stateManagment.BaseScene):
         # self.throw_dice_btn.update_text('{0} roll the dice'.format(self.current_player.get_name()))
 
     def get_event(self, event):
-        if event.type == pg.QUIT:
-            self.quit = True
+        helpers.check_paused_event(self, event)
         self.throw_dice_btn.check_event(event)
 
     def update(self, dt):

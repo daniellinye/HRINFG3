@@ -2,13 +2,14 @@ from components import stateManagment, formControl, helpers
 from functools import partial
 import pygame as pg
 
+SCENE_NAME = "PAUSED"
 class Scene(stateManagment.BaseScene):
     def __init__(self, surface, helpers):
         super(Scene, self).__init__(helpers)
         self.vars = helpers['vars']
         self.assets = helpers['assets']
+        self.current_state = SCENE_NAME
         self.game = game = helpers['vars']['pygame']
-        self.next_state = 'MENU'
         self.buttons = ['resume', 'instructions', 'settings', 'go to menu'];
         self.btns = {}
         self.background = formControl.Image((0,0), self.assets['background-erasmus'])
@@ -34,6 +35,7 @@ class Scene(stateManagment.BaseScene):
     def go_to_scene(self, scene, id):
         if scene == 'go to menu':
             self.next_state = 'MENU'
+            self.persist['game_state']['reset_state'] = True 
             self.done= True
 
 
@@ -46,6 +48,7 @@ class Scene(stateManagment.BaseScene):
             button.check_event(event)
 
     def startup(self, persistent):
+        self.next_state = 'MENU'
         self.persist = persistent
         helpers.set_startup(self, self.persist)
 

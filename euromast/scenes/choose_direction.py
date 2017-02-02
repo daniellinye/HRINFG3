@@ -1,12 +1,13 @@
-from components import stateManagment, formControl
+from components import stateManagment, formControl, helpers
 from functools import partial
 import pygame as pg
 
+SCENE_NAME = 'CHOOSE_DIRECTION'
 class Scene(stateManagment.BaseScene):
     def __init__(self, screen, helpers):
         super(Scene, self).__init__(helpers)
         self.vars = helpers['vars']
-        self.next_state = 'ROLL_DICE.BUTTON'
+        self.current_state = SCENE_NAME
         self.assets = helpers['assets']
         self.player = None
         self.game = game = self.vars['pygame']
@@ -63,13 +64,13 @@ class Scene(stateManagment.BaseScene):
         self.done = True
 
     def startup(self, persistent):
+        self.next_state = 'ROLL_DICE.BUTTON'
         self.persist = persistent
         current_player_idx = self.persist['game_state']['current_player_index']
         self.player = self.persist['game_state']['players'][current_player_idx]
 
     def get_event(self, event):
-        if event.type == pg.QUIT:
-            self.quit = True
+        helpers.check_paused_event(self, event)
         self.up_direction_btn.check_event(event)
         self.left_direction_btn.check_event(event)
         self.down_direction_btn.check_event(event)

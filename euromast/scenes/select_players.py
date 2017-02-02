@@ -1,16 +1,16 @@
-from components import stateManagment, formControl
+from components import stateManagment, formControl, helpers
 from functools import partial
 import pygame as pg
 
+SCENE_NAME = "SELECT_PLAYER"
 class Scene(stateManagment.BaseScene):
     def __init__(self, screen, helpers):
         super(Scene, self).__init__(helpers)
         self.vars = helpers['vars']
+        self.current_state = SCENE_NAME
         self.assets =  helpers['assets']
         self.background = formControl.Image((0,0), self.assets['background-erasmus'])
         self.done = False
-        self.next_state = 'INSERT_PLAYERS_NAMES'
-
         Button = formControl.Button
 
         game = self.vars['pygame']
@@ -51,6 +51,7 @@ class Scene(stateManagment.BaseScene):
         self.done = True
 
     def startup(self, persistent):
+        self.next_state = 'INSERT_PLAYERS_NAMES'
         self.persist = persistent
         self.i18n = self.persist['game_state']['i18n']
 
@@ -60,8 +61,7 @@ class Scene(stateManagment.BaseScene):
         self.three_players_btn.update_text(self.i18n.translate('3 players'))
         self.four_players_btn.update_text(self.i18n.translate('4 players'))
     def get_event(self, event):
-        if event.type == pg.QUIT:
-            self.quit = True
+        helpers.check_paused_event(self, event)
         self.two_players_btn.check_event(event)
         self.three_players_btn.check_event(event)
         self.four_players_btn.check_event(event)

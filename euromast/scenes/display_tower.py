@@ -1,16 +1,17 @@
-from components import stateManagment, formControl, player
+from components import stateManagment, formControl, player, helpers
 from functools import partial
 from model.model import Model
 import pygame as pg
 
 
+SCENE_NAME = "SHOW_TOWER"
 class Scene(stateManagment.BaseScene):
     def __init__(self, scene, helpers):
         super(Scene, self).__init__(helpers)
+        self.current_state = SCENE_NAME
         self.vars = helpers['vars']
         self.assets = helpers['assets']
         self.game = game = self.vars['pygame']
-        self.next_state = 'CHOOSE_DIRECTION'
         self.tower_upper = Grid(1, 5)
         self.tower_lower = Grid()
         self.players = None
@@ -34,12 +35,13 @@ class Scene(stateManagment.BaseScene):
 
 
     def get_event(self, event):
+        helpers.check_paused_event(self, event)
         self.button.check_event(event)
-        if event.type == pg.QUIT:
-            self.quit = True
+
 
 
     def startup(self, persistent):
+        self.next_state = 'CHOOSE_DIRECTION'
         self.persist = persistent
         self.players = self.persist['game_state']['players']
         game_state = self.persist['game_state']

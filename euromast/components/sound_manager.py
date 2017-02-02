@@ -1,5 +1,5 @@
 import pygame as pg
-from components.helpers import dotdict
+
 class Manager(object):
     def __init__(self, sounds):
         self.ambiances = sounds['ambiances']
@@ -23,7 +23,8 @@ class Manager(object):
                 self.now_playing.remove(s)
                 self.sounds[s].stop(force)
             return
-        self.now_playing.remove(sound)
+        if sound in self.now_playing:
+            self.now_playing.remove(sound)
         self.sounds[sound].stop(force)
 
     def stop_effects(self):

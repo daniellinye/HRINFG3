@@ -1,13 +1,14 @@
-from components import stateManagment, formControl
+from components import stateManagment, formControl, helpers
 from functools import partial
 from model.model import Model
 import pygame as pg
 
+SCENE_NAME = 'CHOOSE_CATEGORY'
 class Scene(stateManagment.BaseScene):
     def __init__(self, screen, helpers):
         super(Scene, self).__init__(helpers)
         self.vars = helpers['vars']
-        self.next_state = 'CHOOSE_DIRECTION'
+        self.current_state = SCENE_NAME
         self.assets = helpers['assets']
         self.categories = []
         self.selected_categories = []
@@ -36,6 +37,7 @@ class Scene(stateManagment.BaseScene):
         self.done = True
 
     def startup(self, persistent):
+        self.next_state = 'CHOOSE_DIRECTION'
         self.persist = persistent
         self.i18n = self.persist['game_state']['i18n']
         game_state = self.persist['game_state']
@@ -57,8 +59,7 @@ class Scene(stateManagment.BaseScene):
         self.player = self.persist['game_state']['players'][current_player_idx]
 
     def get_event(self, event):
-        if event.type == pg.QUIT:
-            self.quit = True
+        helpers.check_paused_event(self, event)
         for category_btn in self.category_btns:
             category_btn.check_event(event)
 

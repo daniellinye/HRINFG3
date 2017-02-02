@@ -1,9 +1,10 @@
-from components import stateManagment, formControl, player
+from components import stateManagment, formControl, player, helpers
 from functools import partial
 from model.model import Model
 import pygame as pg
 from math import floor
 
+SCENE_NAME = 'CHOOSE_QUESTION'
 class Scene(stateManagment.BaseScene):
     """
     Parent class for individual game states to inherit from.
@@ -11,10 +12,10 @@ class Scene(stateManagment.BaseScene):
     def __init__(self, screen , helpers):
         super(Scene, self).__init__(helpers)
         self.done = False
+        self.current_state = SCENE_NAME
         self.vars = helpers['vars']
         self.assets = helpers['assets']
         self.game = game = self.vars['pygame']
-        self.next_state = 'ANSWER_QUESTION'
         self.questions = []
         self.xPosFirstRow = 180
         self.opOrMul = {'multiple_choice': 'mul', 'open': 'op'}
@@ -25,6 +26,7 @@ class Scene(stateManagment.BaseScene):
         self.maxCardsPerRow = int(floor((game['width'] - self.xPosFirstRow) / self.xPosFirstRow))
 
     def startup(self, persistent):
+        self.next_state = 'ANSWER_QUESTION'
         # stop sounds so we can use them again and play another sound
         self.sounds.stop(['dice_roll', 'main_theme'])
         self.sounds.play('choose_question')
@@ -65,8 +67,7 @@ class Scene(stateManagment.BaseScene):
         self.done = True
 
     def get_event(self, event):
-        if event.type == pg.QUIT:
-            self.quit = True
+        helpers.check_paused_event(self, event)
         for question in self.questions:
             question.check_event(event)
 
