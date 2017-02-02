@@ -11,6 +11,7 @@ class Scene(stateManagment.BaseScene):
         self.assets = helpers['assets']
         self.player = None
         self.game = game = self.vars['pygame']
+        self.background = formControl.Image((0, 0), self.assets['game-category'])
         self.turn_text = formControl.Text(
             (game['width']*.5, game['height']*.5),
             '',
@@ -19,7 +20,7 @@ class Scene(stateManagment.BaseScene):
         )
 
         self.left_direction_btn = formControl.Button(
-            (20, 20, 300, 300),
+            (10, game["height"]/2-150, 300, 300),
             (0,0,255),
             partial(self.nextPlayer, 'left'),
             click_sound=self.sounds.effects['click_sound'],
@@ -28,7 +29,7 @@ class Scene(stateManagment.BaseScene):
         )
 
         self.up_direction_btn = formControl.Button(
-            (20, game['height']-310, 300, 300),
+            (game['width']/2-150, 10, 300, 300),
             (255,0,0),
             partial(self.nextPlayer, 'up'),
             click_sound=self.sounds.effects['click_sound'],
@@ -37,7 +38,7 @@ class Scene(stateManagment.BaseScene):
         )
 
         self.right_direction_btn = formControl.Button(
-            (game['width'] - 320, 20, 300, 300),
+            (game['width']-310, game["height"]/2-150, 300, 300),
             (0,255,0),
             partial(self.nextPlayer, 'right'),
             click_sound=self.sounds.effects['click_sound'],
@@ -47,7 +48,7 @@ class Scene(stateManagment.BaseScene):
 
 
         self.down_direction_btn = formControl.Button(
-            (game['width'] - 320, game['height']-310, 300, 300),
+            (game['width']/2-150, game["height"]-310, 300, 300),
             (255,255,0),
             partial(self.nextPlayer, 'down'),
             click_sound=self.sounds.effects['click_sound'],
@@ -82,7 +83,7 @@ class Scene(stateManagment.BaseScene):
 
     def draw(self, surface):
         # background
-        surface.fill((255, 255, 255))
+        surface.blit(self.background.image, self.background.rect)
 
         self.left_direction_btn.update(surface)
 

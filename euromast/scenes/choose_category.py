@@ -11,6 +11,8 @@ class Scene(stateManagment.BaseScene):
         self.current_state = SCENE_NAME
         self.assets = helpers['assets']
         self.categories = []
+        self.background = formControl.Image((0, 0), self.assets['game-category'])
+
         self.selected_categories = []
         self.player = None
         self.game = game = self.vars['pygame']
@@ -69,7 +71,7 @@ class Scene(stateManagment.BaseScene):
 
     def draw(self, surface):
         # background
-        surface.fill((255, 255, 255))
+        surface.blit(self.background.image, self.background.rect)
         for category_btn in self.category_btns:
             if category_btn.button_id not in self.selected_categories:
                 category_btn.update(surface)
