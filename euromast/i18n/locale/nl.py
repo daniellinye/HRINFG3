@@ -29,10 +29,10 @@ lang = {
                       "- Elke speler rolt de dobbelsteen, de speler met het hoogste cijfer kiest als eerste zijn/haar categorie.\n " \
                       "Wanneer twee of meer spelers het hoogste cijfer gooien, zullen deze spelers de dobbelsteen nogmaals gooien totdat één van die spelers het hoogste cijfer gooit.\n \n " \
                       "- De rest van de spelers kiezen een categorie van de overgebleven categorieën (er is maar 1 speler per categorie mogelijk aan het begin van het spel).\n \n " \
-                      "- De speler wie het hoogste cijfer heeft gegooid, zal als eerste beginnen met zijn/haar beurt. Nadat deze speler klaar is met zijn/haar beurt, vervolgt het spel zich met de klok mee.\n " \
+                      "- De speler wie het hoogste cijfer heeft gegooid, zal als eerste beginnen met zijn/haar beurt. \n Nadat deze speler klaar is met zijn/haar beurt, vervolgt het spel zich met de klok mee.\n " \
                       "\n - Spelers plaatsen hun poppetjes op het houten deel van het speelbord en voor de gekozen categorie.\n Plaats het poppetje niet in het eerst gaatje.\n \n \n ",
     "guide2": "Tijdens het spel:\n " \
-                      "- Kies een als eerst een richting (links, rechts, omhoog, omlaag). Nadat er een richting is gekozen word de dobbelsteen gegooid om te bepalen hoeveel stappen er genomen \n mogen worden.\n" \
+                      "- Kies een als eerst een richting (links, rechts, omhoog, omlaag). \n Nadat er een richting is gekozen word de dobbelsteen gegooid om te bepalen hoeveel stappen er genomen mogen worden.\n" \
                       " (Het is alleen toegestaan om een poppetje in horizontale of verticale richting te verplaatsen)\n " \
                       "- cijfers 1 en 2 = 1 stap in gekozen richting\n " \
                       "- cijfers 3 en 4 = 2 stappen in gekozen richting\n " \
@@ -40,8 +40,8 @@ lang = {
                       "- Er is 1 speler per gaatje toegestaan.\n " \
                       "Als een speler op het gaatje komt waar al een andere speler in staat. Gooit de speler wie al in het gaatje stond een dobbelsteen.\n" \
                       " Het cijfer op de dobbelsteen na het gooien bepaalt het aantal stappen dat de speler omlaag moet.\n \n " \
-                      "- Een niet-spelende speler leest de vraag hardop voor.  Probeer het antwoord op het kaartje niet te laten zien. Nadat een vraag is beantwoord, leg je de vraag weg.\n " \
-                      "- Wanneer een speler een fout antwoord geeft, de vraag niet begrijpt of geen antwoord binnen de 50 seconden geeft zal dit fout worden gerekend en gaat de beurt naar de volgende speler.\n " \
+                      "- Een niet-spelende speler leest de vraag hardop voor.  Probeer het antwoord op het kaartje niet te laten zien.\n  Nadat een vraag is beantwoord, leg je de vraag weg.\n " \
+                      "- Wanneer een speler een fout antwoord geeft, de vraag niet begrijpt of geen antwoord binnen \n de 50 seconden geeft zal dit fout worden gerekend en gaat de beurt naar de volgende speler.\n " \
                       "- Wanneer een speler de vraag correct beantwoord, zal hij/zij het poppetje verplaatsen met het aantal stappen in de gekozen richting.\n \n " \
                       "- Als de vragen van een categorie op zijn, verplaatst elke speler op de desbetreffende categorie zijn/haar poppetje naar de categorie rechts van hen.\n \n \n " \
                       "Hoe win je en wat doe je als je gewonnen hebt:\n " \
