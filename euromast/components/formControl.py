@@ -31,10 +31,10 @@ class Image:
         self.clicked = False
         self.call_on_release = True
 
-    def scale(self):
+    def scale(self, sx=3, sy=3):
         size = self.image.get_rect().size
 
-        self.image = pg.transform.scale(self.image, (int(size[0] / 3), int(size[1] / 3)))
+        self.image = pg.transform.scale(self.image, (int(size[0] / sx), int(size[1] / sy)))
         self.rect = self.image.get_rect()
         self.rect.move_ip(
             self.position_x - self.image.get_rect().size[0]*0.5,
