@@ -63,6 +63,7 @@ class Scene(stateManagment.BaseScene):
         self.next_state = 'SHOW_TURN_ORDER'
         self.persist = persistent
         self.i18n = self.persist['game_state']['i18n']
+        self.persist['game_state']['reuse_scene'] = self.current_state
         self.rolled_number = randint(1,6)
         self.sounds.play('dice_roll')
 

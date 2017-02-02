@@ -341,7 +341,7 @@ INSERT INTO answer (name, question_id, is_correct) VALUES
   ('Maasbrug', 224, TRUE),
   ('Koninginnenbrug', 224, FALSE),
   ('Suiker', 225, TRUE),
-  ('Wol', 225, TRUE),
+  ('Wol', 225, FALSE),
   ('Cacao', 225, FALSE),
   ('De Nieuwe Waterweg', 226, TRUE),
   ('De Maas zeeverbinding', 226, FALSE),

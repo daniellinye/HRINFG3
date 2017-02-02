@@ -57,6 +57,8 @@ class Scene(stateManagment.BaseScene):
         if self.guide_part > 1:
             self.guide_part -= 1
         else:
+            if self.persist['game_state']['skip_to_scene'] == 'PAUSED':
+                self.next_state = 'PAUSED'
             self.done = True
 
     def next(self, id):
