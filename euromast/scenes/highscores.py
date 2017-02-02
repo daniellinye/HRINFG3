@@ -54,7 +54,7 @@ class Scene(stateManagment.BaseScene):
         self.go_back_btn.update_text(self.i18n.translate('go back'))
 
     def get_event(self, event):
-        helpers.check_default_events(self, events)
+        helpers.check_default_events(self, event)
         self.go_back_btn.check_event(event)
 
     def draw(self, surface):
