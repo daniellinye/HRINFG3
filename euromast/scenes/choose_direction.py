@@ -21,7 +21,7 @@ class Scene(stateManagment.BaseScene):
 
         self.left_direction_btn = formControl.Button(
             (10, game["height"]/2-150, 300, 300),
-            (0,0,255),
+            (142, 96, 175),
             partial(self.nextPlayer, 'left'),
             click_sound=self.sounds.effects['click_sound'],
             text="left",
@@ -30,7 +30,7 @@ class Scene(stateManagment.BaseScene):
 
         self.up_direction_btn = formControl.Button(
             (game['width']/2-150, 10, 300, 300),
-            (255,0,0),
+            (142, 96, 175),
             partial(self.nextPlayer, 'up'),
             click_sound=self.sounds.effects['click_sound'],
             text="up",
@@ -39,7 +39,7 @@ class Scene(stateManagment.BaseScene):
 
         self.right_direction_btn = formControl.Button(
             (game['width']-310, game["height"]/2-150, 300, 300),
-            (0,255,0),
+            (142, 96, 175),
             partial(self.nextPlayer, 'right'),
             click_sound=self.sounds.effects['click_sound'],
             text="right",
@@ -49,7 +49,7 @@ class Scene(stateManagment.BaseScene):
 
         self.down_direction_btn = formControl.Button(
             (game['width']/2-150, game["height"]-310, 300, 300),
-            (255,255,0),
+            (142, 96, 175),
             partial(self.nextPlayer, 'down'),
             click_sound=self.sounds.effects['click_sound'],
             text='down',
