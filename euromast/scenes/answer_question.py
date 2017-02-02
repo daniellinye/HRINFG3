@@ -39,7 +39,7 @@ class Scene(stateManagment.BaseScene):
         self.answer_btns = []
         self.card_color = None
         self.player = None
-        self.timer = 10
+        self.timer = 51
         self.text_box = None
         self.question_type = None
         self.done = True
