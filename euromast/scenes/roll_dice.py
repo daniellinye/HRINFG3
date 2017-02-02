@@ -24,7 +24,7 @@ class Scene(stateManagment.BaseScene):
             (center_of_screen, vertical_center_of_screen + 100),
             '',
             self.vars['fonts']['medium'],
-            pg.Color('red')
+            pg.Color('black')
         )
 
         self.continue_btn = formControl.Button(

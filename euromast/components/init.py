@@ -50,13 +50,18 @@ class LoadAssets(object):
             self.assets['background-erasmus'] = pg.image.load('./assets/background.png')
             self.assets['background-highscore'] = pg.image.load('./assets/highscore_background.png')
             self.assets['background-dice'] = pg.image.load('./assets/dice_table.png')
+            self.assets['background-end'] = pg.image.load('./assets/end_screen.png')
             self.assets['game-category'] = pg.image.load('./assets/game_category.png')
+
             #cardfronts
             self.assets['bfront'] = pg.image.load('./assets/CFronts/Blue.png')
             self.assets['gfront'] = pg.image.load('./assets/CFronts/Green.png')
             self.assets['rfront'] = pg.image.load('./assets/CFronts/Red.png')
             self.assets['yfront'] = pg.image.load('./assets/CFronts/Yellow.png')
-
+            self.assets['euromast0'] = pg.image.load('./assets/euromast/euromast0.png')
+            self.assets['euromast1'] = pg.image.load('./assets/euromast/euromast1.png')
+            self.assets['euromast2'] = pg.image.load('./assets/euromast/euromast2.png')
+            self.assets['euromast3'] = pg.image.load('./assets/euromast/euromast3.png')
             #dice
             for x in range(1,7):
                 self.assets['rdlist']['dice{0}'.format(x)] = pg.image.load('./assets/red_dice/{0}.png'.format(x))

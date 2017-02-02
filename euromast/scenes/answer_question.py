@@ -38,6 +38,7 @@ class Scene(stateManagment.BaseScene):
         self.correct = None
         self.answer_btns = []
         self.card_color = None
+        print(self.player.steps)
         self.player = None
         self.timer = 10
         self.text_box = None
@@ -64,7 +65,7 @@ class Scene(stateManagment.BaseScene):
 
     def check_answer(self, answer, bid):
         self.sounds.stop("question_theme")
-        if self.player.question_type !='open':
+        if self.player.question_type != 'open':
             correct_btn = None
             self.correct = False
             if self.correct_answer_id == bid:
@@ -78,8 +79,11 @@ class Scene(stateManagment.BaseScene):
                 self.correct = True
 
         if self.correct:
+            self.player.tower['current_steps'] += self.player.steps
+            self.player.steps = 0
             self.sounds.play("question_right")
         else:
+            self.player.steps = 0
             self.sounds.play("question_wrong")
 
 
