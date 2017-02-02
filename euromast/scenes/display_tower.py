@@ -16,8 +16,7 @@ class Scene(stateManagment.BaseScene):
         self.button = formControl.Button(
             (game['width'] - 200, 300 , 200, 50),
             pg.Color('pink'),
-            self.next_scene,
-            text="Stuff"
+            self.next_scene
         )
 
         euromast0 = self.assets['euromast0']
@@ -114,6 +113,7 @@ class Scene(stateManagment.BaseScene):
     def startup(self, persistent):
         self.next_state = 'CHOOSE_DIRECTION'
         self.persist = persistent
+        print(persistent)
         self.players = self.persist['game_state']['players']
         game_state = self.persist['game_state']
         self.persist['game_state']['reuse_scene'] = self.current_state
@@ -127,7 +127,7 @@ class Scene(stateManagment.BaseScene):
         self.colors = [pg.Color('darkslategray'), pg.Color('purple'), pg.Color('brown'), pg.Color('black')]
 
     def update(self, dt):
-        pass
+        self.button.update_text(self.i18n.translate('continue'))
 
     def draw(self, surface):
         surface.fill(pg.Color('white'))
@@ -137,11 +137,19 @@ class Scene(stateManagment.BaseScene):
         self.tower3.draw(surface)
         self.button.update(surface)
         x = 0
+        y = 0
+        beg = 290
+        cf = 300
         for player in self.players:
             if player.tower['current_steps'] > 0:
                 if player.tower['current_steps'] > 10:
                     player.tower['current_pos'] = 'middle'
                 tower = player.tower
-                if str(tower['current_steps']) in self.towers[tower['tower_id']][tower['current_pos']]:
+                if str(tower['current_steps']) in self.towers[tower['tower_id']][tower['current_pos']] and tower['tower_id'] != None:
                     pg.draw.rect(surface, self.colors[x], self.towers[tower['tower_id']][tower['current_pos']][str(tower['current_steps'])])
                     x += 1
+            pg.draw.rect(surface, self.colors[y], (self.game['width'] - 20, self.game['height'] - cf, 15, 15))
+            formControl.Text((self.game['width'] - 100, self.game['height'] - beg), player.name, self.vars['fonts']['small'], pg.Color('black')).draw(surface)
+            y +=1
+            beg -= 30
+            cf -= 30

@@ -21,7 +21,7 @@ class Scene(stateManagment.BaseScene):
         self.game = game = self.vars['pygame']
         self.text_box = None
         self.counter_font = self.vars['fonts']['large']
-        self.timer = 10
+        self.timer = 51
         self.next_button = formControl.Button(
             (game['center_of_screen'] - 100, (game['vertical_center_of_screen'] *2)-100, 200, 40),
             pg.Color('green'),

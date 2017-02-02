@@ -20,8 +20,8 @@ class createPlayer(object):
         self.moved = True
         self.tower = {
             "tower_id": None, #t1 t2 t3 t4
-            "current_pos": "middle", # middle left right,
-            "current_steps": 16
+            "current_pos": "left", # middle left right,
+            "current_steps": 0
         }
         self.roll = roll
         self.steps = 0
@@ -91,9 +91,11 @@ class createPlayer(object):
         elif category['name'] == 'sport':
             self.tower['tower_id'] = 't2'
         elif category['name'] == 'geografie':
+            print('setting to geo')
             self.tower['tower_id'] = 't4'
         elif category['name'] == 'historie':
-            self.tower['tower_id'] == 't3'
+            print('setting to histor')
+            self.tower['tower_id'] = 't3'
 
     def add_type(self, type):
         self.type = type
