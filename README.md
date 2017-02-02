@@ -7,4 +7,4 @@ Please follow the following steps for a successful launch of the game:
 
 3. Execute _.setup.py_ which is also in the root folder
 
-4. Run _euromast.py_ in the euromast folder
+4. Run _euromast.py_ inside the euromast folder
