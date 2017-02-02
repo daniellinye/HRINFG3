@@ -9,6 +9,7 @@ class Scene(stateManagment.BaseScene):
         self.assets = helpers['assets']
         self.current_state = SCENE_NAME
         self.game = game = self.vars['pygame']
+        self.background = formControl.Image((0, 0), self.assets['background-dice'])
         self.player_order = []
         self.playing_order_text = formControl.Text((game['center_of_screen'] , 100),
             '',
@@ -52,7 +53,7 @@ class Scene(stateManagment.BaseScene):
         pass
 
     def draw(self, surface):
-        surface.fill((255, 255, 255))
+        surface.blit(self.background.image, self.background.rect)
         self.playing_order_text.draw(surface)
         self.pick_category_btn.update(surface)
         self.playing_order_text.update_text(self.i18n.translate('the playing order will be'))

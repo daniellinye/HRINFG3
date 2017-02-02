@@ -9,7 +9,7 @@ from i18n import i18n
 from scenes import menu, select_players, insert_player_name, roll_dice, \
     choose_category, choose_direction, roll_dice_button, turn_order, \
     roll_double_dice, choose_question, answer_question, settings, highscores, \
-    display_tower, pause_menu, instructions
+    display_tower, pause_menu, instructions, end_screen
 from components import init, sound_manager, helpers as hp
 
 from model import model
@@ -116,7 +116,8 @@ if __name__ == "__main__":
                 "ROLL_DOUBLE_DICE": roll_double_dice.Scene(screen, helpers),
                 "CHOOSE_QUESTION": choose_question.Scene(screen, helpers),
                 "ANSWER_QUESTION": answer_question.Scene(screen, helpers),
-                 "SHOW_TOWER": display_tower.Scene(screen, helpers),
+                "SHOW_TOWER": display_tower.Scene(screen, helpers),
+                "END_SCREEN": end_screen.Scene(screen,helpers),
                 "__sartScene__": "MENU"
              }
 

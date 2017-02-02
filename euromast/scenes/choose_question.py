@@ -19,6 +19,7 @@ class Scene(stateManagment.BaseScene):
         self.questions = []
         self.xPosFirstRow = 180
         self.opOrMul = {'multiple_choice': 'mul', 'open': 'op'}
+        self.background = formControl.Image((0, 0), self.assets['background-dice'])
         self.category_color = None
         self.question_img =None
         self.category_type = None
@@ -66,4 +67,5 @@ class Scene(stateManagment.BaseScene):
 
     def draw(self, surface):
         surface.fill((255, 255, 255))
+        surface.blit(self.background.image, self.background.rect)
         self.question_img.draw(surface)
