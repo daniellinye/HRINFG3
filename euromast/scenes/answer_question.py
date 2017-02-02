@@ -56,12 +56,14 @@ class Scene(stateManagment.BaseScene):
                     answer_btn.update_font_color(pg.Color('red'))
 
     def too_late(self):
+        self.sounds.stop("question_theme")
         self.correct = False
         if self.question_type != 'open':
             self.show_correct()
-        self.sounds.play("question_wrong")
+        self.sounds.play("too_slow")
 
     def check_answer(self, answer, bid):
+        self.sounds.stop("question_theme")
         if self.player.question_type !='open':
             correct_btn = None
             self.correct = False
@@ -85,6 +87,7 @@ class Scene(stateManagment.BaseScene):
         self.next_state = 'SHOW_TOWER'
         # stop sounds so we can use them again and play another sound
         self.text_box = None
+        self.sounds.stop("choose_question")
         self.sounds.play("question_theme")
 
         self.persist = persistent
