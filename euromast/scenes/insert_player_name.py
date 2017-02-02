@@ -44,7 +44,6 @@ class Scene(stateManagment.BaseScene):
         self.input.execute()
 
     def setPlayerName(self, id, pname):
-        self.player_count = 1
         if not pname:
             pname = "{0} {1}".format(
                 self.i18n.translate("player"),

@@ -22,7 +22,16 @@ class Scene(stateManagment.BaseScene):
             pg.Color('black')
         )
 
-        self.players = None
+        self.players = Model().get_highscores()
+        for i in range(1, len(self.players) + 1):
+            self.list.append(
+                formControl.Text(
+                    (self.center_of_screen, 80 + 60 * i),
+                    str(i) + '. ' + self.players[i - 1]['name'] + '   ' + str(self.players[i - 1]['score']),
+                    self.vars['fonts']['medium'],
+                    pg.Color('black')
+                )
+            )
 
         self.go_back_btn = formControl.Button(
             (center_of_screen / 2 - 100, 650, 200, 50),
@@ -46,16 +55,7 @@ class Scene(stateManagment.BaseScene):
     def update(self, dt):
         self.header_text.update_text('Highscores')
         self.go_back_btn.update_text(self.i18n.translate('go back'))
-        self.players = Model().get_highscores()
-        for i in range(1,len(self.players)+1):
-            self.list.append(
-                formControl.Text(
-                (self.center_of_screen, 80 + 60*i),
-                str(i) + '. ' + self.players[i-1]['name'] + '   ' + str(self.players[i-1]['score']),
-                self.vars['fonts']['medium'],
-                pg.Color('black')
-                )
-            )
+
 
     def get_event(self, event):
         helpers.check_default_events(self, event)

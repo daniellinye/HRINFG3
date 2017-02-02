@@ -80,13 +80,10 @@ class Scene(stateManagment.BaseScene):
 
     def startup(self, persistent):
         self.persist = persistent
-        print(persistent['game_state']['reset_state'])
         self.i18n = self.persist['game_state']['i18n']
         if self.persist['game_state']['reset_state']:
-            print('rest')
             self.persist = helpers.get_state()
             self.persist['game_state']['i18n'] = self.i18n
-        print(self.persist)
 
     def update(self, dt):
         self.header_text.update_text('Euromast')

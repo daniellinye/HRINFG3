@@ -116,6 +116,7 @@ class Scene(stateManagment.BaseScene):
         self.persist = persistent
         self.players = self.persist['game_state']['players']
         game_state = self.persist['game_state']
+        self.persist['game_state']['reuse_scene'] = self.current_state
         pindex = game_state['current_player_index']
         player = game_state['players'][pindex]
         for player in self.players:
@@ -141,8 +142,6 @@ class Scene(stateManagment.BaseScene):
                 if player.tower['current_steps'] > 10:
                     player.tower['current_pos'] = 'middle'
                 tower = player.tower
-                print(tower['current_steps'])
-                print(self.towers[tower['tower_id']][tower['current_pos']])
                 if str(tower['current_steps']) in self.towers[tower['tower_id']][tower['current_pos']]:
                     pg.draw.rect(surface, self.colors[x], self.towers[tower['tower_id']][tower['current_pos']][str(tower['current_steps'])])
                     x += 1

@@ -87,9 +87,11 @@ class Scene(stateManagment.BaseScene):
             if self.player.direction == 'left' or self.player.direction == 'right':
                 self.player.move_player_horizontal()
             self.player.steps = 0
-            self.player.score += 1
+            self.player.streak += 1
+            self.player.score = self.player.score + self.player.streak
             self.sounds.play("question_right")
         else:
+            self.player.streak = 0
             self.player.steps = 0
             self.sounds.play("question_wrong")
 

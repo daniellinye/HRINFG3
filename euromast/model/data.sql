@@ -178,7 +178,7 @@ INSERT INTO answer (name, question_id, is_correct) VALUES
   ('De Witte Aap', 1, TRUE),
   ('Het NRC', 1, FALSE),
   ('Cafe de Beurs', 1, FALSE),
-  ('R’dam Escape', 2, FALSE),
+  ('Rotterdam Escape', 2, FALSE),
   ('Escape010', 2, TRUE),
   ('Room Escape', 2, FALSE),
   ('Segway', 3, FALSE),

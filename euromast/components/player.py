@@ -8,6 +8,7 @@ class createPlayer(object):
         self.id = uuid.uuid4()
         self.name = name
         self.score = 0
+        self.streak = 0
         self.position = position
         self.direction = None
         self.category_name = None
