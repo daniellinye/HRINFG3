@@ -16,9 +16,9 @@ class Scene(stateManagment.BaseScene):
         self.tower_lower = Grid()
         self.players = None
         self.button = formControl.Button(
-            [0, self.game['height']/5, 200, 50],
-            (0, 0, 0),
-            self.next_scene(),
+            (300, 300 , 200, 50),
+            pg.Color('pink'),
+            self.next_scene,
             text="Stuff"
         )
 
@@ -26,8 +26,18 @@ class Scene(stateManagment.BaseScene):
 
 
 
+
     def next_scene(self):
-#        self.persist['game_state']['current_player_index'] += 1
+        self.persist['game_state']['current_player_index'] += 1
+
+    def next_scene(self, id):
+        game_state = self.persist['game_state']
+        current_player_index = game_state['current_player_index']
+        players = game_state['players']
+        if len(players) == current_player_index + 1:
+            self.persist['game_state']['current_player_index'] = 0
+        else:
+            self.persist['game_state']['current_player_index'] += 1
         self.done = True
         self.next_state = "CHOOSE_DIRECTION"
 
@@ -42,6 +52,7 @@ class Scene(stateManagment.BaseScene):
         self.next_state = 'CHOOSE_DIRECTION'
         self.persist = persistent
         self.players = self.persist['game_state']['players']
+        print(self.persist)
         game_state = self.persist['game_state']
         pindex = game_state['current_player_index']
         player = game_state['players'][pindex]

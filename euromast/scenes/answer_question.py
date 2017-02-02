@@ -20,7 +20,7 @@ class Scene(stateManagment.BaseScene):
         self.card_color = None
         self.game = game = self.vars['pygame']
         self.text_box = None
-        self.counter_font = self.vars['fonts']['small']
+        self.counter_font = self.vars['fonts']['large']
         self.timer = 10
         self.next_button = formControl.Button(
             (game['center_of_screen'] - 100, (game['vertical_center_of_screen'] *2)-100, 200, 40),
@@ -103,7 +103,7 @@ class Scene(stateManagment.BaseScene):
                 font=self.vars['fonts']['medium'])
 
         if self.question_type != 'open':
-            start_pos_top = 200;
+            start_pos_top = 100;
             abc = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
             c = 0;
             for answer in self.player.current_question['answers']:
@@ -117,9 +117,10 @@ class Scene(stateManagment.BaseScene):
                         self.card_color,
                         partial(self.check_answer, answer),
                         text=button_text,
+                        font_color=(0, 0, 0),
                         button_id=answer['id'],
                         click_sound=self.sounds.effects['click_sound'],
-                        font=self.vars['fonts']['medium'],
+                        font=self.vars['fonts']['large'],
                         outline_color= self.card_color
                     )
                 )
@@ -159,9 +160,9 @@ class Scene(stateManagment.BaseScene):
             self.text_box.draw(surface)
         if self.correct or self.correct == False:
             self.next_button.update(surface)
-        rect = pg.draw.rect(surface, self.card_color, (self.game['center_of_screen'] - 300, 10, 600, self.game['height'] *.25))
-        formControl.TextInRect(surface, self.player.current_question['name'], pg.Color('black'), rect, self.vars['fonts']['medium'])
-        pg.draw.line(surface, pg.Color('black'), (0, self.game['height'] *.25), (self.game['width'], self.game['height'] *.25))
+        rect = pg.draw.rect(surface, self.card_color, (self.game['center_of_screen'] - 300, 30, 600, self.game['height'] *.25))
+        formControl.TextInRect(surface, self.player.current_question['name'], pg.Color('black'), rect, self.vars['fonts']['large'], 1)
+        pg.draw.line(surface, pg.Color('black'), (0, self.game['height'] *.15), (self.game['width'], self.game['height'] *.15))
 
         for answer_btns in self.answer_btns:
             answer_btns.update(surface)
