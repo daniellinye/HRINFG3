@@ -48,7 +48,8 @@ class Scene(stateManagment.BaseScene):
 
 
     def update(self, dt):
-        pass
+        for butname in self.buttons:
+            self.btns[butname].update_text(self.i18n.translate(butname))
 
     def get_event(self, event):
         helpers.check_default_events(self, event)
